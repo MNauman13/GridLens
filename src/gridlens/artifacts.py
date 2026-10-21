@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from typing import Literal
 
 from pydantic import Field
 
@@ -18,7 +19,7 @@ class ArtifactFile(StrictRecord):
 
 
 class ArtifactManifest(StrictRecord):
-    schema_version: str = "gridlens_artifact_v1"
+    schema_version: Literal["gridlens_artifact_v1"] = "gridlens_artifact_v1"
     kind: str = Field(min_length=1)
     files: tuple[ArtifactFile, ...] = Field(min_length=1)
 

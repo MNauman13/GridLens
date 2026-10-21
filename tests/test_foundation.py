@@ -49,6 +49,10 @@ class FoundationTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             IntervalForecast(point=point, calibrator_version="fixture", state_id="initial", bands=bands)
 
+    def test_unsupported_coverage_level_is_rejected(self) -> None:
+        with self.assertRaises(ValidationError):
+            PredictionBand(level=0.7, lower_mw=(0.0,) * 48, upper_mw=(20.0,) * 48)
+
     def test_feedback_cannot_mature_before_interval_completion(self) -> None:
         end = datetime(2024, 2, 11, 0, 30, tzinfo=UTC)
         with self.assertRaises(ValidationError):

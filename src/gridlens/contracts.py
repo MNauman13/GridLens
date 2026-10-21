@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from datetime import date, datetime
+from enum import Enum
 from pathlib import Path
 from typing import Annotated, Literal, Protocol, Self
 
@@ -12,6 +13,12 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 EvidenceMode = Literal["retrospective_revised", "captured_availability"]
 CONTRACT_VERSION = "gb_nd_day_ahead_v1"
 Sha256 = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
+
+
+class CoverageLevel(float, Enum):
+    P80 = 0.8
+    P90 = 0.9
+    P95 = 0.95
 
 
 class StrictRecord(BaseModel):
@@ -56,7 +63,7 @@ class PointForecast(StrictRecord):
 
 
 class PredictionBand(StrictRecord):
-    level: Literal[0.8, 0.9, 0.95]
+    level: CoverageLevel
     lower_mw: tuple[float, ...] = Field(min_length=48, max_length=48)
     upper_mw: tuple[float, ...] = Field(min_length=48, max_length=48)
 

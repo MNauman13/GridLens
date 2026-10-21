@@ -1,5 +1,14 @@
 {
   "$defs": {
+    "CoverageLevel": {
+      "enum": [
+        0.8,
+        0.9,
+        0.95
+      ],
+      "title": "CoverageLevel",
+      "type": "number"
+    },
     "PointForecast": {
       "additionalProperties": false,
       "properties": {
@@ -41,13 +50,7 @@
       "additionalProperties": false,
       "properties": {
         "level": {
-          "enum": [
-            0.8,
-            0.9,
-            0.95
-          ],
-          "title": "Level",
-          "type": "number"
+          "$ref": "#/$defs/CoverageLevel"
         },
         "lower_mw": {
           "items": {
