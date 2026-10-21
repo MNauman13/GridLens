@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from datetime import date, datetime
 from pathlib import Path
-from typing import Literal, Protocol
+from typing import Annotated, Literal, Protocol, Self
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 EvidenceMode = Literal["retrospective_revised", "captured_availability"]
 CONTRACT_VERSION = "gb_nd_day_ahead_v1"
+Sha256 = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
 
 
 class StrictRecord(BaseModel):
@@ -30,7 +32,8 @@ class InputWindow(StrictRecord):
     @field_validator("issued_at", "context_start", "context_end_exclusive", "target_start", "target_end_exclusive")
     @classmethod
     def utc_only(cls, value: datetime) -> datetime:
-        if value.utcoffset() is None or value.utcoffset().total_seconds() != 0:
+        offset = value.utcoffset()
+        if offset is None or offset.total_seconds() != 0:
             raise ValueError("Explicit UTC timestamps are required")
         return value
 
@@ -87,7 +90,7 @@ class DatasetManifest(StrictRecord):
     evidence_mode: EvidenceMode
     truth_policy: str = Field(min_length=1)
     feature_order: tuple[str, ...] = Field(min_length=1)
-    source_sha256: tuple[str, ...]
+    source_sha256: tuple[Sha256, ...] = Field(min_length=1)
     split_start: date
     split_end: date
 
@@ -112,17 +115,33 @@ class MaturedFeedback(StrictRecord):
     @model_validator(mode="after")
     def release_after_target(self) -> MaturedFeedback:
         for stamp in (self.target_end, self.first_seen_at):
-            if stamp.utcoffset() is None or stamp.utcoffset().total_seconds() != 0:
+            offset = stamp.utcoffset()
+            if offset is None or offset.total_seconds() != 0:
                 raise ValueError("Feedback timestamps must be UTC")
         if self.first_seen_at < self.target_end:
             raise ValueError("Actual cannot mature before its target interval ends")
         return self
 
 
+class TrainingExample(StrictRecord):
+    inputs: InputWindow
+    target_mw: tuple[float, ...] = Field(min_length=48, max_length=48)
+    truth_version: str = Field(min_length=1)
+
+
+class TrainingDataset(Protocol):
+    @property
+    def manifest(self) -> DatasetManifest: ...
+    def iter_examples(self) -> Iterator[TrainingExample]: ...
+
+
 class ForecastModel(Protocol):
-    def fit(self, dataset: DatasetManifest) -> None: ...
+    def fit(self, dataset: TrainingDataset) -> None: ...
     def predict(self, inputs: InputWindow) -> PointForecast: ...
     def save_bundle(self, destination: Path) -> None: ...
+
+    @classmethod
+    def load_bundle(cls, source: Path) -> Self: ...
 
 
 class Calibrator(Protocol):

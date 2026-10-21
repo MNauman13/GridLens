@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "PointForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "gb_nd_day_ahead_v1",
+          "default": "gb_nd_day_ahead_v1",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "feature_snapshot_id": {
+          "minLength": 1,
+          "title": "Feature Snapshot Id",
+          "type": "string"
+        },
+        "model_version": {
+          "minLength": 1,
+          "title": "Model Version",
+          "type": "string"
+        },
+        "prediction_mw": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 48,
+          "minItems": 48,
+          "title": "Prediction Mw",
+          "type": "array"
+        }
+      },
+      "required": [
+        "model_version",
+        "feature_snapshot_id",
+        "prediction_mw"
+      ],
+      "title": "PointForecast",
+      "type": "object"
+    },
+    "PredictionBand": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "enum": [
+            0.8,
+            0.9,
+            0.95
+          ],
+          "title": "Level",
+          "type": "number"
+        },
+        "lower_mw": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 48,
+          "minItems": 48,
+          "title": "Lower Mw",
+          "type": "array"
+        },
+        "upper_mw": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 48,
+          "minItems": 48,
+          "title": "Upper Mw",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level",
+        "lower_mw",
+        "upper_mw"
+      ],
+      "title": "PredictionBand",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "bands": {
+      "items": {
+        "$ref": "#/$defs/PredictionBand"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Bands",
+      "type": "array"
+    },
+    "calibrator_version": {
+      "minLength": 1,
+      "title": "Calibrator Version",
+      "type": "string"
+    },
+    "point": {
+      "$ref": "#/$defs/PointForecast"
+    },
+    "scope": {
+      "const": "marginal_per_output_slot",
+      "default": "marginal_per_output_slot",
+      "title": "Scope",
+      "type": "string"
+    },
+    "state_id": {
+      "minLength": 1,
+      "title": "State Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "point",
+    "calibrator_version",
+    "state_id",
+    "bands"
+  ],
+  "title": "IntervalForecast",
+  "type": "object"
+}

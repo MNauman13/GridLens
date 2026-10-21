@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Fixture = {
   fixture_kind: string; real_demand_data: boolean; trained_model: boolean;
@@ -33,7 +34,7 @@ export default function Home() {
     } finally { setLoading(false); }
   }
   return <main>
-    <header><a className="brand" href="/">Grid<span>Lens</span></a><span className="phase">Phase 1 · Foundations</span></header>
+    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">Phase 1 · Foundations</span></header>
     <section className="intro"><p className="eyebrow">ELECTRICITY FORECASTING, MADE AUDITABLE</p>
       <h1>A forecast starts with<br/>what we know.</h1>
       <p className="lede">Before training a Transformer, verify its time boundaries. Inspect the history it can use, the day it must skip, and the day it will predict.</p>

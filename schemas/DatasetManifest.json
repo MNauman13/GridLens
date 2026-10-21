@@ -1,0 +1,67 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "gb_nd_day_ahead_v1",
+      "default": "gb_nd_day_ahead_v1",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "minLength": 1,
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "evidence_mode": {
+      "enum": [
+        "retrospective_revised",
+        "captured_availability"
+      ],
+      "title": "Evidence Mode",
+      "type": "string"
+    },
+    "feature_order": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Feature Order",
+      "type": "array"
+    },
+    "source_sha256": {
+      "items": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Source Sha256",
+      "type": "array"
+    },
+    "split_end": {
+      "format": "date",
+      "title": "Split End",
+      "type": "string"
+    },
+    "split_start": {
+      "format": "date",
+      "title": "Split Start",
+      "type": "string"
+    },
+    "truth_policy": {
+      "minLength": 1,
+      "title": "Truth Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_id",
+    "evidence_mode",
+    "truth_policy",
+    "feature_order",
+    "source_sha256",
+    "split_start",
+    "split_end"
+  ],
+  "title": "DatasetManifest",
+  "type": "object"
+}

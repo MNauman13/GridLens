@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "actual_mw": {
+      "title": "Actual Mw",
+      "type": "number"
+    },
+    "first_seen_at": {
+      "format": "date-time",
+      "title": "First Seen At",
+      "type": "string"
+    },
+    "forecast_id": {
+      "minLength": 1,
+      "title": "Forecast Id",
+      "type": "string"
+    },
+    "model_version": {
+      "minLength": 1,
+      "title": "Model Version",
+      "type": "string"
+    },
+    "slot": {
+      "exclusiveMaximum": 48,
+      "minimum": 0,
+      "title": "Slot",
+      "type": "integer"
+    },
+    "target_end": {
+      "format": "date-time",
+      "title": "Target End",
+      "type": "string"
+    },
+    "truth_version": {
+      "minLength": 1,
+      "title": "Truth Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "forecast_id",
+    "model_version",
+    "slot",
+    "target_end",
+    "first_seen_at",
+    "actual_mw",
+    "truth_version"
+  ],
+  "title": "MaturedFeedback",
+  "type": "object"
+}

@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "InputWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "context_end_exclusive": {
+          "format": "date-time",
+          "title": "Context End Exclusive",
+          "type": "string"
+        },
+        "context_start": {
+          "format": "date-time",
+          "title": "Context Start",
+          "type": "string"
+        },
+        "contract_version": {
+          "const": "gb_nd_day_ahead_v1",
+          "default": "gb_nd_day_ahead_v1",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "demand_mw": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 336,
+          "minItems": 336,
+          "title": "Demand Mw",
+          "type": "array"
+        },
+        "evidence_mode": {
+          "enum": [
+            "retrospective_revised",
+            "captured_availability"
+          ],
+          "title": "Evidence Mode",
+          "type": "string"
+        },
+        "feature_snapshot_id": {
+          "minLength": 1,
+          "title": "Feature Snapshot Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "target_end_exclusive": {
+          "format": "date-time",
+          "title": "Target End Exclusive",
+          "type": "string"
+        },
+        "target_start": {
+          "format": "date-time",
+          "title": "Target Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issued_at",
+        "context_start",
+        "context_end_exclusive",
+        "target_start",
+        "target_end_exclusive",
+        "evidence_mode",
+        "feature_snapshot_id",
+        "demand_mw"
+      ],
+      "title": "InputWindow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "inputs": {
+      "$ref": "#/$defs/InputWindow"
+    },
+    "target_mw": {
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 48,
+      "minItems": 48,
+      "title": "Target Mw",
+      "type": "array"
+    },
+    "truth_version": {
+      "minLength": 1,
+      "title": "Truth Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "inputs",
+    "target_mw",
+    "truth_version"
+  ],
+  "title": "TrainingExample",
+  "type": "object"
+}

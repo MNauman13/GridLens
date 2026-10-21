@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -30,7 +30,7 @@ class FoundationTests(unittest.TestCase):
 
     def test_input_window_rejects_future_context_and_naive_times(self) -> None:
         original = make_fixture().model_dump()
-        for replacement in [datetime(2024, 2, 10), datetime(2024, 2, 10, 1, tzinfo=timezone.utc)]:
+        for replacement in [datetime(2024, 2, 10), datetime(2024, 2, 10, 1, tzinfo=UTC)]:
             with self.subTest(replacement=replacement):
                 with self.assertRaises(ValidationError):
                     type(make_fixture())(**{**original, "context_end_exclusive": replacement})
@@ -50,7 +50,7 @@ class FoundationTests(unittest.TestCase):
             IntervalForecast(point=point, calibrator_version="fixture", state_id="initial", bands=bands)
 
     def test_feedback_cannot_mature_before_interval_completion(self) -> None:
-        end = datetime(2024, 2, 11, 0, 30, tzinfo=timezone.utc)
+        end = datetime(2024, 2, 11, 0, 30, tzinfo=UTC)
         with self.assertRaises(ValidationError):
             MaturedFeedback(forecast_id="fixture", model_version="fixture", slot=0, target_end=end, first_seen_at=end - timedelta(minutes=30), actual_mw=1.0, truth_version="v1")
 
