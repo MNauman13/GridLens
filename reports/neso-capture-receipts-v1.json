@@ -1,0 +1,131 @@
+{
+  "captures": [
+    {
+      "byte_size": 1385795,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/2f0f75b8-39c5-46ff-a914-ae38088ed022/demanddata_2017.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"881bf19cf1d008f679984c4e520751e4\"",
+        "last-modified": "Tue, 16 Apr 2024 02:46:32 GMT"
+      },
+      "name": "2017",
+      "raw_sha256": "ad6c47de0264aa1183336c7ca438631f90056c41f438c86f34da147a51351de4",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/2f0f75b8-39c5-46ff-a914-ae38088ed022/download/demanddata_2017.csv",
+      "resource_id": "2f0f75b8-39c5-46ff-a914-ae38088ed022",
+      "retrieved_at": "2026-10-21T15:02:20.484Z"
+    },
+    {
+      "byte_size": 1389142,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/fcb12133-0db0-4f27-a4a5-1669fd9f6d33/demanddata_2018.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"6367d9c0646a92963331b841ffc2f288\"",
+        "last-modified": "Tue, 16 Apr 2024 02:50:47 GMT"
+      },
+      "name": "2018",
+      "raw_sha256": "a2e19b4eb4157a190d1e7f2c946ee92c4be2ae196f72d55545c870399d3efb2f",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/fcb12133-0db0-4f27-a4a5-1669fd9f6d33/download/demanddata_2018.csv",
+      "resource_id": "fcb12133-0db0-4f27-a4a5-1669fd9f6d33",
+      "retrieved_at": "2026-10-21T15:02:23.947Z"
+    },
+    {
+      "byte_size": 1554786,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/dd9de980-d724-415a-b344-d8ae11321432/demanddata_2019.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"4c2ff93d925b0447c68b734d491960f7\"",
+        "last-modified": "Tue, 08 Apr 2025 19:45:41 GMT"
+      },
+      "name": "2019",
+      "raw_sha256": "0084d546dcdba0af21b7414f1a1b0ab308a9de8460884aa8e550fd0e858b38da",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/dd9de980-d724-415a-b344-d8ae11321432/download/demanddata_2019.csv",
+      "resource_id": "dd9de980-d724-415a-b344-d8ae11321432",
+      "retrieved_at": "2026-10-21T15:02:27.244Z"
+    },
+    {
+      "byte_size": 1560521,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/33ba6857-2a55-479f-9308-e5c4c53d4381/demanddata_2020.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"96635f45c73fe587aada29ba503a653d\"",
+        "last-modified": "Tue, 08 Apr 2025 19:49:16 GMT"
+      },
+      "name": "2020",
+      "raw_sha256": "7121b6fbf317862febe364f6b702184836b174327bf503ac143de1191f61f141",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/33ba6857-2a55-479f-9308-e5c4c53d4381/download/demanddata_2020.csv",
+      "resource_id": "33ba6857-2a55-479f-9308-e5c4c53d4381",
+      "retrieved_at": "2026-10-21T15:02:30.291Z"
+    },
+    {
+      "byte_size": 1589451,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/18c69c42-f20d-46f0-84e9-e279045befc6/demanddata_2021.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"27b77950a9237061fbea7b4f5035107a\"",
+        "last-modified": "Tue, 08 Apr 2025 19:51:20 GMT"
+      },
+      "name": "2021",
+      "raw_sha256": "b9f7285fecec48b05244c5bd3206c14d2409ab6da9cfc5c3b976104d5d5734ef",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/18c69c42-f20d-46f0-84e9-e279045befc6/download/demanddata_2021.csv",
+      "resource_id": "18c69c42-f20d-46f0-84e9-e279045befc6",
+      "retrieved_at": "2026-10-21T15:02:34.020Z"
+    },
+    {
+      "byte_size": 1682356,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/bb44a1b5-75b1-4db2-8491-257f23385006/demanddata_2022.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"373b85708bd39ff51ba9261cf84da467\"",
+        "last-modified": "Tue, 08 Apr 2025 19:52:22 GMT"
+      },
+      "name": "2022",
+      "raw_sha256": "fc6bd5d5a8e8b9094ae748ae6f62d688797577ca3be8e66acbffdda771a5b6c4",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/bb44a1b5-75b1-4db2-8491-257f23385006/download/demanddata_2022.csv",
+      "resource_id": "bb44a1b5-75b1-4db2-8491-257f23385006",
+      "retrieved_at": "2026-10-21T15:02:37.000Z"
+    },
+    {
+      "byte_size": 1732679,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/bf5ab335-9b40-4ea4-b93a-ab4af7bce003/demanddata_2023.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"f9c5f7595738db732928c0c44545202f\"",
+        "last-modified": "Tue, 08 Apr 2025 19:54:09 GMT"
+      },
+      "name": "2023",
+      "raw_sha256": "cb6f7b91dd6a5defbdd918e3db440b8e6cec5855ef18a8715bb8e294b50cfa23",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/bf5ab335-9b40-4ea4-b93a-ab4af7bce003/download/demanddata_2023.csv",
+      "resource_id": "bf5ab335-9b40-4ea4-b93a-ab4af7bce003",
+      "retrieved_at": "2026-10-21T15:02:40.191Z"
+    },
+    {
+      "byte_size": 1809707,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/f6d02c0f-957b-48cb-82ee-09003f2ba759/demanddata_2024.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"227895ec11ff7caf5480381681d82ff5\"",
+        "last-modified": "Tue, 08 Apr 2025 19:55:42 GMT"
+      },
+      "name": "2024",
+      "raw_sha256": "fa7895b6e9ab5eb1b450949d969cb18ffeb6005359fc71c79c87e1c47e59cac6",
+      "requested_url": "https://api.neso.energy/dataset/8f2fe0af-871c-488d-8bad-960426f24601/resource/f6d02c0f-957b-48cb-82ee-09003f2ba759/download/demanddata_2024.csv",
+      "resource_id": "f6d02c0f-957b-48cb-82ee-09003f2ba759",
+      "retrieved_at": "2026-10-21T15:02:43.775Z"
+    },
+    {
+      "byte_size": 278036,
+      "final_url_without_signed_query": "https://83025b28472d6aa2bf5ae59f3724aa78.eu.r2.cloudflarestorage.com/dx-national-grid/national-grid/resources/177f6fa4-ae49-4182-81ea-0c6b35f26ca6/demanddataupdate.csv",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "etag": "\"cf70f0e2be523e794d96eefa76d3bdab\"",
+        "last-modified": "Wed, 21 Oct 2026 08:20:16 GMT"
+      },
+      "name": "daily",
+      "raw_sha256": "fa5efe1315bd0b55a2997f9e2658cf31cc25a9f583150dc5c329d781f860b619",
+      "requested_url": "https://api.neso.energy/dataset/7a12172a-939c-404c-b581-a6128b74f588/resource/177f6fa4-ae49-4182-81ea-0c6b35f26ca6/download/demanddataupdate.csv",
+      "resource_id": "177f6fa4-ae49-4182-81ea-0c6b35f26ca6",
+      "retrieved_at": "2026-10-21T15:02:46.976Z"
+    }
+  ],
+  "transport": "Node fetch; original response bytes, not a reconstructed API preview"
+}

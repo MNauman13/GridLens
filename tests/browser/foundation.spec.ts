@@ -38,3 +38,28 @@ test("API outage is visible and does not masquerade as verification", async ({pa
   await expect(page.getByRole("main").getByRole("alert")).toContainText("API is unavailable");
   await expect(page.getByRole("status")).not.toContainText("Contract verified");
 });
+
+test("settlement animation distinguishes repeated local hours and UTC", async ({page}) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.goto("/learn/settlement");
+  await expect(page.getByTestId("period-count")).toContainText("46 settlement periods");
+  await page.getByRole("button", {name:"Period 3",exact:true}).click();
+  await expect(page.getByTestId("local-start")).toHaveText("2024-03-31T02:00:00+01:00");
+  await expect(page.getByTestId("utc-start")).toHaveText("2024-03-31T01:00:00+00:00");
+  await page.getByLabel("Day type").selectOption("autumn");
+  await expect(page.getByTestId("period-count")).toContainText("50 settlement periods");
+  await page.getByRole("button", {name:"Period 3",exact:true}).click();
+  await expect(page.getByTestId("local-start")).toHaveText("2024-10-27T01:00:00+01:00");
+  await page.getByRole("button", {name:"Period 5",exact:true}).click();
+  await expect(page.getByTestId("local-start")).toHaveText("2024-10-27T01:00:00+00:00");
+  await expect(page.getByTestId("utc-start")).toHaveText("2024-10-27T01:00:00+00:00");
+  await page.getByRole("button", {name:"Play animation"}).click();
+  await expect(page.getByRole("button", {name:"Period 6",exact:true})).toHaveAttribute("aria-pressed","true");
+  await page.getByRole("button", {name:"Pause animation"}).click();
+  await page.getByLabel("Day type").selectOption("ordinary");
+  await expect(page.getByTestId("period-count")).toContainText("48 settlement periods");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+  await page.screenshot({path:`reports/local/browser-results/settlement-${test.info().project.name}.png`,fullPage:true});
+});

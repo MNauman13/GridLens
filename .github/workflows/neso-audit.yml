@@ -1,0 +1,47 @@
+name: NESO live data audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/gridlens/data/**'
+      - 'src/gridlens/resources/neso_resources_v1.json'
+      - 'scripts/check_live_ingestion.py'
+      - 'reports/neso-audit-v1.json'
+      - '.github/workflows/neso-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: neso-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  original-csv-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.11.21
+      - run: uv sync --frozen --no-dev
+      - name: Retrieve all pinned original CSVs through the Python adapter
+        run: |
+          mkdir -p reports/local
+          uv run --frozen --no-dev gridlens ingest-neso --sources 2017 2018 2019 2020 2021 2022 2023 2024 daily --report reports/local/live-audit.json > reports/local/live-ingestion.log
+      - name: Verify frozen annual hashes and transactional observation counts
+        run: uv run --frozen --no-dev python scripts/check_live_ingestion.py --report reports/local/live-audit.json
+      - name: Preserve source bytes, receipts, database, and audit
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: neso-original-captures-${{ github.sha }}
+          path: |
+            data/neso/
+            reports/local/live-audit.json
+            reports/local/live-ingestion.log
+          retention-days: 30

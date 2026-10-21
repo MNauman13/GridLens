@@ -11,9 +11,15 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from typing import Any, Literal
 
-from gridlens.data.settlement import HALF_HOUR, day_bounds, parse_date, periods_in_day, settlement_interval
+from gridlens.data.settlement import (
+    HALF_HOUR,
+    day_bounds,
+    parse_date,
+    periods_in_day,
+    settlement_interval,
+)
 
-TRANSFORM_VERSION = "neso_interval_v1"
+TRANSFORM_VERSION = "neso_interval_v2"
 REQUIRED = ("SETTLEMENT_DATE", "SETTLEMENT_PERIOD", "ND")
 NUMERIC_FIELDS = ("ND", "TSD", "EMBEDDED_WIND_GENERATION", "EMBEDDED_SOLAR_GENERATION")
 INDICATOR = "FORECAST_ACTUAL_INDICATOR"
@@ -74,6 +80,7 @@ def _parse_csv(content: bytes, source: Source) -> ParsedSnapshot:
     if missing or len(fields) != len(set(fields)):
         raise QuarantineError("Missing or duplicate CSV columns", missing)
     rows: dict[datetime, Observation] = {}
+    original_rows: dict[datetime, dict[str, str]] = {}
     counts: Counter[str] = Counter()
     errors: list[str] = []
     for line, raw in enumerate(reader, 2):
@@ -84,7 +91,7 @@ def _parse_csv(content: bytes, source: Source) -> ParsedSnapshot:
             kind = raw.get(INDICATOR, "A").strip()
             if kind not in ("A", "F"):
                 raise ValueError(f"Unknown actual/forecast indicator: {kind!r}")
-            day = parse_date(raw["SETTLEMENT_DATE"].strip())
+            day = parse_date(raw["SETTLEMENT_DATE"].strip(), resource_year=source.year)
             if source.year is not None and day.year != source.year:
                 raise ValueError("Settlement date outside resource year")
             period_text = raw["SETTLEMENT_PERIOD"].strip()
@@ -100,12 +107,17 @@ def _parse_csv(content: bytes, source: Source) -> ParsedSnapshot:
                 raise ValueError("Negative National Demand")
             observation = Observation(day, period, start, end, values)
             if start in rows:
-                if rows[start] != observation:
+                if rows[start] != observation or original_rows[start] != raw:
                     raise ValueError(f"Conflicting duplicate UTC interval: {start.isoformat()}")
                 counts["identical_duplicates_collapsed"] += 1
                 continue
             rows[start] = observation
+            original_rows[start] = raw
             counts["actual_rows_unique"] += 1
+            if values[0] == 0:
+                counts["zero_nd_flagged"] += 1
+            if any(value is not None and value < 0 for value in values[2:]):
+                counts["negative_embedded_generation_flagged"] += 1
         except (ValueError, OverflowError) as exc:
             counts["invalid_rows"] += 1
             if len(errors) < 100:
@@ -147,7 +159,7 @@ def _parse_csv(content: bytes, source: Source) -> ParsedSnapshot:
         "resource_id": source.resource_id, "source_kind": source.kind,
         "columns": fields, "additional_columns": sorted(set(fields) - set(REQUIRED) - {INDICATOR} - set(NUMERIC_FIELDS)),
         "absent_optional_fields": sorted(set(NUMERIC_FIELDS) - set(fields)),
-        "counts": {key: counts[key] for key in ("input_rows", "forecast_rows_excluded", "identical_duplicates_collapsed", "actual_rows_unique", "invalid_rows")},
+        "counts": {key: counts[key] for key in ("input_rows", "forecast_rows_excluded", "identical_duplicates_collapsed", "actual_rows_unique", "invalid_rows", "zero_nd_flagged", "negative_embedded_generation_flagged")},
         "years": year_reports, "conflicting_duplicates": 0,
         "evidence_mode": "retrospective_revised" if source.kind == "historic_outturn" else "captured_availability",
         "historical_revision_availability_known": False,
