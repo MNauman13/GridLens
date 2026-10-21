@@ -35,11 +35,7 @@ jobs:
       - name: Install Python environment
         run: uv sync --frozen --extra api --group dev
       - name: Resolve or install Node lock
-        run: |
-          npm install --package-lock-only
-          npm ci
-      - name: Emit reviewed dependency refresh
-        run: python scripts/emit_lockfiles.py
+        run: npm ci
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
       - name: Python tests and deterministic fixture

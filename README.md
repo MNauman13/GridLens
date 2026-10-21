@@ -16,6 +16,8 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 - [Source audit](docs/data/source-audit.md)
 - [Research mapping](docs/research/mapping.md)
 - [Phase status](docs/progress/phase-0.md)
+- [Phase 1 results](docs/progress/phase-1.md)
+- [Browser verification runbook](docs/operations/browser-verification.md)
 
 The default contract issues at 09:30 UTC, uses seven complete UTC days of history ending at the start of the issue day, skips observed values from the issue day, and predicts 48 half-hours of the following UTC day.
 

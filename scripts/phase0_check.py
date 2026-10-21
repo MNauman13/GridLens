@@ -69,7 +69,7 @@ def check():
         'research_references': len(pins['references']),
         'registered_annual_sources': len(catalog['annual_resources']),
         'full_source_quality_audit': 'pending_phase_2',
-        'ML_environment_and_GPU_execution': 'pending_phase_1',
+        'runtime_checks': 'not_evaluated_by_this_phase0_command',
         'training_ready': False,
     }
 

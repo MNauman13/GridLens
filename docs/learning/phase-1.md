@@ -36,6 +36,16 @@ Paths are relative to the bundle root. A member named `../outside` is rejected s
 
 The user selects an issue date and clicks **Run contract check**. The browser requests `/api/fixture` from Next.js. Next.js calls FastAPI's `/v1/fixture`. Python constructs and validates the input window, then returns a summary. The browser displays the returned boundaries.
 
+```mermaid
+flowchart TD
+  B["Browser: issue date"] --> N["Next.js: same-origin route"]
+  N --> A["FastAPI: construct fixture"]
+  A --> V["Validate input boundaries"]
+  V -->|valid| S["Verified summary"]
+  V -->|invalid| E["Visible validation error"]
+  N -->|API unavailable| E
+```
+
 If Python is unavailable, the page displays a verification error. It does not replace the response with a client-side success message. This gives the browser test something meaningful to verify across the application boundary.
 
 ## 6. What a real browser test checks
