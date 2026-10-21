@@ -1,0 +1,140 @@
+{
+  "catalog_version": "neso_source_catalog_v1",
+  "provider": "NESO",
+  "attribution": "Supported by National Energy SO Open Data",
+  "license_url": "https://www.neso.energy/data-portal/neso-open-licence",
+  "raw_bytes_audited": false,
+  "full_coverage_verified": false,
+  "evidence_transport": "official_pages_and_web_retrieved_API_previews_not_raw_capture",
+  "required_fields": [
+    "SETTLEMENT_DATE",
+    "SETTLEMENT_PERIOD",
+    "ND"
+  ],
+  "candidate_history_fields": [
+    "EMBEDDED_WIND_GENERATION",
+    "EMBEDDED_SOLAR_GENERATION"
+  ],
+  "annual_resources": [
+    {
+      "year": 2017,
+      "resource_id": "2f0f75b8-39c5-46ff-a914-ae38088ed022",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2017",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=2f0f75b8-39c5-46ff-a914-ae38088ed022",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2018,
+      "resource_id": "fcb12133-0db0-4f27-a4a5-1669fd9f6d33",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2018",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=fcb12133-0db0-4f27-a4a5-1669fd9f6d33",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": true,
+      "reported_total": 17520,
+      "raw_sha256": null
+    },
+    {
+      "year": 2019,
+      "resource_id": "dd9de980-d724-415a-b344-d8ae11321432",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2019",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=dd9de980-d724-415a-b344-d8ae11321432",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2020,
+      "resource_id": "33ba6857-2a55-479f-9308-e5c4c53d4381",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2020",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=33ba6857-2a55-479f-9308-e5c4c53d4381",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2021,
+      "resource_id": "18c69c42-f20d-46f0-84e9-e279045befc6",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2021",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=18c69c42-f20d-46f0-84e9-e279045befc6",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2022,
+      "resource_id": "bb44a1b5-75b1-4db2-8491-257f23385006",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2022",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=bb44a1b5-75b1-4db2-8491-257f23385006",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2023,
+      "resource_id": "bf5ab335-9b40-4ea4-b93a-ab4af7bce003",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2023",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=bf5ab335-9b40-4ea4-b93a-ab4af7bce003",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": false,
+      "reported_total": null,
+      "raw_sha256": null
+    },
+    {
+      "year": 2024,
+      "resource_id": "f6d02c0f-957b-48cb-82ee-09003f2ba759",
+      "page_url": "https://www.neso.energy/data-portal/historic-demand-data/historic_demand_data_2024",
+      "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=f6d02c0f-957b-48cb-82ee-09003f2ba759",
+      "kind": "historic_outturn",
+      "metadata_verified": true,
+      "preview_verified": true,
+      "reported_total": 17568,
+      "raw_sha256": null
+    }
+  ],
+  "daily_resource": {
+    "resource_id": "177f6fa4-ae49-4182-81ea-0c6b35f26ca6",
+    "page_url": "https://www.neso.energy/data-portal/daily-demand-update/demand_data_update",
+    "preview_url": "https://api.neso.energy/api/3/action/datastore_search?limit=5&resource_id=177f6fa4-ae49-4182-81ea-0c6b35f26ca6",
+    "kind": "mixed_actual_forecast",
+    "actual_indicator": "A",
+    "forecast_indicator": "F",
+    "preview_verified": true,
+    "reported_total_at_preview": 2736,
+    "raw_sha256": null
+  },
+  "transcribed_preview_examples": [
+    {
+      "resource_year": 2018,
+      "SETTLEMENT_DATE": "2018-01-01",
+      "SETTLEMENT_PERIOD": 1,
+      "ND": 25593
+    },
+    {
+      "resource_year": 2024,
+      "SETTLEMENT_DATE": "2024-01-01",
+      "SETTLEMENT_PERIOD": 1,
+      "ND": 21783
+    },
+    {
+      "resource": "daily_update",
+      "SETTLEMENT_DATE": "2026-09-01",
+      "SETTLEMENT_PERIOD": 1,
+      "ND": 21924,
+      "FORECAST_ACTUAL_INDICATOR": "A"
+    }
+  ]
+}

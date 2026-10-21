@@ -1,0 +1,41 @@
+{
+  "version": "research_pins_v1",
+  "references": [
+    {
+      "method": "timexer",
+      "repository": "thuml/TimeXer",
+      "paper": "https://arxiv.org/abs/2402.19072v4",
+      "reference_commit": "76011909357972bd55a27adba2e1be994d81b327",
+      "tree_sha": "1da84e7d4f9b3c0d5c6709fafe39c8cccaf994a3",
+      "recursive_tree_truncated": false,
+      "license_named_paths": [],
+      "reuse_policy": "independent_implementation_from_paper_no_vendoring",
+      "reference_files": [
+        {
+          "path": "models/TimeXer.py",
+          "blob_sha": "c8026b74e45af938c2e234e06eef8126a6117caa"
+        }
+      ]
+    },
+    {
+      "method": "ncc",
+      "repository": "complex-ai-lab/ncc",
+      "paper": "https://arxiv.org/abs/2412.18144v1",
+      "reference_commit": "1430cd38bc5ac7331b7f1d7b31867d27074efddf",
+      "tree_sha": "9cd88668217ab96b36d47421ba81101d30514312",
+      "recursive_tree_truncated": false,
+      "license_named_paths": [],
+      "reuse_policy": "independent_implementation_from_paper_no_vendoring",
+      "reference_files": [
+        {
+          "path": "src/forecaster/e2ecp.py",
+          "blob_sha": "88ab4589461dd3e7779e50936175717801f9a184"
+        },
+        {
+          "path": "src/forecaster/end2endmodel.py",
+          "blob_sha": "4aeb492e89e8d4a4d52f34e2db2b063ec04de2de"
+        }
+      ]
+    }
+  ]
+}
