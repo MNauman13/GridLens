@@ -35,6 +35,6 @@ test("API outage is visible and does not masquerade as verification", async ({pa
   await page.route("**/api/fixture?**",route => route.fulfill({status:503,contentType:"application/json",body:'{"error":"unavailable"}'}));
   await page.goto("/");
   await page.getByRole("button",{name:"Run contract check"}).click();
-  await expect(page.getByRole("alert")).toContainText("API is unavailable");
+  await expect(page.getByRole("main").getByRole("alert")).toContainText("API is unavailable");
   await expect(page.getByRole("status")).not.toContainText("Contract verified");
 });
