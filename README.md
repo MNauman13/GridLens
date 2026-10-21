@@ -21,7 +21,7 @@ The default contract issues at 09:30 UTC, uses seven complete UTC days of histor
 
 ## Install and run
 
-Use Python 3.12 and Node 22. Core/API, development, and CPU ML dependencies are separated. Lockfiles record the actual dependency resolution.
+Use Python 3.12 and Node 24. Core/API, development, and CPU ML dependencies are separated. Lockfiles record the actual dependency resolution.
 
 ```bash
 uv sync --frozen --extra api --group dev
