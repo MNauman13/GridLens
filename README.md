@@ -25,6 +25,7 @@ Phase 0 uses Python 3.11+ and only the standard library. It does not install ML 
 ```bash
 python scripts/forecast_contract.py --issue-date 2024-02-10
 python -m unittest discover -s tests -v
+node --test tests/visual.test.cjs
 python scripts/phase0_check.py
 python scripts/environment_audit.py --output reports/local/environment.json
 ```
