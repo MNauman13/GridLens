@@ -1,0 +1,23 @@
+{
+  "contract_version": "gb_nd_day_ahead_v1",
+  "target": "NESO_ND",
+  "unit": "MW",
+  "storage_timezone": "UTC",
+  "display_timezone": "Europe/London",
+  "interval_minutes": 30,
+  "interval_semantics": "[start,end)",
+  "issue_time_utc": "09:30:00",
+  "context_end": "issue_day_00:00_UTC_exclusive",
+  "context_intervals": 336,
+  "gap_intervals": 48,
+  "target_day_offset": 1,
+  "horizon_intervals": 48,
+  "origin_frequency": "daily",
+  "nominal_coverage_levels": [0.8, 0.9, 0.95],
+  "coverage_scope": "marginal_per_output_slot",
+  "historical_observations_rule": "interval_end <= context_end_exclusive",
+  "captured_availability_rule": "first_seen_at <= issued_at",
+  "forecast_covariate_rule": "source_issued_at <= issued_at",
+  "incomplete_input_policy": "fail_without_moving_cutoff",
+  "predictions_immutable": true
+}

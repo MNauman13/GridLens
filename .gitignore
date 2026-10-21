@@ -1,0 +1,16 @@
+# Generated data and artifacts are regenerated from manifests.
+data/
+artifacts/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+node_modules/
+.next/
+.env
+.env.*
+!.env.example
+reports/local/
+*.zip
+*.bundle

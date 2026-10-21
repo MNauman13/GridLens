@@ -1,0 +1,33 @@
+{
+  "manifest_version": "gridlens_experiment_plan_v1",
+  "contract_version": "gb_nd_day_ahead_v1",
+  "status": "planned_pending_raw_coverage_audit",
+  "evidence_mode": "retrospective_revised",
+  "split_assignment": "target_UTC_date",
+  "range_semantics": "inclusive_dates",
+  "input_warmup_start": "2017-12-24",
+  "splits": [
+    {"role": "point_train", "start": "2018-01-01", "end": "2021-12-31"},
+    {"role": "point_validation", "start": "2022-01-01", "end": "2022-12-31"},
+    {"role": "calibrator_train", "start": "2023-01-01", "end": "2023-06-30"},
+    {"role": "calibrator_validation", "start": "2023-07-01", "end": "2023-09-30"},
+    {"role": "calibration_initialisation", "start": "2023-10-01", "end": "2023-12-31"},
+    {"role": "locked_test", "start": "2024-01-01", "end": "2024-12-31"}
+  ],
+  "point_model_frozen_after": "point_validation",
+  "calibrator_neural_weights_frozen_after": "calibrator_validation",
+  "test_state_updates": "matured_feedback_only_with_declared_NCC_TTA",
+  "simulated_actual_release": "target_day_plus_1_at_09:00_UTC",
+  "truth_policy": "frozen_revised_snapshot_for_Mode_A",
+  "full_runs": {"seeds": [17, 42, 101], "maximum_epochs": 50, "early_stopping_patience": 8},
+  "budget": {
+    "exploratory_run_wallclock_hours": 2,
+    "pilot_total_wallclock_hours": 12,
+    "timexer_max_validation_trials": 6,
+    "numeric_transformer_max_validation_trials": 3,
+    "paid_compute_enabled": false
+  },
+  "test_locked": true,
+  "actual_source_snapshot_hashes": [],
+  "note": "A plan is not a materialised dataset. Freeze real byte checksums and coverage before training."
+}
