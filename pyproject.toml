@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridlens"
+version = "0.1.0"
+description = "Auditable electricity forecasting with a Transformer built from scratch"
+requires-python = ">=3.12,<3.14"
+dependencies = ["pydantic>=2.12,<3", "tzdata>=2025.2"]
+
+[project.optional-dependencies]
+api = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+ml = ["torch>=2.6,<3", "numpy>=2,<3"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[project.scripts]
+gridlens = "gridlens.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1", "mypy>=1.15,<2", "httpx>=0.28,<1", "build>=1.2,<2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+gridlens = ["resources/*.json"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+include = ["src/**/*.py", "tests/test_foundation.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/gridlens"]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]

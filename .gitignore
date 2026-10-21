@@ -14,3 +14,10 @@ node_modules/
 reports/local/
 *.zip
 *.bundle
+*.egg-info/
+*.tsbuildinfo
+/dist/
+/build/
+/.mypy_cache/
+/test-results/
+/playwright-report/
