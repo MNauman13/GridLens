@@ -45,3 +45,10 @@ Run `uv run --frozen python scripts/build_dataset.py` after ingesting the frozen
 
 An exact Linux rebuild exposed rare differences in the last rounded calendar digits from Windows math-library results. Labels and measurement scaling were identical. Calendar phases now use integer ratios, fixed-precision Decimal arithmetic, and twelve-decimal quantisation. An independent Windows CI job must match the Linux fingerprint across all 35,143 phase values exactly. The approved freeze was regenerated; previous snapshots remain in Git history. See ADR 0006.
 
+
+## Label maturity at fitting boundaries
+
+Nonoverlapping target dates are necessary but insufficient. For example, the forecast for 2022-01-01 issues on 2021-12-31 at 09:30 UTC. A 2021-12-31 training label is not complete then. The sampler therefore excludes fitting/selection labels whose declared release follows the next role's first issue.
+
+Mode A uses the predeclared target-plus-one-day 09:00 UTC release. Captured-mode fitting labels additionally select only versions first seen by the fitting deadline. Four fitting/selection boundary origins are excluded; all reasons and retained dates are frozen. Initialisation and final evaluation are not weight-fitting roles, and delayed feedback remains a separate later-phase constraint.
+

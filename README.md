@@ -76,6 +76,8 @@ The data licence applies to the relevant NESO datasets, not automatically to pro
 - `/learn/settlement`: British clock-change conversion animation.
 - `/learn/attention`: checked numerical attention calculator and positional animation.
 
-The 2022 selected ridge baseline has MAE 1,389.20 MW and RMSE 1,892.54 MW. These are validation results; the final 2024 evaluation remains locked. See `reports/baseline-validation-v1.json`. The serving API validates packaged results and does not fit models during a page request.
+The 2022 selected ridge baseline has MAE 1,390.80 MW and RMSE 1,895.45 MW. These are validation results; the final 2024 evaluation remains locked. See `reports/baseline-validation-v1.json`. The serving API validates packaged results and does not fit models during a page request.
 
 Run `uv run --frozen --extra ml python scripts/build_dataset.py` and `uv run --frozen --extra ml python -m scripts.run_baselines` after ingestion. The latter rebuilds and verifies the frozen dataset before fitting. Hosted CI verifies the complete source-to-baseline path and tests the app in Chromium. A separate Windows/Linux job requires identical fingerprints for all annual, weekly, and daily calendar phases.
+
+Label-maturity embargoes retain 1,460 training and 364 validation origins. Four fitting/selection boundary dates are excluded because their labels would arrive after the next role's first issue; exclusions are frozen and do not depend on model error.

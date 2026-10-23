@@ -5,27 +5,50 @@
     4,
     5
   ],
-  "dataset_manifest_id": "a7e1993d870c599704590827d2a3f3787eebca404b0d81265ee20762d89b971e",
-  "baseline_report_id": "107a95d18086e73d44dce7d3f2b25c7415ceaf9931c3ddb684961391794b32cb",
+  "dataset_manifest_id": "784a934d96749bbc8105c63ae32e4cc63fd7d817557adbaf045f0625f15a0f26",
+  "baseline_report_id": "b698f94f423a0dd06895687500cf31da3c46b0cc3b0cda3b5b51fcae38151d0d",
   "locked_test_evaluated": false,
   "evidence_mode": "retrospective_revised",
-  "source_code_commit": "dc97396b1e5678c8df85fd513228b745a67976ab",
-  "live_baseline_verification": {
-    "run_id": 40018718405,
-    "conclusion": "success",
-    "absolute_error_tolerance_mw": 0.000001
+  "accepted_origins": {
+    "calibration_initialisation": 92,
+    "calibrator_train": 180,
+    "calibrator_validation": 91,
+    "locked_test": 366,
+    "point_train": 1460,
+    "point_validation": 364
   },
-  "calendar_portability": {
-    "run_id": 40018718765,
-    "conclusion": "success",
-    "platforms": [
-      "Linux",
-      "Windows"
+  "fitting_boundary_exclusions": {
+    "calibrator_train": [
+      {
+        "reason": "label_matures_after_next_role_issue",
+        "target_date": "2023-06-30"
+      }
     ],
-    "sha256": "38a522821a06953035e71d73198a2fe4dd1cd580226cf626e9d2a5153b144825"
+    "calibrator_validation": [
+      {
+        "reason": "label_matures_after_next_role_issue",
+        "target_date": "2023-09-30"
+      }
+    ],
+    "point_train": [
+      {
+        "reason": "label_matures_after_next_role_issue",
+        "target_date": "2021-12-31"
+      }
+    ],
+    "point_validation": [
+      {
+        "reason": "label_matures_after_next_role_issue",
+        "target_date": "2022-12-31"
+      }
+    ]
   },
+  "source_verification_run": 40020171125,
+  "reviewed_artifact_generation_run": 40020171075,
+  "calendar_portability_run": 40020171081,
+  "calendar_sha256": "38a522821a06953035e71d73198a2fe4dd1cd580226cf626e9d2a5153b144825",
   "required_foundation_checks": {
-    "python_total": 63,
+    "python_total": 64,
     "python_allowed_skips": [
       "CUDA unavailable"
     ],
@@ -35,7 +58,9 @@
     "production_build": true,
     "visual_fixtures_match_manual_torch": true
   },
+  "required_absolute_baseline_error_tolerance_mw": 0.000001,
   "foundation_acceptance_url": "https://github.com/MNauman13/GridLens/actions/workflows/ci.yml",
+  "live_reference_acceptance_url": "https://github.com/MNauman13/GridLens/actions/workflows/neso-audit.yml",
   "manual_screenshot_review": false,
   "cuda_execution_verified": false,
   "local_workspace_available_at_completion": false

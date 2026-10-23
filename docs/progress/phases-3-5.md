@@ -4,40 +4,46 @@
 
 | Phase | Result |
 | --- | --- |
-| 3 | Eligible frozen observation versions; captured-time filtering; causal two-slot filling with missingness/age; fixed feature order; exact 336/48-gap/48-target windows; training-only scaling; split ownership; reproducible manifests |
-| 4 | Last-available-day, weekly, and ridge baselines; checked model bundles; complete 2022 validation comparison; typed saved-forecast API; real-data browser chart and provenance |
-| 5 | Manual scaled/multi-head attention, causal/padding masks, positional buffers, numerical and gradient oracles, interactive head/query/mask calculator, attention/position animations |
+| 3 | Frozen eligible observations, captured-time filtering, causal fills/missingness/age, exact context/gap/targets, training-only scaling, chronology and label-maturity guards, reproducible manifests |
+| 4 | Persistence and ridge baselines, checked bundles, full eligible validation comparison, typed saved-forecast API, real-data browser chart and provenance |
+| 5 | Manual scaled/multi-head attention, causal/padding masks, positional buffers, numerical/gradient oracles, exact interactive calculations and head/position animations |
 
-## Data and model evidence
+## Data and fitting boundaries
 
-The annual data has 140,256 actual intervals. Dataset membership has 1,461 point-training and 365 point-validation origins with no drops. Calibration roles and 366 final-test origins are frozen separately. The final 2024 model evaluation remains locked.
+The annual sources have 140,256 actual intervals. Accepted origins are 1,460 point-training, 364 point-validation, 180 calibrator-training, 91 calibrator-validation, 92 initialisation, and 366 locked-test. Four fitting/selection boundary origins are excluded because labels would mature after the next role's first issue. No dates were excluded based on model errors.
 
-| Baseline | Validation MAE, MW | Validation RMSE, MW |
+The final 2024 evaluation remains locked. Annual data is revised historical outturn with unknown historical publication vintages.
+
+| Baseline | MAE, MW | RMSE, MW |
 | --- | ---: | ---: |
-| Last available day | 2732.066210 | 3642.848166 |
-| Weekly persistence | 2035.021632 | 2804.568086 |
-| Selected ridge, alpha 10 | 1389.199691 | 1892.542181 |
+| Last available day | 2734.75 | 3646.32 |
+| Weekly persistence | 2037.39 | 2807.36 |
+| Ridge, alpha 1 | 1411.82 | 1916.25 |
+| Ridge, alpha 10 | 1390.80 | 1895.45 |
+| Ridge, alpha 100 | 1401.82 | 1913.63 |
 
-These are validation/model-selection results. Ridge uses a fixed 100-feature lag/calendar design and fits only 2018–2021. The saved demo target is 2022-02-10.
+Ridge selects alpha 10 from the predeclared 1/10/100 candidates. These are validation/model-selection results, not final generalisation metrics. The saved demo target is 2022-02-10.
 
-The [live data-to-baseline verification](https://github.com/MNauman13/GridLens/actions/runs/40018718405) passed at commit dc97396b1e5678c8df85fd513228b745a67976ab. It independently retrieved original CSVs, verified frozen hashes, rebuilt the exact dataset manifest, fitted all five baseline candidates, verified bundle reloads, and reproduced all reference errors within 1e-6 MW.
+The source-to-baseline workflow requires exact equality with the approved dataset manifest, original annual hashes, identical eligible origins, the same selected penalty, and absolute error agreement within 1e-6 MW. Reference generation never pushes automatically. See [live data/baseline acceptance](https://github.com/MNauman13/GridLens/actions/workflows/neso-audit.yml).
 
-The [Windows/Linux calendar verification](https://github.com/MNauman13/GridLens/actions/runs/40018718765) passed at the same commit. Labels and measurement scaling were already identical; fixed-precision calendar arithmetic resolves the detected platform drift without relaxing dataset SHA checks. The manual review workflow cannot push and no longer runs automatically.
+The [Windows/Linux calendar run](https://github.com/MNauman13/GridLens/actions/runs/40020171081) verifies every phase of the daily, weekly, and annual cycles exactly. Fixed Decimal arithmetic resolves detected OS math-library rounding differences without weakening hash checks.
 
-## Test acceptance
+## Acceptance gates
 
-At the preceding implementation commit, all 61 Python tests completed successfully except the explicitly conditional CUDA check. CPU attention parity/gradients, HTTP behavior, artifact integrity, leakage invariants, and dataset/ingestion fixtures passed. The current source additionally checks genuine self-attention oracle parity, exact calendar quadrants, and rejection of nonoverlapping splits whose training/validation chronology is reversed.
+The [foundation workflow](https://github.com/MNauman13/GridLens/actions/workflows/ci.yml) records checks for each exact commit. Required gates are 64 Python checks (only conditional CUDA may skip), sixteen real Chromium tests, three Node tests, schema and visual-fixture freshness, lint, strict Python/TypeScript types, the production build, and CPU PyTorch verification.
 
-The browser suite contains eight scenarios at desktop/mobile widths: contract round-trip, timeline, fixture outage, settlement lesson, saved forecast/provenance, forecast outage, attention controls/masks, and position animation. The [foundation workflow](https://github.com/MNauman13/GridLens/actions/workflows/ci.yml) is the acceptance record for each exact source commit. Its gates are 63 Python checks (only conditional CUDA may skip), sixteen real Chromium tests, three Node logic tests, checked visual fixtures and schemas, lint, strict Python/TypeScript types, the production web build, and a CPU PyTorch smoke check. A green run is required before these phases are reported complete.
+[The source verification run](https://github.com/MNauman13/GridLens/actions/runs/40020171125) passed the source tests and all sixteen browser scenarios. The final live-reference run additionally verifies the committed embargoed artifacts.
+
+The browser scenarios cover real contract requests, timeline controls, fixture outage, settlement conversion, real saved forecasts/provenance, forecast outage, attention masks/head/query controls, and positional animation, each at desktop/mobile widths. No manual screenshot review or CUDA execution is claimed.
 
 ## Use and limits
 
-- `/forecasts`: saved real-data baseline forecast.
+- `/forecasts`: real saved baseline forecast.
 - `/learn/settlement`: 46/48/50-period conversion.
-- `/learn/attention`: checked numerical attention and positional animation.
+- `/learn/attention`: checked attention arithmetic and positional animation.
 
-The workspace disconnected during the final phase; completion continued through normal GitHub Git-object commits and clean hosted runners. The earlier disconnected checkout may contain uncommitted lesson files. Preserve and compare those files before fetching/reconciling the updated main branch; no reset or clean was attempted. Shared history was not force-pushed.
+The workspace disconnected during the final phase. Completion continued through normal GitHub commits and hosted verification. Preserve and compare uncommitted files in the older local checkout before reconciling it with remote main; no reset, clean, or force-push was performed.
 
-No manual screenshot review or CUDA execution is claimed. Annual observations are revised historical data with unknown historical publication vintages. The attention patterns are transparent teaching fixtures, not learned electricity explanations. Full encoder/decoder construction is Phase 6; no trained Transformer result is claimed.
+Teaching attention uses identity projections; its patterns are not learned electricity explanations. The complete encoder/decoder and sequence trainer are Phase 6. No trained Transformer result is claimed.
 
-[Phase 3 walkthrough](../learning/phase-3.md) · [Phase 4 walkthrough](../learning/phase-4.md) · [Phase 5 walkthrough](../learning/phase-5.md)
+[Phase 3](../learning/phase-3.md) · [Phase 4](../learning/phase-4.md) · [Phase 5](../learning/phase-5.md)

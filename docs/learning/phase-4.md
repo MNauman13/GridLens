@@ -18,15 +18,15 @@ The training-only design matrix has one row per origin. Each feature is centred 
 
 Predictions reverse the target centring. The intercept is not penalised because it is represented by the training target mean. We solve the system directly rather than computing a matrix inverse. All fitted arrays and training dataset identity are saved as JSON in a checksum-verified bundle; loading does not execute pickled Python code.
 
-The predeclared penalties are 1, 10, and 100. Minimum 2022 validation RMSE selects 10. Every candidate uses the same 365 origins, fixed labels, and evidence mode. The final 2024 test has not been evaluated.
+The predeclared penalties are 1, 10, and 100. Minimum 2022 validation RMSE selects 10. A label-maturity embargo removes the final origin of each fitting/selection role: a label released after the next role's first issue cannot train or select that earlier model. The training role retains 1,460 origins and point validation retains 364. Every candidate uses the same 364 origins, fixed labels, and evidence mode. The final 2024 test has not been evaluated.
 
 | Baseline | MAE, MW | RMSE, MW |
 | --- | ---: | ---: |
-| Last available day | 2732.07 | 3642.85 |
-| Weekly persistence | 2035.02 | 2804.57 |
-| Ridge, alpha 1 | 1409.88 | 1912.67 |
-| Ridge, alpha 10 | 1389.20 | 1892.54 |
-| Ridge, alpha 100 | 1400.59 | 1911.49 |
+| Last available day | 2734.75 | 3646.32 |
+| Weekly persistence | 2037.39 | 2807.36 |
+| Ridge, alpha 1 | 1411.82 | 1916.25 |
+| Ridge, alpha 10 | 1390.80 | 1895.45 |
+| Ridge, alpha 100 | 1401.82 | 1913.63 |
 
 These are selection-set results, not an unbiased final generalisation estimate. See [the saved report](../../reports/baseline-validation-v1.json) for all slot errors, daily peak errors, runtime, and model identities.
 

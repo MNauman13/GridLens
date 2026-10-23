@@ -1,17 +1,19 @@
 # Phase 4 results
 
-Implemented last-available-day persistence, weekly persistence, and a 100-feature, 48-output ridge baseline with JSON model bundles. All five candidates use the identical 1,461 training and 365 point-validation origins; ridge penalties 1, 10, and 100 are compared on validation RMSE. Alpha 10 is selected.
+Implemented last-available-day persistence, weekly persistence, and a 100-feature, 48-output ridge baseline with checked JSON model bundles. All candidates share 1,460 eligible training origins and 364 point-validation origins. Label-maturity embargoes prevent fitting or model selection from consuming observations unavailable at the following role's first issue.
 
-| Model | Validation MAE, MW | Validation RMSE, MW |
+| Baseline | MAE, MW | RMSE, MW |
 | --- | ---: | ---: |
-| Last available day | 2732.0662 | 3642.8482 |
-| Weekly persistence | 2035.0216 | 2804.5681 |
-| Selected ridge | 1389.1997 | 1892.5422 |
+| Last available day | 2734.75 | 3646.32 |
+| Weekly persistence | 2037.39 | 2807.36 |
+| Ridge, alpha 1 | 1411.82 | 1916.25 |
+| Ridge, alpha 10 | 1390.80 | 1895.45 |
+| Ridge, alpha 100 | 1401.82 | 1913.63 |
 
-The full report is `reports/baseline-validation-v1.json`, including per-slot errors, peak error definitions, timings, and runtime. These are model-selection results. No final 2024 test metrics have been computed.
+The predeclared penalties are 1, 10, and 100; alpha 10 minimises validation RMSE. These are selection-set results, not final test results. The 2024 evaluation remains locked. `reports/baseline-validation-v1.json` includes per-slot errors, peaks, timings, runtime, and model identities.
 
-The real saved validation forecast for target 2022-02-10 is packaged with its input window, source hashes, model/dataset/truth versions, and content ID. FastAPI returns a typed 48-point artifact. `/forecasts` renders the chart, model selector, exact boundaries, slot readout, and provenance. Missing/corrupt artifacts fail explicitly.
+The packaged real validation forecast for 2022-02-10 has a typed 48-point response, exact input/cutoff/target boundaries, source/model/dataset/truth identifiers, and a verified content ID. `/forecasts` provides the chart, model selector, slot readout, and provenance.
 
-Local checks verify exact lag positions, hand-computed metrics, fitted ridge output, reload equality, corruption, and edited forecast rejection. HTTP tests require the API extra and run in CI. Browser tests use both real servers at desktop/mobile sizes. The live data workflow reruns the whole frozen dataset and baseline comparison, permitting 1e-6 MW numerical error across CPU/BLAS platforms.
+Tests verify lag eligibility, hand metrics, fitted output, save/reload equality, corrupt-artifact rejection, HTTP responses, and real desktop/mobile browser interactions. Live CI independently rebuilds the source-frozen dataset, reruns all five candidates, and requires the same selected penalty and absolute metric agreement within 1e-6 MW.
 
-See the [walkthrough](../learning/phase-4.md). Final verification run links are recorded in the Phases 3–5 completion report.
+[Walkthrough](../learning/phase-4.md) · [Acceptance record](phases-3-5.md)
