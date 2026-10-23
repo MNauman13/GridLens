@@ -18,7 +18,7 @@ The test runner starts FastAPI on `127.0.0.1:8000` and the production Next.js ap
 
 ## What is actually verified
 
-There are three scenarios at two viewport sizes, giving six browser tests:
+There are eight scenarios at two viewport sizes, giving sixteen browser tests:
 
 1. Open the page, call the real Python fixture API, validate its boundaries, and change to a leap-day origin.
 2. Click Next/Previous through context, gap, target, and delayed feedback; check boundary buttons.
@@ -49,3 +49,9 @@ A local server process alone is insufficient. Verify all three links:
 In the restricted task environment used for Phase 1, direct loopback HTTP was rejected with socket error 10013 and the in-app browser timed out. The same committed suite ran on GitHub's runner, where both servers were reachable. That proves the application can be tested in a real browser without asserting that this chat's local browser bridge works.
 
 Do not relabel Node DOM mocks as browser tests, or a launched process as a verified page. Record the blocked layer and use a verified environment for the full test.
+
+## Phases 4–5 additions
+
+The suite also verifies real saved baseline forecasts, exact issue/target/cutoff boundaries, model switching, lag values, provenance, and forecast API errors. Attention checks compare displayed weights/output with the PyTorch-verified fixture, test causal masking and head/query controls, and play/pause attention and positional animations. Eight scenarios at two Chromium viewport sizes give sixteen tests.
+
+Install the ML extra for the complete repository checks: `uv sync --frozen --extra api --extra ml --group dev`. The web server still serves saved baseline artifacts without running training during a request.

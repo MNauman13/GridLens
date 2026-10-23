@@ -2,7 +2,7 @@
 
 Electricity demand forecasting with a Transformer implemented from scratch in PyTorch, a TimeXer application adaptation, and Neural Conformal Control.
 
-**Stage:** Phase 2: original NESO CSV ingestion, immutable captures, versioned actuals, UTC conversion, and a frozen 2017–2024 quality audit. No model is trained yet.
+**Stage:** Phases 3–5: frozen causal datasets, validated real-data baseline forecasts, manual attention/positional operators, and interactive browser lessons. Full encoder/decoder construction is Phase 6.
 
 GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
 
@@ -14,6 +14,10 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 - [Phase 0 walkthrough](docs/learning/phase-0.md)
 - [Phase 1 walkthrough](docs/learning/phase-1.md)
 - [Phase 2 walkthrough and animated lesson](docs/learning/phase-2.md)
+- [Phase 3: causal datasets](docs/learning/phase-3.md)
+- [Phase 4: baseline forecast explorer](docs/learning/phase-4.md)
+- [Phase 5: manual attention and animations](docs/learning/phase-5.md)
+- [Phases 3–5 results](docs/progress/phases-3-5.md)
 - [Frozen full-data audit](reports/neso-audit-v1.json)
 - [Source audit](docs/data/source-audit.md)
 - [Research mapping](docs/research/mapping.md)
@@ -29,8 +33,8 @@ The default contract issues at 09:30 UTC, uses seven complete UTC days of histor
 Use Python 3.12 and Node 24. Core/API, development, and CPU ML dependencies are separated. Lockfiles record the actual dependency resolution.
 
 ```bash
-uv sync --frozen --extra api --group dev
-uv run --frozen --extra api gridlens fixture
+uv sync --frozen --extra api --extra ml --group dev
+uv run --frozen --extra api --extra ml gridlens fixture
 npm ci
 npm run build
 npx playwright install chromium
@@ -39,16 +43,16 @@ npm run test:e2e
 
 Use the absolute path to a working interpreter if `python` resolves to the Windows Store launcher. The audit records the interpreter actually used; no personal directory or machine name is required in committed reports.
 
-For manual inspection, run `uv run --frozen --extra api python -m uvicorn gridlens.api:app --host 127.0.0.1 --port 8000` and `npm run dev` in separate terminals, then open `http://127.0.0.1:3000`.
+For manual inspection, run `uv run --frozen --extra api --extra ml python -m uvicorn gridlens.api:app --host 127.0.0.1 --port 8000` and `npm run dev` in separate terminals, then open `http://127.0.0.1:3000`.
 
 `npm run test:e2e` starts both servers automatically and checks real Chromium interactions at desktop and mobile sizes. Reports, screenshots, and failure traces go to `reports/local/`. GitHub Actions runs the same checks without relying on this chat's loopback access.
 
 ```bash
-uv run --frozen --extra api python -m unittest discover -s tests -v
-uv run --frozen --extra api python scripts/phase0_check.py
-uv run --frozen --extra api python scripts/export_schemas.py --check
-uv run --frozen --extra api ruff check src tests/test_foundation.py tests/test_ingestion.py
-uv run --frozen --extra api mypy src/gridlens
+uv run --frozen --extra api --extra ml python -m unittest discover -s tests -v
+uv run --frozen --extra api --extra ml python scripts/phase0_check.py
+uv run --frozen --extra api --extra ml python scripts/export_schemas.py --check
+uv run --frozen --extra api --extra ml ruff check src tests
+uv run --frozen --extra api --extra ml mypy src/gridlens
 npm run typecheck
 npm run lint
 npm run test:unit
@@ -65,3 +69,13 @@ Commit each coherent, verified change: contracts, source evidence, research refe
 Supported by National Energy SO Open Data.
 
 The data licence applies to the relevant NESO datasets, not automatically to project code. GridLens is independent and is not endorsed by NESO. Reference repositories are not vendored; their reuse permissions must be checked separately.
+
+## Explore the current implementation
+
+- `/forecasts`: real saved 2022 validation forecast, three baselines, exact time boundaries, and provenance.
+- `/learn/settlement`: British clock-change conversion animation.
+- `/learn/attention`: checked numerical attention calculator and positional animation.
+
+The 2022 selected ridge baseline has MAE 1,389.20 MW and RMSE 1,892.54 MW. These are validation results; the final 2024 evaluation remains locked. See `reports/baseline-validation-v1.json`. The serving API validates packaged results and does not fit models during a page request.
+
+Run `uv run --frozen --extra ml python scripts/build_dataset.py` and `uv run --frozen --extra ml python -m scripts.run_baselines` after ingestion. The latter rebuilds and verifies the frozen dataset before fitting. Hosted CI verifies the complete source-to-baseline path and tests the app in Chromium. A separate Windows/Linux job requires identical fingerprints for all annual, weekly, and daily calendar phases.

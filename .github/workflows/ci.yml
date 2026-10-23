@@ -44,6 +44,7 @@ jobs:
           uv run --frozen --extra api --extra ml python scripts/phase0_check.py
           uv run --frozen --extra api --extra ml python scripts/export_schemas.py --check
           uv run --frozen --extra api --extra ml python scripts/export_settlement_demo.py --check
+          uv run --frozen --extra api --extra ml python scripts/export_attention_demo.py --check
           uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |

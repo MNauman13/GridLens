@@ -1,4 +1,5 @@
 {
+  "calendar_encoding": "fixed_decimal_cyclic_v1",
   "evidence_mode": "retrospective_revised",
   "feature_order": [
     "ND",
@@ -19,7 +20,7 @@
   ],
   "fill_limit_slots": 2,
   "locked_test_evaluated": false,
-  "manifest_id": "bb56f625058ba648cb3c831c6db142ed739cd88d61bbb011f003d5eecb33e840",
+  "manifest_id": "a7e1993d870c599704590827d2a3f3787eebca404b0d81265ee20762d89b971e",
   "scaler_id": "e91fe3ba9675c5f94f8bb4dc8e4ffbe8b416991a6c223d99f46e970019ca652a",
   "scaling": {
     "means": [
@@ -1510,11 +1511,11 @@
   ],
   "splits": {
     "calibration_initialisation": {
-      "dataset_id": "69c67c39ef82648672d535fdad25930358058d8e3604023646a0d040bd275145",
+      "dataset_id": "9c30508bcdc558619c91e20ef3566935c7db5343694dbf93bb482dabcd5c7c74",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2023-12-31",
-      "feature_ids_sha256": "219538cae8603741292b5faac132000a522c38cbf16fdaa63c88a6ece263d133",
+      "feature_ids_sha256": "2dde6151512495725c7feddd33cd6f10e3ddb591fe30a3e5ba92ee96aa814829",
       "label_hashes_sha256": "4e4bca6527dcab8a3214c844dd37f7d3d395c6c3386c26502d6a55132dfe7eb9",
       "role": "calibration_initialisation",
       "start": "2023-10-01",
@@ -1614,11 +1615,11 @@
       ]
     },
     "calibrator_train": {
-      "dataset_id": "3cc45d188904e3e2668b25669b4a68ef9d4eef36a8d9a358a8078caf299d91ef",
+      "dataset_id": "616a01e4e21b44a6415ece8475e12ac54930bfe6f80b1f625480c0d56d83fc83",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2023-06-30",
-      "feature_ids_sha256": "e0ffa2d2051352ebeb90572cb1194c03ab23b93c2c6cf54048a7c3ac4121bef3",
+      "feature_ids_sha256": "e74d68c82af9e51c1ea86984732a30fb7810fbd5bd06056051fb49a52d0bfd17",
       "label_hashes_sha256": "df110bb5459fa6d74a6d2ac7217f8ae20d31cc30fcee3a72407e2378522ea14e",
       "role": "calibrator_train",
       "start": "2023-01-01",
@@ -1807,11 +1808,11 @@
       ]
     },
     "calibrator_validation": {
-      "dataset_id": "15275a0d94c0ad2435c9481007ef6b99f26f2b363e795129a58ca9d02bf33d3b",
+      "dataset_id": "17ab28824357444bc4f2f9da4bb129bc95b4d494c89db5f17b39278a66d4e046",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2023-09-30",
-      "feature_ids_sha256": "341a2cf472f98f79dcf9716f47e597d21ba96ff39ed6450a3ddb83286232713c",
+      "feature_ids_sha256": "0a4ab20f46602707ce024ff2f0ead5b070a16e6eb7cfc857b1ed737b7497393f",
       "label_hashes_sha256": "8d26706690e5b99724d4cc7e18fa6199c0f7194288b9d2e0b5c97dd176d6511d",
       "role": "calibrator_validation",
       "start": "2023-07-01",
@@ -1911,11 +1912,11 @@
       ]
     },
     "locked_test": {
-      "dataset_id": "6b88b49b06107ee7a1cba57d0bea6a004241795c5c9fa417bfec22ff0adb6961",
+      "dataset_id": "ae05fb4f8d75600860fb1383d19dfc61f43e9a3a81c1217a5633f94d4a153ba2",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2024-12-31",
-      "feature_ids_sha256": "d7c33aa01cb32c057b47fbccb99d27f508e3206185ccb9a309050e3a11743afd",
+      "feature_ids_sha256": "ad6843242900be1e47b139c9540fe30d0df55c1a9ab1074dfd65b527d12cfc7a",
       "label_hashes_sha256": "8754eba2af16888c532da6ca2b9a39247a6f21ed9cc3021f7a4624954f13a0c0",
       "role": "locked_test",
       "start": "2024-01-01",
@@ -2289,11 +2290,11 @@
       ]
     },
     "point_train": {
-      "dataset_id": "bf657139141fa9d02d5204bbf6e11cad495bf074561f17eb9f417e7c264b5b0e",
+      "dataset_id": "fd85581e870b8cef00df9d58e71575f6c0d50155936d2a101155e246b4a16cce",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2021-12-31",
-      "feature_ids_sha256": "fc58cd4faaa2951fa6fd1db9d52e54cb31bb142603783edd1050a5a5b9301367",
+      "feature_ids_sha256": "331df5c5198ca15087c6bb27452f050899f3329ab59722ef962aadc849a76547",
       "label_hashes_sha256": "e2a15e3a1fdce39087c40ef723c757004cbe56cd810fdc5cd1e96813732eee5d",
       "role": "point_train",
       "start": "2018-01-01",
@@ -3762,11 +3763,11 @@
       ]
     },
     "point_validation": {
-      "dataset_id": "be486af50ab515c0ba1e11b4ef2e4ba052e4f070a2e68a0f6083b7aa6b3ee3dc",
+      "dataset_id": "5a7d7a29a9e98a645b7b2ca0383898b5925716bc55f2139a3b2e5c49b5e01551",
       "drop_counts": {},
       "dropped_origins": [],
       "end": "2022-12-31",
-      "feature_ids_sha256": "e95ca5ebedd3d933f8a651196d3d56fc97f5dc68661a81f87e7eaa8e6feeeebe",
+      "feature_ids_sha256": "ea8359ba75c933b8f88617cc1902dd340b0928b8a5b7d859793880a213976312",
       "label_hashes_sha256": "a17d5cf09ec96292647c413c26ad40441bb43f2e7499c145fb06cbc5a53282d9",
       "role": "point_validation",
       "start": "2022-01-01",

@@ -1,8 +1,8 @@
 {
   "last_day": {
-    "dataset_id": "be486af50ab515c0ba1e11b4ef2e4ba052e4f070a2e68a0f6083b7aa6b3ee3dc",
+    "dataset_id": "5a7d7a29a9e98a645b7b2ca0383898b5925716bc55f2139a3b2e5c49b5e01551",
     "evaluation_role": "point_validation",
-    "forecast_id": "2b4be8008d0c9c2889aa7b466a8adfbb23c1acc088ec1c859d959dc04a297696",
+    "forecast_id": "5b6ee822f596845913c8158544bea52666d5ccc243d6565063800d76a6c070dd",
     "inputs": {
       "context_end_exclusive": "2022-02-09T00:00:00Z",
       "context_start": "2022-02-02T00:00:00Z",
@@ -346,7 +346,7 @@
         23520.0
       ],
       "evidence_mode": "retrospective_revised",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
       "issued_at": "2022-02-09T09:30:00Z",
       "target_end_exclusive": "2022-02-11T00:00:00Z",
       "target_start": "2022-02-10T00:00:00Z"
@@ -404,8 +404,8 @@
     ],
     "point": {
       "contract_version": "gb_nd_day_ahead_v1",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
-      "model_version": "last_day_v1_c960822ae7dafa3e9ebc3b9c78d3766b86f8e9b1d1f8b286fe847170d84b90b1",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
+      "model_version": "last_day_v1_39239f441a34e48a538c249f2f20d692cbe49d81262d46f147352bab58b2324c",
       "prediction_mw": [
         22823.0,
         23338.0,
@@ -469,12 +469,12 @@
       "a2e19b4eb4157a190d1e7f2c946ee92c4be2ae196f72d55545c870399d3efb2f"
     ],
     "truth_version": "cc7501c438ff1342c0b30d5de3f40193c35f317067b828fcfd427b5d4ea4eb06",
-    "validation_report_id": "d95f4869024df18b97fbdd9bbb077b60c0e4a7489a04d0f0f057d70103ce99a4"
+    "validation_report_id": "107a95d18086e73d44dce7d3f2b25c7415ceaf9931c3ddb684961391794b32cb"
   },
   "ridge": {
-    "dataset_id": "be486af50ab515c0ba1e11b4ef2e4ba052e4f070a2e68a0f6083b7aa6b3ee3dc",
+    "dataset_id": "5a7d7a29a9e98a645b7b2ca0383898b5925716bc55f2139a3b2e5c49b5e01551",
     "evaluation_role": "point_validation",
-    "forecast_id": "b16caccaac2805111379597d9708cd5de38bacac7eee048a513f9f1ce7f927f7",
+    "forecast_id": "e79faba61e7aa166fe498b520cd5f303402862fca3aa2f35d6eb81e92abe02b6",
     "inputs": {
       "context_end_exclusive": "2022-02-09T00:00:00Z",
       "context_start": "2022-02-02T00:00:00Z",
@@ -818,7 +818,7 @@
         23520.0
       ],
       "evidence_mode": "retrospective_revised",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
       "issued_at": "2022-02-09T09:30:00Z",
       "target_end_exclusive": "2022-02-11T00:00:00Z",
       "target_start": "2022-02-10T00:00:00Z"
@@ -876,57 +876,57 @@
     ],
     "point": {
       "contract_version": "gb_nd_day_ahead_v1",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
-      "model_version": "ridge_v1_bf1a356d8524faae7290b28d801d20914e169b85404945bd7353ffc8382dce98",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
+      "model_version": "ridge_v1_d498e34feb3a210308cd0a43162a370f9f7a9b7f00e0d2c91443b5a71feeaf42",
       "prediction_mw": [
-        24534.382009162575,
-        24953.40025044721,
-        24672.034525123738,
-        24067.6694534392,
-        23518.320416429073,
-        23217.281045457647,
-        22792.44977468135,
-        22382.004595106984,
-        22176.149483560228,
-        22260.96502740082,
-        22835.83142365802,
-        23876.636558386137,
-        26514.286999875134,
-        29008.248341032053,
-        31978.767721205208,
-        33528.80687999423,
-        34627.38798225069,
-        34933.565296144814,
-        35226.29939373456,
-        35010.10880472975,
-        34635.81512178154,
-        34332.68084143685,
-        34218.452771740485,
-        34101.694721066175,
-        34227.58595540545,
-        34048.01602178473,
-        33872.79853247924,
-        33559.62595475573,
+        24534.38200916264,
+        24953.400250447252,
+        24672.034525123792,
+        24067.66945343915,
+        23518.3204164291,
+        23217.281045457676,
+        22792.449774681343,
+        22382.004595107035,
+        22176.149483560188,
+        22260.9650274009,
+        22835.831423658026,
+        23876.63655838621,
+        26514.286999875163,
+        29008.24834103215,
+        31978.767721205284,
+        33528.806879994256,
+        34627.38798225074,
+        34933.56529614483,
+        35226.299393734436,
+        35010.10880472974,
+        34635.81512178153,
+        34332.68084143688,
+        34218.452771740616,
+        34101.69472106634,
+        34227.58595540553,
+        34048.01602178466,
+        33872.79853247925,
+        33559.625954755815,
         33544.46644057977,
-        33538.53143703986,
-        33909.706847918766,
-        34833.72013286772,
-        36081.25278949814,
-        37692.1058950609,
-        39202.47351216063,
-        39882.648208671846,
-        39896.940438278834,
-        39326.10447932459,
-        38404.50148624847,
-        37243.54334138725,
-        36015.8602505127,
-        34570.14695441116,
+        33538.53143703984,
+        33909.7068479188,
+        34833.72013286774,
+        36081.252789498336,
+        37692.10589506092,
+        39202.473512160694,
+        39882.64820867192,
+        39896.94043827879,
+        39326.10447932445,
+        38404.501486248555,
+        37243.543341387245,
+        36015.86025051267,
+        34570.146954411146,
         32965.49105684394,
-        31255.302726824513,
-        29484.911339729944,
-        27863.21945098198,
-        26122.17252376108,
-        25029.233168347317
+        31255.30272682449,
+        29484.911339730046,
+        27863.219450981967,
+        26122.172523761146,
+        25029.233168347342
       ]
     },
     "schema_version": "gridlens_baseline_forecast_v1",
@@ -941,12 +941,12 @@
       "a2e19b4eb4157a190d1e7f2c946ee92c4be2ae196f72d55545c870399d3efb2f"
     ],
     "truth_version": "cc7501c438ff1342c0b30d5de3f40193c35f317067b828fcfd427b5d4ea4eb06",
-    "validation_report_id": "d95f4869024df18b97fbdd9bbb077b60c0e4a7489a04d0f0f057d70103ce99a4"
+    "validation_report_id": "107a95d18086e73d44dce7d3f2b25c7415ceaf9931c3ddb684961391794b32cb"
   },
   "weekly": {
-    "dataset_id": "be486af50ab515c0ba1e11b4ef2e4ba052e4f070a2e68a0f6083b7aa6b3ee3dc",
+    "dataset_id": "5a7d7a29a9e98a645b7b2ca0383898b5925716bc55f2139a3b2e5c49b5e01551",
     "evaluation_role": "point_validation",
-    "forecast_id": "c5375c95aef1feb6dbd38d29fee0f766a3520f15b66aea8f4c486dc4b0818540",
+    "forecast_id": "80e7c8a641a038d33ec1c749890f01ea3c8b2ec54ebff4819e126e8d79fcade4",
     "inputs": {
       "context_end_exclusive": "2022-02-09T00:00:00Z",
       "context_start": "2022-02-02T00:00:00Z",
@@ -1290,7 +1290,7 @@
         23520.0
       ],
       "evidence_mode": "retrospective_revised",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
       "issued_at": "2022-02-09T09:30:00Z",
       "target_end_exclusive": "2022-02-11T00:00:00Z",
       "target_start": "2022-02-10T00:00:00Z"
@@ -1348,8 +1348,8 @@
     ],
     "point": {
       "contract_version": "gb_nd_day_ahead_v1",
-      "feature_snapshot_id": "d69a4894c4af9a0d2e8565567a7e0df308870c626d080b85ed68f2e4a1369e0f",
-      "model_version": "weekly_v1_ecf3cedf98399774a79dfece801f2e1a55cc9f913760472af52175cc93174792",
+      "feature_snapshot_id": "2ba5dd574f5a59a62c2f845805f716f4505e75dc53e06b03846a282d2b9ae3cc",
+      "model_version": "weekly_v1_ec147ad08d645947b20d9016d1dfab166856a34392f578d58bb8621c41f35bd0",
       "prediction_mw": [
         24439.0,
         24854.0,
@@ -1413,6 +1413,6 @@
       "a2e19b4eb4157a190d1e7f2c946ee92c4be2ae196f72d55545c870399d3efb2f"
     ],
     "truth_version": "cc7501c438ff1342c0b30d5de3f40193c35f317067b828fcfd427b5d4ea4eb06",
-    "validation_report_id": "d95f4869024df18b97fbdd9bbb077b60c0e4a7489a04d0f0f057d70103ce99a4"
+    "validation_report_id": "107a95d18086e73d44dce7d3f2b25c7415ceaf9931c3ddb684961391794b32cb"
   }
 }
