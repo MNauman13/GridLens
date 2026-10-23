@@ -33,22 +33,22 @@ jobs:
       - name: Resolve or verify Python lock
         run: uv lock --check
       - name: Install Python environment
-        run: uv sync --frozen --extra api --group dev
+        run: uv sync --frozen --extra api --extra ml --group dev
       - name: Resolve or install Node lock
         run: npm ci
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
       - name: Python tests and deterministic fixture
         run: |
-          uv run --frozen --extra api python -m unittest discover -s tests -v
-          uv run --frozen --extra api python scripts/phase0_check.py
-          uv run --frozen --extra api python scripts/export_schemas.py --check
-          uv run --frozen --extra api python scripts/export_settlement_demo.py --check
-          uv run --frozen --extra api gridlens fixture
+          uv run --frozen --extra api --extra ml python -m unittest discover -s tests -v
+          uv run --frozen --extra api --extra ml python scripts/phase0_check.py
+          uv run --frozen --extra api --extra ml python scripts/export_schemas.py --check
+          uv run --frozen --extra api --extra ml python scripts/export_settlement_demo.py --check
+          uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api ruff check src tests
-          uv run --frozen --extra api mypy src/gridlens
+          uv run --frozen --extra api --extra ml ruff check src tests
+          uv run --frozen --extra api --extra ml mypy src/gridlens
       - name: Node logic, lint, and types
         run: |
           npm run test:unit

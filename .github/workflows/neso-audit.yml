@@ -8,6 +8,11 @@ on:
       - 'src/gridlens/data/**'
       - 'src/gridlens/resources/neso_resources_v1.json'
       - 'scripts/check_live_ingestion.py'
+      - 'scripts/build_dataset.py'
+      - 'scripts/run_baselines.py'
+      - 'scripts/check_baseline_reference.py'
+      - 'src/gridlens/models/baselines.py'
+      - 'src/gridlens/metrics.py'
       - 'reports/neso-audit-v1.json'
       - '.github/workflows/neso-audit.yml'
 
@@ -28,13 +33,19 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install uv==0.11.21
-      - run: uv sync --frozen --no-dev
+      - run: uv sync --frozen --extra ml --no-dev
       - name: Retrieve all pinned original CSVs through the Python adapter
         run: |
           mkdir -p reports/local
-          uv run --frozen --no-dev gridlens ingest-neso --sources 2017 2018 2019 2020 2021 2022 2023 2024 daily --report reports/local/live-audit.json > reports/local/live-ingestion.log
+          uv run --frozen --extra ml --no-dev gridlens ingest-neso --sources 2017 2018 2019 2020 2021 2022 2023 2024 daily --report reports/local/live-audit.json > reports/local/live-ingestion.log
       - name: Verify frozen annual hashes and transactional observation counts
-        run: uv run --frozen --no-dev python scripts/check_live_ingestion.py --report reports/local/live-audit.json
+        run: uv run --frozen --extra ml --no-dev python scripts/check_live_ingestion.py --report reports/local/live-audit.json
+      - name: Rebuild the frozen dataset and baseline comparison
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: |
+          uv run --frozen --extra ml --no-dev python -m scripts.run_baselines --output reports/local/baseline-rerun.json --forecast-output reports/local/baseline-forecasts-rerun.json
+          uv run --frozen --extra ml --no-dev python scripts/check_baseline_reference.py reports/local/baseline-rerun.json
       - name: Preserve source bytes, receipts, database, and audit
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -44,4 +55,7 @@ jobs:
             data/neso/
             reports/local/live-audit.json
             reports/local/live-ingestion.log
+            reports/local/baseline-rerun.json
+            reports/local/baseline-forecasts-rerun.json
+            artifacts/baselines/
           retention-days: 30

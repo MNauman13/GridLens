@@ -136,6 +136,30 @@ class TrainingExample(StrictRecord):
     truth_version: str = Field(min_length=1)
 
 
+class BaselineForecast(StrictRecord):
+    schema_version: Literal["gridlens_baseline_forecast_v1"] = "gridlens_baseline_forecast_v1"
+    forecast_id: Sha256
+    inputs: InputWindow
+    point: PointForecast
+    model_kind: Literal["last_day", "weekly", "ridge"]
+    observed_mw: tuple[float, ...] = Field(min_length=48, max_length=48)
+    dataset_id: Sha256
+    source_sha256: tuple[Sha256, ...] = Field(min_length=1)
+    truth_version: str = Field(min_length=1)
+    evaluation_role: Literal["point_validation"] = "point_validation"
+    validation_report_id: Sha256
+
+    @model_validator(mode="after")
+    def aligned_and_identified(self) -> BaselineForecast:
+        from gridlens.data.store import content_id
+
+        if self.point.feature_snapshot_id != self.inputs.feature_snapshot_id:
+            raise ValueError("Prediction and inputs reference different feature snapshots")
+        if self.forecast_id != content_id(self.model_dump(mode="json", exclude={"forecast_id"})):
+            raise ValueError("Forecast artifact content ID is invalid")
+        return self
+
+
 class TrainingDataset(Protocol):
     @property
     def manifest(self) -> DatasetManifest: ...

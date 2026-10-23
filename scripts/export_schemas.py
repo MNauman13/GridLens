@@ -5,10 +5,10 @@ import sys
 from pathlib import Path
 
 from gridlens.artifacts import ArtifactManifest
-from gridlens.contracts import DatasetManifest, InputWindow, IntervalForecast, MaturedFeedback, PointForecast, TrainingExample
+from gridlens.contracts import BaselineForecast, DatasetManifest, InputWindow, IntervalForecast, MaturedFeedback, PointForecast, TrainingExample
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = [DatasetManifest, InputWindow, PointForecast, IntervalForecast, MaturedFeedback, TrainingExample, ArtifactManifest]
+MODELS = [DatasetManifest, InputWindow, PointForecast, IntervalForecast, MaturedFeedback, TrainingExample, ArtifactManifest, BaselineForecast]
 
 
 def main():
