@@ -9,6 +9,7 @@ from gridlens.data.dataset import (
     Series,
     Version,
     build_datasets,
+    cyclic,
     feature_snapshot,
     training_example,
 )
@@ -24,6 +25,12 @@ HASHES = ("0" * 64,)
 
 
 class DatasetTests(unittest.TestCase):
+    def test_canonical_calendar_quadrants_and_periodicity(self) -> None:
+        for phase, expected in [(0, (0.0, 1.0)), (1, (1.0, 0.0)), (2, (0.0, -1.0)), (3, (-1.0, 0.0))]:
+            self.assertEqual(cyclic(phase, 4), expected)
+            self.assertEqual(cyclic(phase + 4, 4), expected)
+
+
     def test_exact_context_gap_target_and_declared_feature_order(self) -> None:
         rows = fixture()
         feature = feature_snapshot(Series(rows), date(2018, 1, 5), "retrospective_revised")

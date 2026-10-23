@@ -40,3 +40,8 @@ A feature ID describes the eligible feature content. The dataset ID additionally
 Perturbation tests replace every issue-day and future value and require the earlier feature snapshot to remain identical. Other tests add an ineligible revision, create short/long gaps, remove a label, overlap split dates, and alter validation/test data while requiring the training scaler to remain unchanged. Repeated builds must reproduce the same report and IDs.
 
 Run `uv run --frozen python scripts/build_dataset.py` after ingesting the frozen annual data. Model fitting starts in Phase 4. The final 2024 evaluation remains locked for its later predeclared comparison.
+
+## Cross-platform canonicalisation
+
+An exact Linux rebuild exposed rare differences in the last rounded calendar digits from Windows math-library results. Labels and measurement scaling were identical. Calendar phases now use integer ratios, fixed-precision Decimal arithmetic, and twelve-decimal quantisation. An independent Windows CI job must match the Linux fingerprint across all 35,143 phase values exactly. The approved freeze was regenerated; previous snapshots remain in Git history. See ADR 0006.
+

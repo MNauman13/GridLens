@@ -59,6 +59,8 @@ class AttentionTests(unittest.TestCase):
                 oracle.in_proj_bias.copy_(torch.cat([manual.q_proj.bias, manual.k_proj.bias, manual.v_proj.bias]))
                 oracle.out_proj.load_state_dict(manual.out_proj.state_dict())
             q, k, v = (torch.randn(2, length, 8, dtype=torch.float64) for length in (query_length, key_length, key_length))
+            if query_length == key_length:
+                k = v = q
             blocked = torch.zeros(query_length, key_length, dtype=torch.bool)
             blocked[:, -1] = True
             actual, weights = manual(q, k, v, blocked=blocked)
