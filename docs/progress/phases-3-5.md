@@ -20,15 +20,15 @@ The annual data has 140,256 actual intervals. Dataset membership has 1,461 point
 
 These are validation/model-selection results. Ridge uses a fixed 100-feature lag/calendar design and fits only 2018–2021. The saved demo target is 2022-02-10.
 
-The [live data-to-baseline verification](https://github.com/MNauman13/GridLens/actions/runs/40018056952) passed at commit 24d55ceceba4c98eb842459ca3d185f67ae2e17e. It independently retrieved original CSVs, verified frozen hashes, rebuilt the exact dataset manifest, fitted all five baseline candidates, verified bundle reloads, and reproduced all reference errors within 1e-6 MW.
+The [live data-to-baseline verification](https://github.com/MNauman13/GridLens/actions/runs/40018718405) passed at commit dc97396b1e5678c8df85fd513228b745a67976ab. It independently retrieved original CSVs, verified frozen hashes, rebuilt the exact dataset manifest, fitted all five baseline candidates, verified bundle reloads, and reproduced all reference errors within 1e-6 MW.
 
-The [Windows/Linux calendar verification](https://github.com/MNauman13/GridLens/actions/runs/40018057101) passed at the same commit. Labels and measurement scaling were already identical; fixed-precision calendar arithmetic resolves the detected platform drift without relaxing dataset SHA checks. The manual review workflow cannot push and no longer runs automatically.
+The [Windows/Linux calendar verification](https://github.com/MNauman13/GridLens/actions/runs/40018718765) passed at the same commit. Labels and measurement scaling were already identical; fixed-precision calendar arithmetic resolves the detected platform drift without relaxing dataset SHA checks. The manual review workflow cannot push and no longer runs automatically.
 
 ## Test acceptance
 
-At the preceding implementation commit, all 61 Python tests completed successfully except the explicitly conditional CUDA check. CPU attention parity/gradients, HTTP behavior, artifact integrity, leakage invariants, and dataset/ingestion fixtures passed. The current source additionally checks genuine self-attention oracle parity and exact calendar quadrants.
+At the preceding implementation commit, all 61 Python tests completed successfully except the explicitly conditional CUDA check. CPU attention parity/gradients, HTTP behavior, artifact integrity, leakage invariants, and dataset/ingestion fixtures passed. The current source additionally checks genuine self-attention oracle parity, exact calendar quadrants, and rejection of nonoverlapping splits whose training/validation chronology is reversed.
 
-The browser suite contains eight scenarios at desktop/mobile widths: contract round-trip, timeline, fixture outage, settlement lesson, saved forecast/provenance, forecast outage, attention controls/masks, and position animation. The final 16-test browser acceptance and source checks are tracked by the [foundation workflow](https://github.com/MNauman13/GridLens/actions/workflows/ci.yml). Final run evidence is recorded after this source is verified.
+The browser suite contains eight scenarios at desktop/mobile widths: contract round-trip, timeline, fixture outage, settlement lesson, saved forecast/provenance, forecast outage, attention controls/masks, and position animation. The [foundation workflow](https://github.com/MNauman13/GridLens/actions/workflows/ci.yml) is the acceptance record for each exact source commit. Its gates are 63 Python checks (only conditional CUDA may skip), sixteen real Chromium tests, three Node logic tests, checked visual fixtures and schemas, lint, strict Python/TypeScript types, the production web build, and a CPU PyTorch smoke check. A green run is required before these phases are reported complete.
 
 ## Use and limits
 

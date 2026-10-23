@@ -1,0 +1,42 @@
+{
+  "schema_version": "gridlens_phase_acceptance_v1",
+  "phases": [
+    3,
+    4,
+    5
+  ],
+  "dataset_manifest_id": "a7e1993d870c599704590827d2a3f3787eebca404b0d81265ee20762d89b971e",
+  "baseline_report_id": "107a95d18086e73d44dce7d3f2b25c7415ceaf9931c3ddb684961391794b32cb",
+  "locked_test_evaluated": false,
+  "evidence_mode": "retrospective_revised",
+  "source_code_commit": "dc97396b1e5678c8df85fd513228b745a67976ab",
+  "live_baseline_verification": {
+    "run_id": 40018718405,
+    "conclusion": "success",
+    "absolute_error_tolerance_mw": 0.000001
+  },
+  "calendar_portability": {
+    "run_id": 40018718765,
+    "conclusion": "success",
+    "platforms": [
+      "Linux",
+      "Windows"
+    ],
+    "sha256": "38a522821a06953035e71d73198a2fe4dd1cd580226cf626e9d2a5153b144825"
+  },
+  "required_foundation_checks": {
+    "python_total": 63,
+    "python_allowed_skips": [
+      "CUDA unavailable"
+    ],
+    "browser_tests": 16,
+    "node_logic_tests": 3,
+    "strict_types": true,
+    "production_build": true,
+    "visual_fixtures_match_manual_torch": true
+  },
+  "foundation_acceptance_url": "https://github.com/MNauman13/GridLens/actions/workflows/ci.yml",
+  "manual_screenshot_review": false,
+  "cuda_execution_verified": false,
+  "local_workspace_available_at_completion": false
+}
