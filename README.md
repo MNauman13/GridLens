@@ -1,6 +1,6 @@
 # GridLens
 
-Electricity demand forecasting with a Transformer implemented from scratch in PyTorch, a TimeXer application adaptation, and Neural Conformal Control.
+An auditable electricity forecasting project with real-data baselines and Transformer components built from scratch in PyTorch. TimeXer and Neural Conformal Control integrations are planned later phases.
 
 **Stage:** Phases 3–5: frozen causal datasets, validated real-data baseline forecasts, manual attention/positional operators, and interactive browser lessons. Full encoder/decoder construction is Phase 6.
 

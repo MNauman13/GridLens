@@ -25,6 +25,12 @@ HASHES = ("0" * 64,)
 
 
 class DatasetTests(unittest.TestCase):
+    def test_nonoverlapping_but_reversed_train_validation_dates_fail(self) -> None:
+        reversed_splits = [{"role": "point_train", "start": "2018-01-07", "end": "2018-01-09"}, {"role": "point_validation", "start": "2018-01-01", "end": "2018-01-03"}]
+        with self.assertRaisesRegex(ValueError, "chronology"):
+            build_datasets(Series(fixture()), reversed_splits, HASHES)
+
+
     def test_canonical_calendar_quadrants_and_periodicity(self) -> None:
         for phase, expected in [(0, (0.0, 1.0)), (1, (1.0, 0.0)), (2, (0.0, -1.0)), (3, (-1.0, 0.0))]:
             self.assertEqual(cyclic(phase, 4), expected)

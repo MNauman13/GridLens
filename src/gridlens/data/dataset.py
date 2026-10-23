@@ -213,6 +213,10 @@ def build_datasets(series: Series, splits: list[dict[str, str]], source_hashes: 
         datasets[role] = FrozenDataset(manifest, tuple(examples), tuple(features), role)
         membership[role] = {key: value for key, value in record.items() if key not in ("feature_ids", "label_hashes")}
         membership[role].update({"dataset_id": dataset_id, "feature_ids_sha256": content_id(record["feature_ids"]), "label_hashes_sha256": content_id(record["label_hashes"])})
+    ordered_roles = [role for role in ("point_train", "point_validation", "calibrator_train", "calibrator_validation", "calibration_initialisation", "locked_test") if role in datasets]
+    for earlier, later in zip(ordered_roles, ordered_roles[1:], strict=False):
+        if datasets[earlier].manifest.split_end >= datasets[later].manifest.split_start:
+            raise ValueError("Split chronology is invalid")
     if "point_train" not in datasets:
         raise ValueError("A point_train split is required to fit scaling")
     scaling = Scaling.fit(datasets["point_train"])

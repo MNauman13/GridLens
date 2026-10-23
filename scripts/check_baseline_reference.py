@@ -20,10 +20,14 @@ def main():
     for row in actual["results"]:
         ref = expected.pop((row["model_kind"], row["alpha"]))
         for metric in ("mae_mw", "rmse_mw", "mean_daily_peak_absolute_error_mw"):
-            if not math.isclose(row["metrics"][metric], ref["metrics"][metric], rel_tol=1e-9, abs_tol=1e-6):
+            if not math.isclose(row["metrics"][metric], ref["metrics"][metric], rel_tol=0, abs_tol=1e-6):
                 raise SystemExit(f"Baseline reference drift: {row['model_kind']} {metric}")
         if row["metrics"]["origins"] != 365:
             raise SystemExit("Validation origins differ")
+    actual_selected = next(r for r in actual["results"] if r["model_version"] == actual["selected_ridge_model"])
+    reference_selected = next(r for r in reference["results"] if r["model_version"] == reference["selected_ridge_model"])
+    if (actual_selected["model_kind"], actual_selected["alpha"]) != (reference_selected["model_kind"], reference_selected["alpha"]):
+        raise SystemExit("Selected ridge configuration differs")
     if expected:
         raise SystemExit("Missing baseline candidates")
     print("All five frozen baseline candidates reproduce validation errors within 1e-6 MW; final test remains locked")

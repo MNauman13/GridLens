@@ -36,7 +36,7 @@ The browser suite contains eight scenarios at desktop/mobile widths: contract ro
 - `/learn/settlement`: 46/48/50-period conversion.
 - `/learn/attention`: checked numerical attention and positional animation.
 
-The workspace disconnected during the final phase; completion continued through normal GitHub Git-object commits and clean hosted runners. The earlier local checkout will need a normal fast-forward fetch/pull when reconnected. Shared history was not force-pushed.
+The workspace disconnected during the final phase; completion continued through normal GitHub Git-object commits and clean hosted runners. The earlier disconnected checkout may contain uncommitted lesson files. Preserve and compare those files before fetching/reconciling the updated main branch; no reset or clean was attempted. Shared history was not force-pushed.
 
 No manual screenshot review or CUDA execution is claimed. Annual observations are revised historical data with unknown historical publication vintages. The attention patterns are transparent teaching fixtures, not learned electricity explanations. Full encoder/decoder construction is Phase 6; no trained Transformer result is claimed.
 
