@@ -47,7 +47,7 @@ jobs:
           uv run --frozen --extra api gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api ruff check src tests/test_foundation.py tests/test_ingestion.py
+          uv run --frozen --extra api ruff check src tests
           uv run --frozen --extra api mypy src/gridlens
       - name: Node logic, lint, and types
         run: |

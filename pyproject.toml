@@ -36,7 +36,7 @@ gridlens = ["resources/*.json"]
 [tool.ruff]
 target-version = "py312"
 line-length = 100
-include = ["src/**/*.py", "tests/test_foundation.py", "tests/test_ingestion.py"]
+include = ["src/**/*.py", "tests/test_*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

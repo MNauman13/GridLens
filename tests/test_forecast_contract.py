@@ -1,7 +1,7 @@
 """Independent calendar examples guard the specification against leakage."""
 import json
 import unittest
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from unittest.mock import patch
 
@@ -11,11 +11,11 @@ from scripts.forecast_contract import load_contract, origin_boundaries
 class ForecastContractTests(unittest.TestCase):
     def test_worked_origin_and_actual_lead_times(self):
         result = origin_boundaries(date(2024, 2, 10), load_contract())
-        self.assertEqual(result['issued_at'], datetime(2024, 2, 10, 9, 30, tzinfo=timezone.utc))
-        self.assertEqual(result['context_start'], datetime(2024, 2, 3, tzinfo=timezone.utc))
-        self.assertEqual(result['last_observed_interval_start'], datetime(2024, 2, 9, 23, 30, tzinfo=timezone.utc))
-        self.assertEqual(result['target_start'], datetime(2024, 2, 11, tzinfo=timezone.utc))
-        self.assertEqual(result['target_end_exclusive'], datetime(2024, 2, 12, tzinfo=timezone.utc))
+        self.assertEqual(result['issued_at'], datetime(2024, 2, 10, 9, 30, tzinfo=UTC))
+        self.assertEqual(result['context_start'], datetime(2024, 2, 3, tzinfo=UTC))
+        self.assertEqual(result['last_observed_interval_start'], datetime(2024, 2, 9, 23, 30, tzinfo=UTC))
+        self.assertEqual(result['target_start'], datetime(2024, 2, 11, tzinfo=UTC))
+        self.assertEqual(result['target_end_exclusive'], datetime(2024, 2, 12, tzinfo=UTC))
         self.assertEqual(result['points'][0]['lead_minutes'], 870)
         self.assertEqual(result['points'][-1]['lead_minutes'], 2280)
 
@@ -36,7 +36,7 @@ class ForecastContractTests(unittest.TestCase):
                 self.assertEqual(result['gap_intervals'], 48)
                 self.assertEqual(result['context_end_exclusive'] - result['context_start'], timedelta(days=7))
                 self.assertEqual(result['target_end_exclusive'] - result['target_start'], timedelta(days=1))
-                for left, right in zip(result['points'], result['points'][1:]):
+                for left, right in zip(result['points'], result['points'][1:], strict=False):
                     self.assertEqual(left['interval_end'], right['interval_start'])
 
     def test_first_training_target_needs_2017_warmup(self):
