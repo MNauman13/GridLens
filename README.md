@@ -2,7 +2,7 @@
 
 Electricity demand forecasting with a Transformer implemented from scratch in PyTorch, a TimeXer application adaptation, and Neural Conformal Control.
 
-**Stage:** Phase 1: installable Python package, Next.js foundation, typed interfaces, and repeatable browser tests. No model is trained yet.
+**Stage:** Phase 2: original NESO CSV ingestion, immutable captures, versioned actuals, UTC conversion, and a frozen 2017–2024 quality audit. No model is trained yet.
 
 GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
 
@@ -13,10 +13,13 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 - [Evidence modes and truth](docs/decisions/0002-evidence-and-truth.md)
 - [Phase 0 walkthrough](docs/learning/phase-0.md)
 - [Phase 1 walkthrough](docs/learning/phase-1.md)
+- [Phase 2 walkthrough and animated lesson](docs/learning/phase-2.md)
+- [Frozen full-data audit](reports/neso-audit-v1.json)
 - [Source audit](docs/data/source-audit.md)
 - [Research mapping](docs/research/mapping.md)
 - [Phase status](docs/progress/phase-0.md)
 - [Phase 1 results](docs/progress/phase-1.md)
+- [Phase 2 results](docs/progress/phase-2.md)
 - [Browser verification runbook](docs/operations/browser-verification.md)
 
 The default contract issues at 09:30 UTC, uses seven complete UTC days of history ending at the start of the issue day, skips observed values from the issue day, and predicts 48 half-hours of the following UTC day.
@@ -44,12 +47,14 @@ For manual inspection, run `uv run --frozen --extra api python -m uvicorn gridle
 uv run --frozen --extra api python -m unittest discover -s tests -v
 uv run --frozen --extra api python scripts/phase0_check.py
 uv run --frozen --extra api python scripts/export_schemas.py --check
-uv run --frozen --extra api ruff check src tests/test_foundation.py
+uv run --frozen --extra api ruff check src tests/test_foundation.py tests/test_ingestion.py
 uv run --frozen --extra api mypy src/gridlens
 npm run typecheck
 npm run lint
 npm run test:unit
 ```
+
+Fetch original data with `uv run --frozen --no-dev gridlens ingest-neso --report reports/local/live-audit.json`. Add `--sources 2017 2018 2019 2020 2021 2022 2023 2024 daily` to include the mixed daily update. Raw bytes, retrieval receipts, observation versions, and per-snapshot audits are stored under `data/neso/`. The animated settlement-time lesson is at `/learn/settlement`.
 
 ## Contribution and push cadence
 

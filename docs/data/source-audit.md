@@ -1,5 +1,7 @@
 # Phase 0 source audit
 
+This is the historical Phase 0 evidence record. Phase 2 has now captured and audited the complete original CSVs. See the [Phase 2 walkthrough](../learning/phase-2.md) and [frozen full-data audit](../../reports/neso-audit-v1.json) for current coverage and checksums. The limitations below describe the earlier preview-only stage.
+
 ## What has been checked
 
 Official NESO resource pages exist for the 2017 warmup and every proposed training, validation, calibration, and test year through 2024. Their advertised resource IDs are saved in `configs/source_catalog_v1.json`. The current daily-update resource is separately identified.
