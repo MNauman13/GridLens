@@ -20,8 +20,8 @@ export default function AttentionLesson(){
     <section className="intro"><p className="eyebrow">WATCH THE MATHEMATICS</p><h1>Compare. Weight.<br/>Mix information.</h1><p className="lede">Three tokens, two heads, exact numbers. CI checks these calculator values against our manual PyTorch operators.</p><p className="notice">Teaching fixture / Identity projections / No trained attention patterns</p></section>
     <section className="panel"><h2>One query, three candidate keys</h2>
       <div className="lesson-controls">
-        <label htmlFor="attention-head">Attention head<select id="attention-head" value={head} onChange={ev=>choose(Number(ev.target.value),query)}><option value="0">Head 1 / channels 1–2</option><option value="1">Head 2 / channels 3–4</option></select></label>
-        <label htmlFor="attention-query">Query token<select id="attention-query" value={query} onChange={ev=>choose(head,Number(ev.target.value))}>{[0,1,2].map(i=><option key={i} value={i}>Token {i+1}</option>)}</select></label>
+        <div><label htmlFor="attention-head">Attention head</label><select id="attention-head" value={head} onChange={ev=>choose(Number(ev.target.value),query)}><option value="0">Head 1 / channels 1–2</option><option value="1">Head 2 / channels 3–4</option></select></div>
+        <div><label htmlFor="attention-query">Query token</label><select id="attention-query" value={query} onChange={ev=>choose(head,Number(ev.target.value))}>{[0,1,2].map(i=><option key={i} value={i}>Token {i+1}</option>)}</select></div>
         <label className="checkbox-label"><input type="checkbox" checked={causal} onChange={ev=>setCausal(ev.target.checked)}/>Block future keys</label>
       </div>
       <p>Compare a query with every key, divide by √2, replace blocked scores with −∞, then normalise with softmax.</p>
