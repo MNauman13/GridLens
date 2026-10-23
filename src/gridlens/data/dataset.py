@@ -7,7 +7,7 @@ import math
 from collections import Counter
 from collections.abc import Iterator
 from dataclasses import dataclass
-from datetime import UTC, date, datetime, timedelta
+from datetime import UTC, date, datetime, time, timedelta
 from decimal import Decimal, localcontext
 from functools import lru_cache
 from pathlib import Path
@@ -140,11 +140,11 @@ def feature_snapshot(series: Series, issue_date: date, mode: EvidenceMode) -> Fe
     return FeatureSnapshot(inputs, tuple(history), target_calendar)
 
 
-def training_example(features: FeatureSnapshot, truth: Series, truth_version: str) -> TrainingExample:
+def training_example(features: FeatureSnapshot, truth: Series, truth_version: str, *, label_as_of: datetime | None = None) -> TrainingExample:
     labels = []
     for slot in range(48):
         stamp = features.inputs.target_start + slot * STEP
-        row = truth.at(stamp, "retrospective_revised", features.inputs.issued_at)
+        row = truth.at(stamp, "captured_availability" if label_as_of is not None else "retrospective_revised", label_as_of or features.inputs.issued_at)
         if row is None or row.values[0] is None:
             raise DroppedOrigin("missing_target_nd")
         labels.append(row.values[0])
@@ -191,6 +191,12 @@ def build_datasets(series: Series, splits: list[dict[str, str]], source_hashes: 
     truth_id = content_id({"frozen_source_sha256": source_hashes, "policy": "frozen_actuals_no_label_fill"})
     for split in splits:
         role, start, end = split["role"], date.fromisoformat(split["start"]), date.fromisoformat(split["end"])
+        role_order = ("point_train", "point_validation", "calibrator_train", "calibrator_validation", "calibration_initialisation", "locked_test")
+        fitting_roles = role_order[:4]
+        later_splits = [s for s in splits if role in fitting_roles and s["role"] in role_order and role_order.index(s["role"]) > role_order.index(role)]
+        next_split = min(later_splits, key=lambda s: role_order.index(s["role"])) if later_splits else None
+        fit_deadline = boundaries(date.fromisoformat(next_split["start"]) - timedelta(days=1))["issued_at"] if next_split else None
+
         if start > end or role in datasets:
             raise ValueError("Invalid split range or duplicate role")
         features, examples, dropped = [], [], []
@@ -199,9 +205,17 @@ def build_datasets(series: Series, splits: list[dict[str, str]], source_hashes: 
             if target_day in ownership:
                 raise ValueError("Target date is owned by more than one split")
             ownership.add(target_day)
+            # Simulated Mode A actual release is target+1 at 09:00 UTC.
+            # Even nonoverlapping labels can mature after the next role's first issue.
+            release = datetime.combine(target_day + timedelta(days=1), time(9), tzinfo=UTC)
+            if fit_deadline is not None and release > fit_deadline:
+                dropped.append({"target_date": str(target_day), "reason": "label_matures_after_next_role_issue"})
+                target_day += timedelta(days=1)
+                continue
+
             try:
                 feature = feature_snapshot(series, target_day - timedelta(days=1), mode)
-                example = training_example(feature, truth or series, truth_id)
+                example = training_example(feature, truth or series, truth_id, label_as_of=fit_deadline if mode == "captured_availability" else None)
                 features.append(feature)
                 examples.append(example)
             except DroppedOrigin as exc:
@@ -221,7 +235,7 @@ def build_datasets(series: Series, splits: list[dict[str, str]], source_hashes: 
         raise ValueError("A point_train split is required to fit scaling")
     scaling = Scaling.fit(datasets["point_train"])
     scaling_record = {"means": scaling.means, "scales": scaling.scales, "training_origin_ids": scaling.training_origin_ids, "weighting": "equal_weight_per_training_context_slot"}
-    report = {"schema_version": "gridlens_dataset_freeze_v1", "source_sha256": source_hashes, "feature_order": FEATURE_ORDER, "evidence_mode": mode, "truth_version": truth_id, "fill_limit_slots": 2, "calendar_encoding": "fixed_decimal_cyclic_v1", "scaling": scaling_record, "scaler_id": content_id(scaling_record), "splits": membership, "locked_test_evaluated": False}
+    report = {"schema_version": "gridlens_dataset_freeze_v1", "source_sha256": source_hashes, "feature_order": FEATURE_ORDER, "evidence_mode": mode, "truth_version": truth_id, "fill_limit_slots": 2, "calendar_encoding": "fixed_decimal_cyclic_v1", "fit_boundary_policy": "labels_mature_by_next_role_first_issue; Mode A release target_plus_1_09:00_UTC", "scaling": scaling_record, "scaler_id": content_id(scaling_record), "splits": membership, "locked_test_evaluated": False}
     report["manifest_id"] = content_id(report)
     return datasets, report, scaling
 

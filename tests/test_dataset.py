@@ -25,6 +25,14 @@ HASHES = ("0" * 64,)
 
 
 class DatasetTests(unittest.TestCase):
+    def test_fitting_labels_must_mature_before_next_split_first_issue(self) -> None:
+        datasets, report, _ = build_datasets(Series(fixture()), SPLITS, HASHES)
+        self.assertEqual(len(datasets["point_train"].examples), 2)
+        self.assertEqual(report["splits"]["point_train"]["dropped_origins"], [{"target_date": "2018-01-03", "reason": "label_matures_after_next_role_issue"}])
+        self.assertEqual(report["splits"]["point_validation"]["dropped_origins"], [{"target_date": "2018-01-06", "reason": "label_matures_after_next_role_issue"}])
+        self.assertEqual(len(datasets["locked_test"].examples), 3)
+
+
     def test_nonoverlapping_but_reversed_train_validation_dates_fail(self) -> None:
         reversed_splits = [{"role": "point_train", "start": "2018-01-07", "end": "2018-01-09"}, {"role": "point_validation", "start": "2018-01-01", "end": "2018-01-03"}]
         with self.assertRaisesRegex(ValueError, "chronology"):
@@ -92,7 +100,7 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(scaler, changed_scaler)
         self.assertEqual(report["scaler_id"], build_datasets(Series(rows), SPLITS, HASHES)[1]["scaler_id"])
         self.assertEqual(report, build_datasets(Series(rows), SPLITS, HASHES)[1])
-        self.assertEqual(len(datasets["point_train"].examples), 3)
+        self.assertEqual(len(datasets["point_train"].examples), 2)
 
     def test_overlapping_label_ownership_rejected_even_when_origins_drop(self) -> None:
         with self.assertRaisesRegex(ValueError, "owned"):

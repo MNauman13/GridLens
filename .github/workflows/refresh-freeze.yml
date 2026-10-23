@@ -1,6 +1,9 @@
 name: Review regenerated numeric artifacts
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/refresh-freeze.yml']
 permissions:
   contents: read
 jobs:

@@ -22,7 +22,7 @@ def main():
         for metric in ("mae_mw", "rmse_mw", "mean_daily_peak_absolute_error_mw"):
             if not math.isclose(row["metrics"][metric], ref["metrics"][metric], rel_tol=0, abs_tol=1e-6):
                 raise SystemExit(f"Baseline reference drift: {row['model_kind']} {metric}")
-        if row["metrics"]["origins"] != 365:
+        if row["metrics"]["origins"] != len(reference["validation_target_dates"]):
             raise SystemExit("Validation origins differ")
     actual_selected = next(r for r in actual["results"] if r["model_version"] == actual["selected_ridge_model"])
     reference_selected = next(r for r in reference["results"] if r["model_version"] == reference["selected_ridge_model"])
