@@ -7,6 +7,8 @@ import math
 from collections import Counter
 from collections.abc import Iterator
 from dataclasses import dataclass
+from decimal import Decimal, localcontext
+from functools import lru_cache
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -64,14 +66,34 @@ def load_series(store: Store, audits: list[dict[str, Any]]) -> Series:
     return Series(rows)
 
 
+@lru_cache(maxsize=40000)
+def cyclic(numerator: int, denominator: int) -> tuple[float, float]:
+    """Fixed decimal arithmetic avoids OS libm differences in hashed features."""
+    with localcontext() as context:
+        context.prec = 40
+        pi = Decimal("3.1415926535897932384626433832795028841971693993751")
+        angle = 2 * pi * Decimal(numerator % denominator) / Decimal(denominator)
+        if angle > pi:
+            angle -= 2 * pi
+        sine_term = sine = angle
+        cosine_term = cosine = Decimal(1)
+        for index in range(1, 40):
+            sine_term *= -angle * angle / Decimal((2 * index) * (2 * index + 1))
+            cosine_term *= -angle * angle / Decimal((2 * index - 1) * (2 * index))
+            sine += sine_term
+            cosine += cosine_term
+            if abs(sine_term) < Decimal("1e-38") and abs(cosine_term) < Decimal("1e-38"):
+                break
+        first, second = (value.quantize(Decimal("1e-12")) for value in (sine, cosine))
+        return (0.0 if first == 0 else float(first), 0.0 if second == 0 else float(second))
+
+
 def calendar(stamp: datetime) -> tuple[float, ...]:
-    """Deterministic UTC calendar; no measurements or fitted parameters."""
+    """UTC cycles with integer phases and canonical fixed-precision arithmetic."""
     slot = stamp.hour * 2 + stamp.minute // 30
     year_start = datetime(stamp.year, 1, 1, tzinfo=UTC)
     next_year = datetime(stamp.year + 1, 1, 1, tzinfo=UTC)
-    fraction = (stamp - year_start).total_seconds() / (next_year - year_start).total_seconds()
-    angles = (2 * math.pi * slot / 48, 2 * math.pi * stamp.weekday() / 7, 2 * math.pi * fraction)
-    return tuple(round(value, 12) for angle in angles for value in (math.sin(angle), math.cos(angle)))
+    return cyclic(slot, 48) + cyclic(stamp.weekday(), 7) + cyclic((stamp-year_start)//STEP, (next_year-year_start)//STEP)
 
 
 class DroppedOrigin(ValueError):
@@ -195,7 +217,7 @@ def build_datasets(series: Series, splits: list[dict[str, str]], source_hashes: 
         raise ValueError("A point_train split is required to fit scaling")
     scaling = Scaling.fit(datasets["point_train"])
     scaling_record = {"means": scaling.means, "scales": scaling.scales, "training_origin_ids": scaling.training_origin_ids, "weighting": "equal_weight_per_training_context_slot"}
-    report = {"schema_version": "gridlens_dataset_freeze_v1", "source_sha256": source_hashes, "feature_order": FEATURE_ORDER, "evidence_mode": mode, "truth_version": truth_id, "fill_limit_slots": 2, "scaling": scaling_record, "scaler_id": content_id(scaling_record), "splits": membership, "locked_test_evaluated": False}
+    report = {"schema_version": "gridlens_dataset_freeze_v1", "source_sha256": source_hashes, "feature_order": FEATURE_ORDER, "evidence_mode": mode, "truth_version": truth_id, "fill_limit_slots": 2, "calendar_encoding": "fixed_decimal_cyclic_v1", "scaling": scaling_record, "scaler_id": content_id(scaling_record), "splits": membership, "locked_test_evaluated": False}
     report["manifest_id"] = content_id(report)
     return datasets, report, scaling
 

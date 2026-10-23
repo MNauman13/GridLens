@@ -1,0 +1,51 @@
+name: Review regenerated numeric artifacts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/refresh-freeze.yml']
+permissions:
+  contents: read
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.11.21
+      - run: uv sync --frozen --extra ml --no-dev
+      - name: Retrieve and verify frozen original CSVs
+        run: |
+          mkdir -p reports/local
+          uv run --frozen --extra ml --no-dev gridlens ingest-neso --sources 2017 2018 2019 2020 2021 2022 2023 2024 daily --report reports/local/live-audit.json > reports/local/ingestion.log
+          uv run --frozen --extra ml --no-dev python scripts/check_live_ingestion.py --report reports/local/live-audit.json
+      - name: Generate reviewable artifacts without writing to GitHub
+        run: |
+          uv run --frozen --extra ml --no-dev python scripts/build_dataset.py --report reports/local/new-freeze.json
+          cp reports/local/new-freeze.json reports/dataset-freeze-v1.json
+          uv run --frozen --extra ml --no-dev python -m scripts.run_baselines --output reports/local/new-baselines.json --forecast-output reports/local/new-forecasts.json
+          uv run --frozen --extra ml --no-dev python scripts/export_attention_demo.py
+      - name: Emit artifact contents for review
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          pairs=[("reports/local/new-freeze.json","reports/dataset-freeze-v1.json"),("reports/local/new-baselines.json","reports/baseline-validation-v1.json"),("reports/local/new-forecasts.json","src/gridlens/resources/baseline_forecasts_v1.json"),("apps/web/data/attention-demo.json","apps/web/data/attention-demo.json")]
+          for source,target in pairs:
+              value=Path(source).read_text()
+              for index,start in enumerate(range(0,len(value),6000)):
+                  print("GRIDLENS_OUTPUT "+json.dumps({"path":target,"index":index,"content":value[start:start+6000]},ensure_ascii=True))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: numeric-artifacts-for-review
+          path: |
+            reports/local/
+            artifacts/baselines/
+          retention-days: 30
