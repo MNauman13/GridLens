@@ -26,6 +26,8 @@ def main():
     datasets, freeze, _ = prepare(args.root)
     committed = json.loads((ROOT / "reports/dataset-freeze-v1.json").read_text())
     if json.loads(json.dumps(freeze)) != committed:
+        print(json.dumps({"scaling_equal": json.loads(json.dumps(freeze["scaling"])) == committed["scaling"], "actual_scaling_parameters": {k: v for k,v in freeze["scaling"].items() if k != "training_origin_ids"}, "expected_scaling_parameters": {k: v for k,v in committed["scaling"].items() if k != "training_origin_ids"}, "split_hashes": {role: {"features_equal": row["feature_ids_sha256"] == committed["splits"][role]["feature_ids_sha256"], "labels_equal": row["label_hashes_sha256"] == committed["splits"][role]["label_hashes_sha256"]} for role,row in freeze["splits"].items()}}))
+        (ROOT / "reports/local/rebuilt-dataset-freeze.json").write_text(json.dumps(freeze, sort_keys=True, indent=2) + "\n")
         raise ValueError("Dataset rebuild differs from the approved freeze")
     train, validation = datasets["point_train"], datasets["point_validation"]
     actual = [e.target_mw for e in validation.examples]
