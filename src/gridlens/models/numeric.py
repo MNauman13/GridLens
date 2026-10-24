@@ -36,7 +36,7 @@ class NumericTransformer(nn.Module):
             shifted = torch.cat((previous, target[:, :-1]), dim=1)
             embedded = self.positions(self.target_projection(torch.cat((shifted[:, :, None], calendar), dim=-1)), offset=384)
             return cast(Tensor, self.output(self.core.decode(embedded, memory)).squeeze(-1))
-        generated = []
+        generated: list[Tensor] = []
         for slot in range(48):
             shifted = torch.cat((previous, *generated), dim=1)
             embedded = self.positions(self.target_projection(torch.cat((shifted[:, :, None], calendar[:, :slot + 1]), dim=-1)), offset=384)

@@ -80,6 +80,11 @@ class TokenTransformer(nn.Module):
         self.output = nn.Linear(width, vocabulary, bias=False)
         if tie_weights:
             self.output.weight = self.embedding.weight
+        for parameter in self.parameters():
+            if parameter.dim() > 1:
+                nn.init.xavier_uniform_(parameter)
+        with torch.no_grad():
+            self.embedding.weight[self.PAD].zero_()
 
     def embed(self, tokens: Tensor) -> Tensor:
         return cast(Tensor, self.dropout(self.positions(self.embedding(tokens) * math.sqrt(self.width))))

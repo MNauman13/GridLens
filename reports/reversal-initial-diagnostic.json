@@ -1,0 +1,79 @@
+{
+  "seed": 17,
+  "steps": 2400,
+  "architecture": {
+    "width": 128,
+    "heads": 4,
+    "layers": 2,
+    "hidden": 512
+  },
+  "held_out_sequences": 256,
+  "exact_accuracy": 0.03515625,
+  "longer_length_exact_accuracy": 0,
+  "seconds": 152.329409963,
+  "history": [
+    {
+      "step": 200,
+      "loss": 1.8851131200790405,
+      "exact_accuracy": 0.015625
+    },
+    {
+      "step": 400,
+      "loss": 1.45698082447052,
+      "exact_accuracy": 0.03125
+    },
+    {
+      "step": 600,
+      "loss": 1.2036653757095337,
+      "exact_accuracy": 0.05078125
+    },
+    {
+      "step": 800,
+      "loss": 1.1733858585357666,
+      "exact_accuracy": 0.046875
+    },
+    {
+      "step": 1000,
+      "loss": 1.0979230403900146,
+      "exact_accuracy": 0.015625
+    },
+    {
+      "step": 1200,
+      "loss": 1.0248302221298218,
+      "exact_accuracy": 0.04296875
+    },
+    {
+      "step": 1400,
+      "loss": 1.036299228668213,
+      "exact_accuracy": 0.0390625
+    },
+    {
+      "step": 1600,
+      "loss": 0.9844009876251221,
+      "exact_accuracy": 0.03515625
+    },
+    {
+      "step": 1800,
+      "loss": 0.9543735980987549,
+      "exact_accuracy": 0.0390625
+    },
+    {
+      "step": 2000,
+      "loss": 0.947756290435791,
+      "exact_accuracy": 0.0546875
+    },
+    {
+      "step": 2200,
+      "loss": 0.896935224533081,
+      "exact_accuracy": 0.04296875
+    },
+    {
+      "step": 2400,
+      "loss": 0.8763527274131775,
+      "exact_accuracy": 0.03515625
+    }
+  ],
+  "reload_identical": true,
+  "test_set_used": false,
+  "interpretation": "Initial default embedding initialization obscured positional signal. Failed same-length learning target; retained as diagnostic, superseded by Xavier-initialized run."
+}

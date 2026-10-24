@@ -32,7 +32,7 @@ def accuracy(model, source, target):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--steps', type=int, default=2400)
+    parser.add_argument('--steps', type=int, default=4000)
     parser.add_argument('--output', default='reports/local/reversal')
     args = parser.parse_args()
     torch.set_num_threads(2)
@@ -53,7 +53,7 @@ def main():
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         for group in optimizer.param_groups:
-            group['lr'] = warmup_rate(step, 128, 200)
+            group['lr'] = 0.5 * warmup_rate(step, 128, 400)
         optimizer.step()
         if step % 200 == 0:
             model.eval()
