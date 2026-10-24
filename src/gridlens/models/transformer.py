@@ -114,4 +114,4 @@ class TokenTransformer(nn.Module):
 def warmup_rate(step: int, width: int, warmup: int = 4000) -> float:
     if min(step, width, warmup) < 1:
         raise ValueError("Positive schedule arguments required")
-    return width ** -0.5 * min(step ** -0.5, step * warmup ** -1.5)
+    return float(width ** -0.5 * min(step ** -0.5, step * warmup ** -1.5))
