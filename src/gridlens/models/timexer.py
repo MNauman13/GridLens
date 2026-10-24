@@ -48,6 +48,7 @@ class TimeXerReference(nn.Module):
         self.blocks = nn.ModuleList([TimeXerBlock(width, heads, dropout) for _ in range(layers)])
         self.norm = nn.LayerNorm(width)
         self.head = nn.Linear(width * (length // patch + 1), horizon)
+        self.head_dropout = nn.Dropout(dropout)
 
     def forward(self, history: Tensor) -> Tensor:
         if history.ndim != 3 or history.shape[1] != self.length or history.shape[2] < 2:
@@ -63,19 +64,23 @@ class TimeXerReference(nn.Module):
         for block in self.blocks:
             tokens = block(tokens, external)
         # Match reference FlattenHead's channel-before-token flatten order.
-        result = self.head(self.norm(tokens).transpose(1, 2).flatten(1))
+        result = self.head_dropout(self.head(self.norm(tokens).transpose(1, 2).flatten(1)))
         return cast(Tensor, result * scales[:, 0, :1] + means[:, 0, :1])
 
 
 class GridLensTimeXer(nn.Module):
     """Application changes: 96-step head, discard 48 gap slots, calendar residual."""
-    def __init__(self, width: int = 32, heads: int = 4, patch: int = 24, external: bool = True, positions: bool = True) -> None:
+    def __init__(self, width: int = 32, heads: int = 4, patch: int = 24, external: bool = True, positions: bool = True, calendar: bool = True) -> None:
         super().__init__()
         self.reference = TimeXerReference(horizon=96, width=width, heads=heads, patch=patch, external=external, positions=positions)
         self.calendar_head = nn.Sequential(nn.Linear(6, width), nn.ReLU(), nn.Linear(width, 1))
+        self.use_calendar = calendar
 
     def forward(self, history: Tensor, calendar: Tensor, target: Tensor | None = None) -> Tensor:
         check_inputs(history, calendar)
         if target is not None:
             raise ValueError("Direct TimeXer requires no teacher-forcing labels")
-        return cast(Tensor, self.reference(history)[:, 48:] + self.calendar_head(calendar).squeeze(-1))
+        result = self.reference(history)[:, 48:]
+        if self.use_calendar:
+            result = result + self.calendar_head(calendar).squeeze(-1)
+        return cast(Tensor, result)

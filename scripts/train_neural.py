@@ -148,7 +148,7 @@ def main():
         raise ValueError('Dataset freeze mismatch')
     training,validation = datasets['point_train'],datasets['point_validation']
     train_data,val_data = tensors(training,scaling),tensors(validation,scaling)
-    configs = [{'kind':'transformer'},{'kind':'lstm'},{'kind':'timexer'},{'kind':'timexer','external':False},{'kind':'timexer','patch':48},{'kind':'timexer','heads':1},{'kind':'timexer','positions':False}]
+    configs = [{'kind':'transformer'},{'kind':'lstm'},{'kind':'timexer'},{'kind':'timexer','external':False},{'kind':'timexer','patch':48},{'kind':'timexer','heads':1},{'kind':'timexer','positions':False},{'kind':'timexer','calendar':False}]
     results,forecasts,best_by_kind = [],{},{}
     demo_index = next(i for i,e in enumerate(validation.examples) if str(e.inputs.target_start.date()) == '2022-02-10')
     for config in configs:
@@ -167,6 +167,7 @@ def main():
     report['report_id'] = content_id(report)
     report['source_commit'] = os.environ.get('GITHUB_SHA','local')
     report['torch_version'] = str(torch.__version__)
+    report['timexer_trials'] = 6
     report['report_id'] = content_id({k:v for k,v in report.items() if k != 'report_id'})
     for forecast in forecasts.values():
         forecast['validation_report_id'] = report['report_id']
