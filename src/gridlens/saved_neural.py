@@ -8,6 +8,7 @@ from gridlens.data.store import content_id
 
 
 class SavedNeuralForecast(StrictRecord):
+    architecture: dict[str, str | bool | int | float]
     inputs: InputWindow
     prediction_mw: tuple[float, ...] = Field(min_length=48, max_length=48)
     observed_mw: tuple[float, ...] = Field(min_length=48, max_length=48)

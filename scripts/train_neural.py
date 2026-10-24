@@ -3,6 +3,7 @@ import argparse
 import copy
 import hashlib
 import json
+import os
 import random
 import statistics
 import time
@@ -78,7 +79,7 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
     mean,scale = scaling.means[0],scaling.scales[0]
     y = (y-mean)/scale
     started = time.perf_counter()
-    for epoch in range(start,epochs):
+    for epoch in range(start,epochs) if stale < 4 else ():
         model.train()
         order = torch.randperm(len(x))
         losses = []
@@ -148,18 +149,25 @@ def main():
     training,validation = datasets['point_train'],datasets['point_validation']
     train_data,val_data = tensors(training,scaling),tensors(validation,scaling)
     configs = [{'kind':'transformer'},{'kind':'lstm'},{'kind':'timexer'},{'kind':'timexer','external':False},{'kind':'timexer','patch':48},{'kind':'timexer','heads':1},{'kind':'timexer','positions':False}]
-    results,forecasts = [],{}
+    results,forecasts,best_by_kind = [],{},{}
     demo_index = next(i for i,e in enumerate(validation.examples) if str(e.inputs.target_start.date()) == '2022-02-10')
     for config in configs:
         row,prediction = train(config,17,train_data,val_data,scaling,freeze,args.output,args.epochs,args.resume)
         results.append(row)
-        if len(config) == 1:
-            forecasts[config['kind']] = {'inputs':validation.examples[demo_index].inputs.model_dump(mode='json'),'prediction_mw':prediction[demo_index].tolist(),'observed_mw':list(validation.examples[demo_index].target_mw),'model_id':row['identity'],'dataset_manifest_id':freeze['manifest_id'],'evaluation_role':'point_validation','evidence_mode':'retrospective_revised'}
+        kind = config['kind']
+        if kind not in best_by_kind or row['metrics']['rmse_mw'] < best_by_kind[kind]:
+            best_by_kind[kind] = row['metrics']['rmse_mw']
+            loaded_point = NeuralBundle.load_bundle(args.output/row['identity']).predict(validation.features[demo_index])
+            np.testing.assert_allclose(loaded_point.prediction_mw,prediction[demo_index].tolist(),rtol=0,atol=.05)
+            forecasts[kind] = {'inputs':validation.examples[demo_index].inputs.model_dump(mode='json'),'prediction_mw':list(loaded_point.prediction_mw),'observed_mw':list(validation.examples[demo_index].target_mw),'model_id':row['identity'],'dataset_manifest_id':freeze['manifest_id'],'evaluation_role':'point_validation','evidence_mode':'retrospective_revised','architecture':config}
     baseline = json.loads((ROOT/'reports/baseline-validation-v1.json').read_text())
     all_candidates = [{'identity':r['model_version'],'kind':r['model_kind'],'rmse_mw':r['metrics']['rmse_mw']} for r in baseline['results']] + [{'identity':r['identity'],'kind':r['config']['kind'],'rmse_mw':r['metrics']['rmse_mw']} for r in results]
     champion = min(all_candidates,key=lambda r:(r['rmse_mw'],r['identity']))
     report = {'schema_version':'gridlens_neural_pilot_v1','dataset_manifest_id':freeze['manifest_id'],'training_origins':len(training.examples),'validation_origins':len(validation.examples),'results':results,'champion':champion,'selection_rule':'minimum full 2022 validation RMSE across frozen baselines and bounded neural pilot','seeds':[17],'status':'bounded single-seed pilot; no multi-seed superiority claim','locked_test_evaluated':False,'epochs_budget':args.epochs,'timexer_trials':5,'numeric_trials':2,'limitations':['Teacher-forced numeric training has exposure bias; all validation is generated inference.','Ablations are pilot sensitivity checks, not statistically established conclusions.']}
     report['report_id'] = content_id(report)
+    report['source_commit'] = os.environ.get('GITHUB_SHA','local')
+    report['torch_version'] = str(torch.__version__)
+    report['report_id'] = content_id({k:v for k,v in report.items() if k != 'report_id'})
     for forecast in forecasts.values():
         forecast['validation_report_id'] = report['report_id']
         forecast['forecast_id'] = content_id(forecast)
