@@ -18,5 +18,5 @@ test("saved neural forecast switches models and shows immutable provenance",asyn
 test("neural forecast outage is visible",async({page})=>{
   await page.route("**/api/forecasts/neural?*",route=>route.fulfill({status:503,json:{error:"unavailable"}}));
   await page.goto("/forecasts/neural");
-  await expect(page.getByRole("alert")).toContainText("unavailable");
+  await expect(page.getByRole("alert").filter({hasText:"Saved neural forecast unavailable"})).toBeVisible();
 });
