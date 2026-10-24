@@ -13,7 +13,7 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 
-from gridlens.artifacts import ArtifactManifest, build_manifest, verify_manifest
+from gridlens.artifacts import ArtifactManifest, build_manifest, verify_manifest, sha256
 from gridlens.data.dataset import FEATURE_ORDER
 from gridlens.data.store import content_id
 from gridlens.metrics import point_metrics
@@ -66,7 +66,9 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
     torch.manual_seed(seed)
     model = factory(config)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-    identity = content_id({'config':config,'seed':seed,'freeze':freeze['manifest_id'],'epochs':epochs,'lr':.001,'batch':32})
+    operator_files = ['attention.py','transformer.py','numeric.py','timexer.py','bundle.py']
+    operator_hashes = {name:sha256(ROOT/'src/gridlens/models'/name) for name in operator_files}
+    identity = content_id({'config':config,'seed':seed,'freeze':freeze['manifest_id'],'epochs':epochs,'lr':.001,'batch':32,'operator_sha256':operator_hashes,'trainer_sha256':sha256(Path(__file__)),'torch_version':str(torch.__version__)})
     folder = output / identity
     folder.mkdir(parents=True,exist_ok=True)
     checkpoint = folder / 'checkpoint.pt'
@@ -117,7 +119,8 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
             model(vx[:1],vc[:1])
             latencies.append((time.perf_counter()-stamp)*1000)
     torch.save(model.state_dict(),folder/'weights.pt')
-    metadata = {'config':config,'seed':seed,'identity':identity,'dataset_manifest_id':freeze['manifest_id'],'scaling':{'means':scaling.means,'scales':scaling.scales},'feature_order':FEATURE_ORDER,'gap_slots':48,'target_slots':48}
+    model_id = content_id({'run_id':identity,'weights_sha256':sha256(folder/'weights.pt')})
+    metadata = {'config':config,'seed':seed,'identity':model_id,'run_id':identity,'operator_sha256':operator_hashes,'dataset_manifest_id':freeze['manifest_id'],'scaling':{'means':scaling.means,'scales':scaling.scales},'feature_order':FEATURE_ORDER,'gap_slots':48,'target_slots':48}
     (folder/'metadata.json').write_text(json.dumps(metadata,indent=2))
     bundle = build_manifest(folder,['weights.pt','metadata.json'],kind='neural_point_model')
     (folder/'manifest.json').write_text(bundle.model_dump_json(indent=2))
@@ -131,7 +134,7 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
     resume_optimizer = torch.optim.Adam(resume_model.parameters(),lr=.001)
     loaded = load_checkpoint(checkpoint,resume_model,resume_optimizer,identity)
     assert loaded['epoch'] == history[-1]['epoch']
-    row = {'config':config,'seed':seed,'identity':identity,'metrics':point_metrics(vy.tolist(),prediction.tolist()),'fit_seconds':time.perf_counter()-started,'prediction_p50_ms':statistics.median(latencies),'history':history,'bundle_sha256':hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest(),'reload_identical':True,'checkpoint_resume_verified':True}
+    row = {'config':config,'seed':seed,'identity':model_id,'run_id':identity,'bundle_directory':identity,'metrics':point_metrics(vy.tolist(),prediction.tolist()),'fit_seconds':time.perf_counter()-started,'prediction_p50_ms':statistics.median(latencies),'history':history,'bundle_sha256':hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest(),'reload_identical':True,'checkpoint_resume_verified':True}
     NeuralBundle.load_bundle(folder)
     return row,prediction
 
@@ -159,7 +162,7 @@ def main():
         kind = config['kind']
         if kind not in best_by_kind or row['metrics']['rmse_mw'] < best_by_kind[kind]:
             best_by_kind[kind] = row['metrics']['rmse_mw']
-            loaded_point = NeuralBundle.load_bundle(args.output/row['identity']).predict(validation.features[demo_index])
+            loaded_point = NeuralBundle.load_bundle(args.output/row['bundle_directory']).predict(validation.features[demo_index])
             np.testing.assert_allclose(loaded_point.prediction_mw,prediction[demo_index].tolist(),rtol=0,atol=.05)
             forecasts[kind] = {'inputs':validation.examples[demo_index].inputs.model_dump(mode='json'),'prediction_mw':list(loaded_point.prediction_mw),'observed_mw':list(validation.examples[demo_index].target_mw),'model_id':row['identity'],'dataset_manifest_id':freeze['manifest_id'],'evaluation_role':'point_validation','evidence_mode':'retrospective_revised','architecture':config}
     baseline = json.loads((ROOT/'reports/baseline-validation-v1.json').read_text())

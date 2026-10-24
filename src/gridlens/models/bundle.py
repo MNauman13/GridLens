@@ -7,9 +7,10 @@ from typing import Any
 import torch
 from torch import nn
 
-from gridlens.artifacts import ArtifactManifest, verify_manifest
+from gridlens.artifacts import ArtifactManifest, sha256, verify_manifest
 from gridlens.contracts import PointForecast
 from gridlens.data.dataset import FEATURE_ORDER, FeatureSnapshot, Scaling
+from gridlens.data.store import content_id
 from gridlens.models.numeric import NumericLSTM, NumericTransformer
 from gridlens.models.timexer import GridLensTimeXer
 
@@ -41,6 +42,8 @@ class NeuralBundle:
         if manifest.kind != "neural_point_model" or {f.path for f in manifest.files} != {"metadata.json", "weights.pt"}:
             raise ValueError("Unexpected neural bundle members")
         metadata = json.loads((folder / "metadata.json").read_text())
+        if metadata["identity"] != content_id({"run_id": metadata["run_id"], "weights_sha256": sha256(folder / "weights.pt")}):
+            raise ValueError("Model identity does not match its saved weights")
         model = make_model(metadata["config"])
         model.load_state_dict(torch.load(folder / "weights.pt", map_location="cpu", weights_only=True))
         return cls(model, metadata)
