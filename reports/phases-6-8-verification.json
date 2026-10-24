@@ -1,0 +1,77 @@
+{
+  "schema_version": "gridlens_phase_6_8_verification_v1",
+  "implementation_commit": "44efa43d8d1f50c1f5fa2817c7b29f4af058eee5",
+  "foundation": {
+    "run_id": 40092440862,
+    "url": "https://github.com/MNauman13/GridLens/actions/runs/40092440862",
+    "conclusion": "success",
+    "python": {
+      "total": 74,
+      "passed": 73,
+      "skipped": 1,
+      "skip_reason": "CUDA unavailable on mandatory CPU runner"
+    },
+    "strict_mypy_source_files": 23,
+    "chromium": {
+      "passed": 24,
+      "viewports": [
+        "desktop",
+        "mobile emulation"
+      ],
+      "manual_visual_review": false
+    },
+    "other_passed_checks": [
+      "frozen dependency locks",
+      "source lint",
+      "exported JSON schemas",
+      "dataset/report/champion/forecast lineage",
+      "settlement fixture",
+      "manual attention fixture",
+      "Node logic tests",
+      "ESLint",
+      "TypeScript",
+      "Next production build",
+      "production dependency audit",
+      "CPU tensor forward/backward"
+    ]
+  },
+  "reversal": {
+    "run_id": 40091076428,
+    "source_commit": "5e9a378549950df959ea38fff33f8780cd777d8e",
+    "same_length_exact_accuracy": 1,
+    "longer_length_exact_accuracy": 0,
+    "tiny_overfit_exact_accuracy": 1,
+    "held_out_sequences": 256,
+    "training_excludes_evaluation_sequences": true,
+    "reload_identical": true
+  },
+  "forecasting": {
+    "run_id": 40091539589,
+    "source_commit": "65ed9c0ffea64332d2752fd3f7f9d3242d8efdc9",
+    "report_id": "8b58d282e725c34c8678370437dd7e96b75be3cf212b90d078e5b04df2e47920",
+    "champion": {
+      "identity": "892181fea61d719a73e8df39d7abae54ba253ae6797fac3c416e4d584bca2401",
+      "kind": "timexer",
+      "rmse_mw": 1876.6242609087992
+    },
+    "train_origins": 1460,
+    "validation_origins": 364,
+    "seeds": [
+      17
+    ],
+    "numeric_candidates": 2,
+    "timexer_candidates": 6,
+    "checkpoint_resume_verified": true,
+    "model_reload_identical": true,
+    "artifact_id": 12558949389,
+    "artifact_expires_at": "2026-11-23T11:56:58Z"
+  },
+  "locked_test_evaluated": false,
+  "limitations": [
+    "Bounded single-seed pilot rather than full three-seed experiment.",
+    "Patch length 12 deferred to respect six-configuration TimeXer budget.",
+    "Both paired block-bootstrap intervals include zero versus ridge.",
+    "No local browser access or manual visual review is claimed.",
+    "Weights require downloading the linked expiring Actions artifact for long-term archival."
+  ]
+}

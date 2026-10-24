@@ -53,7 +53,7 @@ The accepted neural artifact expires **2026-11-23**. Download it before expiry f
 
 `/learn/transformer` explains shifted targets and generated prefixes, then animates TimeXer's operator route. `/forecasts/neural` serves real saved forecasts from reloaded model bundles with issue/cutoff/target times, 48-slot inspection and hash provenance. `/experiments` presents the measured comparison and reversal learning curve. Diagrams and animations are explicitly schematic where they are not model-derived values.
 
-Hosted CI verifies Python tests, strict types, source lint, static evidence checks, Next build and desktop/mobile Chromium scenarios. The local restricted environment cannot run the full dependency/browser stack; no local-browser or manual-screenshot-review claim is made. The final verification record lists the accepted run.
+The [accepted verification run](https://github.com/MNauman13/GridLens/actions/runs/40092440862) passes **73 Python tests**, with one CUDA-only skip, strict typing for **23 source files**, and **24 desktop/mobile Chromium checks**, along with lint, static evidence checks and the production build. See the [machine-readable verification record](../../reports/phases-6-8-verification.json). The local restricted environment cannot run the full dependency/browser stack; no local-browser or manual-screenshot-review claim is made.
 
 ## Remaining limits
 
