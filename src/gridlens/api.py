@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from gridlens.contracts import BaselineForecast
 from gridlens.fixture import fixture_summary
+from gridlens.saved_neural import SavedNeuralForecast
 
 app = FastAPI(title="GridLens", version="0.1.0")
 
@@ -31,3 +32,12 @@ def baseline_forecast(model: Literal["last_day", "weekly", "ridge"] = "ridge") -
         return BaselineForecast.model_validate(saved[model])
     except (OSError, ValueError, KeyError, ValidationError) as exc:
         raise HTTPException(status_code=503, detail="Saved forecast is unavailable or failed integrity validation") from exc
+
+
+@app.get("/v1/forecasts/neural", response_model=SavedNeuralForecast)
+def neural_forecast(model: Literal["transformer", "lstm", "timexer"] = "timexer") -> SavedNeuralForecast:
+    try:
+        saved = json.loads(files("gridlens").joinpath("resources/neural_forecasts_v1.json").read_text())
+        return SavedNeuralForecast.model_validate(saved[model])
+    except (OSError, ValueError, KeyError, ValidationError) as exc:
+        raise HTTPException(status_code=503, detail="Saved neural forecast is unavailable or failed integrity validation") from exc

@@ -13,10 +13,12 @@ import torch
 from torch.nn import functional as F
 
 from gridlens.artifacts import ArtifactManifest, build_manifest, verify_manifest
+from gridlens.data.dataset import FEATURE_ORDER
 from gridlens.data.store import content_id
 from gridlens.metrics import point_metrics
 from gridlens.models.numeric import NumericLSTM, NumericTransformer
 from gridlens.models.timexer import GridLensTimeXer
+from gridlens.models.bundle import NeuralBundle
 from scripts.build_dataset import ROOT, prepare
 
 
@@ -113,7 +115,7 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
             model(vx[:1],vc[:1])
             latencies.append((time.perf_counter()-stamp)*1000)
     torch.save(model.state_dict(),folder/'weights.pt')
-    metadata = {'config':config,'seed':seed,'identity':identity,'dataset_manifest_id':freeze['manifest_id'],'scaling':{'means':scaling.means,'scales':scaling.scales},'feature_order':list(range(15)),'gap_slots':48,'target_slots':48}
+    metadata = {'config':config,'seed':seed,'identity':identity,'dataset_manifest_id':freeze['manifest_id'],'scaling':{'means':scaling.means,'scales':scaling.scales},'feature_order':FEATURE_ORDER,'gap_slots':48,'target_slots':48}
     (folder/'metadata.json').write_text(json.dumps(metadata,indent=2))
     bundle = build_manifest(folder,['weights.pt','metadata.json'],kind='neural_point_model')
     (folder/'manifest.json').write_text(bundle.model_dump_json(indent=2))
@@ -128,6 +130,7 @@ def train(config, seed, train_data, val_data, scaling, freeze, output, epochs, r
     loaded = load_checkpoint(checkpoint,resume_model,resume_optimizer,identity)
     assert loaded['epoch'] == history[-1]['epoch']
     row = {'config':config,'seed':seed,'identity':identity,'metrics':point_metrics(vy.tolist(),prediction.tolist()),'fit_seconds':time.perf_counter()-started,'prediction_p50_ms':statistics.median(latencies),'history':history,'bundle_sha256':hashlib.sha256((folder/'manifest.json').read_bytes()).hexdigest(),'reload_identical':True,'checkpoint_resume_verified':True}
+    NeuralBundle.load_bundle(folder)
     return row,prediction
 
 
