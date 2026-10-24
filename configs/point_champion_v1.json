@@ -1,0 +1,46 @@
+{
+  "schema_version": "gridlens_point_champion_v1",
+  "identity": "892181fea61d719a73e8df39d7abae54ba253ae6797fac3c416e4d584bca2401",
+  "kind": "timexer",
+  "architecture": {
+    "kind": "timexer",
+    "patch": 48
+  },
+  "resolved_architecture": {
+    "width": 32,
+    "heads": 4,
+    "layers": 2,
+    "hidden": 128,
+    "patch": 48,
+    "dropout": 0.1,
+    "external": true,
+    "positions": true,
+    "calendar": true,
+    "reference_head_slots": 96,
+    "discard_gap_slots": 48,
+    "output_slots": 48,
+    "normalization": "training-global followed by input-window per-channel normalization"
+  },
+  "dataset_manifest_id": "784a934d96749bbc8105c63ae32e4cc63fd7d817557adbaf045f0625f15a0f26",
+  "validation_report_id": "8b58d282e725c34c8678370437dd7e96b75be3cf212b90d078e5b04df2e47920",
+  "validation_rmse_mw": 1876.6242609087992,
+  "selection_rule": "minimum full 2022 validation RMSE across frozen baselines and bounded neural pilot",
+  "source_commit": "65ed9c0ffea64332d2752fd3f7f9d3242d8efdc9",
+  "artifact": {
+    "workflow_run": "https://github.com/MNauman13/GridLens/actions/runs/40091539589",
+    "run_id": 40091539589,
+    "artifact_id": 12558949389,
+    "name": "neural-pilot-models-and-reports",
+    "archive_digest": "sha256:4b91fbec0634dfb117f652c02c8a79f9acf2f284dc0398740dfb6ef28efbbebe",
+    "expires_at": "2026-11-23T11:56:58Z",
+    "bundle_directory": "fd0a5de052fce30ee86027b70a2181af12e0a1e7e6d5dfb4650fd573cb1a6cb6",
+    "manifest_sha256": "78edb44bd12fee1f2a05cd77667ff1456131a23dece0a34dc19ba1c4eec04ee1"
+  },
+  "locked_test_evaluated": false,
+  "pilot_only": true,
+  "limitations": [
+    "Single seed; bootstrap intervals include zero versus ridge.",
+    "Artifact expiry is explicit; download for long-term archival.",
+    "No production service or calibrated intervals in Phase 8."
+  ]
+}

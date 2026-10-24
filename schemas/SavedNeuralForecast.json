@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "InputWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "context_end_exclusive": {
+          "format": "date-time",
+          "title": "Context End Exclusive",
+          "type": "string"
+        },
+        "context_start": {
+          "format": "date-time",
+          "title": "Context Start",
+          "type": "string"
+        },
+        "contract_version": {
+          "const": "gb_nd_day_ahead_v1",
+          "default": "gb_nd_day_ahead_v1",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "demand_mw": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 336,
+          "minItems": 336,
+          "title": "Demand Mw",
+          "type": "array"
+        },
+        "evidence_mode": {
+          "enum": [
+            "retrospective_revised",
+            "captured_availability"
+          ],
+          "title": "Evidence Mode",
+          "type": "string"
+        },
+        "feature_snapshot_id": {
+          "minLength": 1,
+          "title": "Feature Snapshot Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "target_end_exclusive": {
+          "format": "date-time",
+          "title": "Target End Exclusive",
+          "type": "string"
+        },
+        "target_start": {
+          "format": "date-time",
+          "title": "Target Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issued_at",
+        "context_start",
+        "context_end_exclusive",
+        "target_start",
+        "target_end_exclusive",
+        "evidence_mode",
+        "feature_snapshot_id",
+        "demand_mw"
+      ],
+      "title": "InputWindow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "architecture": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "title": "Architecture",
+      "type": "object"
+    },
+    "dataset_manifest_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Dataset Manifest Id",
+      "type": "string"
+    },
+    "evaluation_role": {
+      "const": "point_validation",
+      "title": "Evaluation Role",
+      "type": "string"
+    },
+    "evidence_mode": {
+      "const": "retrospective_revised",
+      "title": "Evidence Mode",
+      "type": "string"
+    },
+    "forecast_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Forecast Id",
+      "type": "string"
+    },
+    "inputs": {
+      "$ref": "#/$defs/InputWindow"
+    },
+    "model_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Model Id",
+      "type": "string"
+    },
+    "observed_mw": {
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 48,
+      "minItems": 48,
+      "title": "Observed Mw",
+      "type": "array"
+    },
+    "prediction_mw": {
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 48,
+      "minItems": 48,
+      "title": "Prediction Mw",
+      "type": "array"
+    },
+    "validation_report_id": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Validation Report Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "architecture",
+    "inputs",
+    "prediction_mw",
+    "observed_mw",
+    "model_id",
+    "dataset_manifest_id",
+    "evaluation_role",
+    "evidence_mode",
+    "validation_report_id",
+    "forecast_id"
+  ],
+  "title": "SavedNeuralForecast",
+  "type": "object"
+}

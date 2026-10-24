@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 import torch
 
@@ -30,6 +31,16 @@ class NumericTests(unittest.TestCase):
         changed[:, 1:] += 9
         with torch.no_grad():
             torch.testing.assert_close(model(self.history, self.calendar)[:, 0], model(self.history, changed)[:, 0])
+
+    def test_teacher_shift_is_causal_and_positions_skip_gap(self):
+        model = NumericTransformer(width=8, heads=2, dropout=0).train()
+        labels = torch.randn(2, 48)
+        altered = labels.clone()
+        altered[:, 20:] += 100
+        with patch.object(model.positions, "forward", wraps=model.positions.forward) as positional:
+            prediction = model(self.history, self.calendar, labels)
+            self.assertEqual(positional.call_args_list[1].kwargs["offset"], 384)
+        torch.testing.assert_close(prediction[:, :21], model(self.history, self.calendar, altered)[:, :21])
 
     def test_reference_shapes_global_route_and_gradients(self):
         model = TimeXerReference(length=12, horizon=4, patch=3, width=8, heads=2, dropout=0)

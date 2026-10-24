@@ -23,7 +23,7 @@ jobs:
         with:
           name: reversal-model-and-report
           path: reports/local/reversal
-          retention-days: 30
+          retention-days: 90
   forecasting:
     if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, 'reversal')
     runs-on: ubuntu-latest
@@ -45,4 +45,4 @@ jobs:
         with:
           name: neural-pilot-models-and-reports
           path: reports/local/neural
-          retention-days: 30
+          retention-days: 90

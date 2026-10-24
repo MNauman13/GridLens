@@ -18,14 +18,16 @@ The project uses the original Transformer and exactly two additional methods. Th
 | --- | --- | --- | --- |
 | Scaled dot-product attention | models/attention | Independent numbers and PyTorch oracle | None in authoritative manual operation |
 | Multiple heads and projection | models/attention | Self/cross shapes, masks, gradients | Smaller model width |
-| Sine/cosine positions | models/positional | Known positions and device/dtype | None in original reproduction |
+| Sine/cosine positions | models/attention.SinusoidalPositionalEncoding | Known positions, offsets, reload and device/dtype | None in original reproduction |
 | Encoder and masked decoder | models/transformer | Causal invariance and learned sequence task | Smaller layers/data budget |
-| Numeric forecasting interface | models/forecasting | 336-context/48-gap/48-label timestamps | Numeric projections and regression |
+| Numeric forecasting interface | models/numeric, models/bundle | 336-context/48-gap/48-label timestamps; generated inference; checkpoint continuation | Numeric projections and regression |
 | TimeXer patches/global/variable tokens | models/timexer | Operator-order and token-route checks | Forecast gap and target-calendar head |
 | NCC score threshold predictor | calibration/ncc | Residual-quantile and gradient fixtures | Shared weights across 48 slot streams |
 | NCC controller and interval ordering | calibration/ncc | Delayed feedback, nesting, state restoration | Delayed daily feedback and bounded TTA |
 
 Replace planned paths with actual classes/functions and test names as each phase is built. Do not mark rows implemented before the code exists.
+
+Through Phase 8, the attention, encoder-decoder, numeric and TimeXer rows are implemented. `tests/test_transformer.py`, `tests/test_numeric.py` and `tests/test_training.py` check masks, shifts, global-only external queries, gradients, save/reload and exact optimizer/RNG continuation. `docs/learning/phase-8.md` maps the pinned TimeXer classes to the implemented operators and separates the gap/calendar adapter. The NCC rows remain planned.
 
 ## Reuse decision
 

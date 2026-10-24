@@ -1,8 +1,8 @@
 # GridLens
 
-An auditable electricity forecasting project with real-data baselines and Transformer components built from scratch in PyTorch. TimeXer and Neural Conformal Control integrations are planned later phases.
+An auditable electricity forecasting project with manual PyTorch attention, a complete encoder-decoder Transformer, real-data baselines, and a documented TimeXer application. Neural Conformal Control is a later phase.
 
-**Stage:** Phases 3–5: frozen causal datasets, validated real-data baseline forecasts, manual attention/positional operators, and interactive browser lessons. Full encoder/decoder construction is Phase 6.
+**Stage:** Through Phase 8: frozen causal datasets, trained encoder-decoder reproduction, numerical Transformer/LSTM comparisons, a bounded TimeXer validation pilot, verified model bundles, and interactive browser lessons. Prediction intervals and online calibration begin in Phase 9.
 
 GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
 
@@ -17,6 +17,12 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 - [Phase 3: causal datasets](docs/learning/phase-3.md)
 - [Phase 4: baseline forecast explorer](docs/learning/phase-4.md)
 - [Phase 5: manual attention and animations](docs/learning/phase-5.md)
+- [Phase 6: complete encoder-decoder Transformer](docs/learning/phase-6.md)
+- [Phase 7: numerical forecasting and resumable training](docs/learning/phase-7.md)
+- [Phase 8: TimeXer operator mapping and application](docs/learning/phase-8.md)
+- [Phases 6-8 results and limitations](docs/progress/phases-6-8.md)
+- [Neural validation evidence](reports/neural-validation-v1.json)
+- [Frozen point champion](configs/point_champion_v1.json)
 - [Phases 3–5 results](docs/progress/phases-3-5.md)
 - [Frozen full-data audit](reports/neso-audit-v1.json)
 - [Source audit](docs/data/source-audit.md)
@@ -75,9 +81,24 @@ The data licence applies to the relevant NESO datasets, not automatically to pro
 - `/forecasts`: real saved 2022 validation forecast, three baselines, exact time boundaries, and provenance.
 - `/learn/settlement`: British clock-change conversion animation.
 - `/learn/attention`: checked numerical attention calculator and positional animation.
+- `/learn/transformer`: shifted training versus generated inference, plus the TimeXer operator animation.
+- `/forecasts/neural`: verified saved Transformer/LSTM/selected-TimeXer validation forecasts.
+- `/experiments`: model comparison, ablations, reversal learning curve and limitations.
 
 The 2022 selected ridge baseline has MAE 1,390.80 MW and RMSE 1,895.45 MW. These are validation results; the final 2024 evaluation remains locked. See `reports/baseline-validation-v1.json`. The serving API validates packaged results and does not fit models during a page request.
 
 Run `uv run --frozen --extra ml python scripts/build_dataset.py` and `uv run --frozen --extra ml python -m scripts.run_baselines` after ingestion. The latter rebuilds and verifies the frozen dataset before fitting. Hosted CI verifies the complete source-to-baseline path and tests the app in Chromium. A separate Windows/Linux job requires identical fingerprints for all annual, weekly, and daily calendar phases.
 
 Label-maturity embargoes retain 1,460 training and 364 validation origins. Four fitting/selection boundary dates are excluded because their labels would arrive after the next role's first issue; exclusions are frozen and do not depend on model error.
+
+## Reproduce the neural pilot
+
+```bash
+uv run --frozen --extra ml python scripts/train_reversal.py
+uv run --frozen --extra ml python -m scripts.train_neural
+uv run --frozen --extra ml python scripts/check_neural_reference.py
+```
+
+Ingest the pinned annual data first. Generated weights, training checkpoints and aligned full-validation predictions stay under ignored `reports/local/`. Hosted experiment artifacts preserve those bundles; the frozen champion record links the exact run and expected manifest hash. The committed JSON examples serve without importing Torch. The numeric models require the complete `FeatureSnapshot`, since the legacy demand-only input contract cannot represent wind, solar and missingness. `NeuralBundle.load_bundle(...).predict(snapshot)` validates and returns the shared `PointForecast` contract.
+
+This is a single-seed, bounded CPU pilot, not a completed multi-seed study or a reproduction of published benchmark scores. The original small Transformer learns disjoint same-length reversal sequences but fails longer-length generalization. All 2024 accuracy evaluation remains locked. See the reports for actual measurements and the walkthroughs for application deviations.

@@ -6,9 +6,10 @@ from pathlib import Path
 
 from gridlens.artifacts import ArtifactManifest
 from gridlens.contracts import BaselineForecast, DatasetManifest, InputWindow, IntervalForecast, MaturedFeedback, PointForecast, TrainingExample
+from gridlens.saved_neural import SavedNeuralForecast
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = [DatasetManifest, InputWindow, PointForecast, IntervalForecast, MaturedFeedback, TrainingExample, ArtifactManifest, BaselineForecast]
+MODELS = [DatasetManifest, InputWindow, PointForecast, IntervalForecast, MaturedFeedback, TrainingExample, ArtifactManifest, BaselineForecast, SavedNeuralForecast]
 
 
 def main():

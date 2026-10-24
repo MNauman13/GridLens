@@ -34,7 +34,7 @@ export default function Home() {
     } finally { setLoading(false); }
   }
   return <main>
-    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">Phase 5 · Attention and baselines</span></header>
+    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">Phase 8 · Neural forecasting</span></header>
     <section className="intro"><p className="eyebrow">ELECTRICITY FORECASTING, MADE AUDITABLE</p>
       <h1>A forecast starts with<br/>what we know.</h1>
       <p className="lede">Before training a Transformer, verify its time boundaries. Inspect the history it can use, the day it must skip, and the day it will predict.</p>
@@ -59,6 +59,7 @@ export default function Home() {
       <div className="step-detail" aria-live="polite"><h3>{steps[step].title}</h3><p>{steps[step].text}</p></div>
       <div className="step-controls"><button onClick={() => setStep(value => value - 1)} disabled={step === 0}>Previous</button><span aria-label="Timeline step">{step + 1} / {steps.length}</span><button onClick={() => setStep(value => value + 1)} disabled={step === steps.length - 1}>Next</button></div>
     </section>
-    <section className="panel"><h2>Why do some days have 46 or 50 periods?</h2><p>Follow British settlement periods as the local clock changes and UTC keeps moving.</p><Link href="/learn/settlement">Explore settlement time and play the animation</Link></section><section className="panel"><h2>Explore a real saved forecast</h2><p>Compare eligible-lag persistence and ridge regression on a fixed validation day.</p><Link href="/forecasts">Open the baseline forecast explorer</Link></section><section className="panel"><h2>Watch attention calculate</h2><p>Inspect query/key scores, masks, two attention heads, and sinusoidal positions.</p><Link href="/learn/attention">Open the interactive attention lesson</Link></section><footer><p>Supported by National Energy SO Open Data</p><p>Independent project · Validated real-data baselines / Transformer blocks follow in Phase 6.</p></footer>
+    <section className="panel"><h2>Why do some days have 46 or 50 periods?</h2><p>Follow British settlement periods as the local clock changes and UTC keeps moving.</p><Link href="/learn/settlement">Explore settlement time and play the animation</Link></section><section className="panel"><h2>Explore a real saved forecast</h2><p>Compare eligible-lag persistence and ridge regression on a fixed validation day.</p><Link href="/forecasts">Open the baseline forecast explorer</Link></section><section className="panel"><h2>Watch attention calculate</h2><p>Inspect query/key scores, masks, two attention heads, and sinusoidal positions.</p><Link href="/learn/attention">Open the interactive attention lesson</Link></section><footer><p>Supported by National Energy SO Open Data</p><p>Independent project · Validated baselines and a bounded neural forecasting pilot.</p></footer>
+    <section className="panel"><h2>From attention to trained forecasts</h2><p>Explore the complete encoder-decoder Transformer, numerical forecasting and the TimeXer application.</p><p><Link href="/learn/transformer">Follow the model walkthrough</Link> · <Link href="/forecasts/neural">Inspect saved neural forecasts</Link></p></section>
   </main>;
 }

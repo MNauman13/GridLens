@@ -1,0 +1,126 @@
+{
+  "seed": 17,
+  "steps": 4000,
+  "architecture": {
+    "width": 128,
+    "heads": 4,
+    "layers": 2,
+    "hidden": 512
+  },
+  "held_out_sequences": 256,
+  "exact_accuracy": 1,
+  "longer_length_exact_accuracy": 0,
+  "seconds": 263.27950308199996,
+  "history": [
+    {
+      "step": 200,
+      "loss": 0.9619801640510559,
+      "exact_accuracy": 0.4140625
+    },
+    {
+      "step": 400,
+      "loss": 0.3467464745044708,
+      "exact_accuracy": 0.7578125
+    },
+    {
+      "step": 600,
+      "loss": 0.18040096759796143,
+      "exact_accuracy": 0.8515625
+    },
+    {
+      "step": 800,
+      "loss": 0.20287209749221802,
+      "exact_accuracy": 0.8828125
+    },
+    {
+      "step": 1000,
+      "loss": 0.08033712953329086,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 1200,
+      "loss": 0.09360940009355545,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 1400,
+      "loss": 0.05914917588233948,
+      "exact_accuracy": 0.9765625
+    },
+    {
+      "step": 1600,
+      "loss": 0.042956531047821045,
+      "exact_accuracy": 0.9921875
+    },
+    {
+      "step": 1800,
+      "loss": 0.07960478216409683,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 2000,
+      "loss": 0.046256862580776215,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 2200,
+      "loss": 0.047010429203510284,
+      "exact_accuracy": 1
+    },
+    {
+      "step": 2400,
+      "loss": 0.027441324666142464,
+      "exact_accuracy": 1
+    },
+    {
+      "step": 2600,
+      "loss": 0.09088199585676193,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 2800,
+      "loss": 0.035365864634513855,
+      "exact_accuracy": 1
+    },
+    {
+      "step": 3000,
+      "loss": 0.007232502102851868,
+      "exact_accuracy": 1
+    },
+    {
+      "step": 3200,
+      "loss": 0.017386456951498985,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 3400,
+      "loss": 0.025263333693146706,
+      "exact_accuracy": 0.9921875
+    },
+    {
+      "step": 3600,
+      "loss": 0.0423637256026268,
+      "exact_accuracy": 0.99609375
+    },
+    {
+      "step": 3800,
+      "loss": 0.007801885716617107,
+      "exact_accuracy": 1
+    },
+    {
+      "step": 4000,
+      "loss": 0.02282877452671528,
+      "exact_accuracy": 1
+    }
+  ],
+  "reload_identical": true,
+  "test_set_used": false,
+  "training_excludes_all_held_out_sequences": true,
+  "tiny_overfit_exact_accuracy": 1,
+  "tiny_overfit_steps": 500,
+  "tiny_overfit_seconds": 2.669959610999996,
+  "learning_rate_multiplier": 0.5,
+  "warmup_steps": 400,
+  "initialization": "Xavier uniform matrices; zero PAD embedding",
+  "workflow_run": "https://github.com/MNauman13/GridLens/actions/runs/40091076428"
+}

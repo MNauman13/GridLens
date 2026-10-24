@@ -1,0 +1,226 @@
+{
+  "workflow_run": "https://github.com/MNauman13/GridLens/actions/runs/40091539589",
+  "champion": {
+    "identity": "892181fea61d719a73e8df39d7abae54ba253ae6797fac3c416e4d584bca2401",
+    "kind": "timexer",
+    "rmse_mw": 1876.6242609087992
+  },
+  "reversal": {
+    "seed": 17,
+    "steps": 4000,
+    "architecture": {
+      "width": 128,
+      "heads": 4,
+      "layers": 2,
+      "hidden": 512
+    },
+    "held_out_sequences": 256,
+    "exact_accuracy": 1,
+    "longer_length_exact_accuracy": 0,
+    "seconds": 263.27950308199996,
+    "history": [
+      {
+        "step": 200,
+        "loss": 0.9619801640510559,
+        "exact_accuracy": 0.4140625
+      },
+      {
+        "step": 400,
+        "loss": 0.3467464745044708,
+        "exact_accuracy": 0.7578125
+      },
+      {
+        "step": 600,
+        "loss": 0.18040096759796143,
+        "exact_accuracy": 0.8515625
+      },
+      {
+        "step": 800,
+        "loss": 0.20287209749221802,
+        "exact_accuracy": 0.8828125
+      },
+      {
+        "step": 1000,
+        "loss": 0.08033712953329086,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 1200,
+        "loss": 0.09360940009355545,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 1400,
+        "loss": 0.05914917588233948,
+        "exact_accuracy": 0.9765625
+      },
+      {
+        "step": 1600,
+        "loss": 0.042956531047821045,
+        "exact_accuracy": 0.9921875
+      },
+      {
+        "step": 1800,
+        "loss": 0.07960478216409683,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 2000,
+        "loss": 0.046256862580776215,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 2200,
+        "loss": 0.047010429203510284,
+        "exact_accuracy": 1
+      },
+      {
+        "step": 2400,
+        "loss": 0.027441324666142464,
+        "exact_accuracy": 1
+      },
+      {
+        "step": 2600,
+        "loss": 0.09088199585676193,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 2800,
+        "loss": 0.035365864634513855,
+        "exact_accuracy": 1
+      },
+      {
+        "step": 3000,
+        "loss": 0.007232502102851868,
+        "exact_accuracy": 1
+      },
+      {
+        "step": 3200,
+        "loss": 0.017386456951498985,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 3400,
+        "loss": 0.025263333693146706,
+        "exact_accuracy": 0.9921875
+      },
+      {
+        "step": 3600,
+        "loss": 0.0423637256026268,
+        "exact_accuracy": 0.99609375
+      },
+      {
+        "step": 3800,
+        "loss": 0.007801885716617107,
+        "exact_accuracy": 1
+      },
+      {
+        "step": 4000,
+        "loss": 0.02282877452671528,
+        "exact_accuracy": 1
+      }
+    ],
+    "reload_identical": true,
+    "test_set_used": false,
+    "training_excludes_all_held_out_sequences": true,
+    "tiny_overfit_exact_accuracy": 1,
+    "tiny_overfit_steps": 500,
+    "tiny_overfit_seconds": 2.669959610999996,
+    "learning_rate_multiplier": 0.5,
+    "warmup_steps": 400,
+    "initialization": "Xavier uniform matrices; zero PAD embedding"
+  },
+  "candidates": [
+    {
+      "identity": "last_day_v1_fdc0fdc3a5594da267cd6f4b86015b856b388194a306cb6b6ded5b3fea7970a3",
+      "label": "last_day",
+      "mae_mw": 2734.749771062271,
+      "rmse_mw": 3646.3186445542065,
+      "latency_ms": 0.009415000008061725
+    },
+    {
+      "identity": "weekly_v1_99ce06f9e964d2e6daa306c6da14473e6e6e61ff54b04af7c6c62918665c95d9",
+      "label": "weekly",
+      "mae_mw": 2037.3909111721612,
+      "rmse_mw": 2807.3616031201036,
+      "latency_ms": 0.00921899999895004
+    },
+    {
+      "identity": "ridge_v1_2d854ae5f464b2b30006c9c829a7519e9cc1a785d40ca7d85fe8a9e750be0921",
+      "label": "ridge / alpha 1",
+      "mae_mw": 1411.8213582735482,
+      "rmse_mw": 1916.2501825042295,
+      "latency_ms": 2.501863999995635
+    },
+    {
+      "identity": "ridge_v1_4a9f1af021cff2a896368f888f9ae9d3f808badf919785d45b09c4e837d0552d",
+      "label": "ridge / alpha 10",
+      "mae_mw": 1390.8028539728655,
+      "rmse_mw": 1895.4522099702126,
+      "latency_ms": 2.530467500001521
+    },
+    {
+      "identity": "ridge_v1_b450f694bc84b34bb0a224063d6d604345563bf2f02e6f6bf62b35c994170a43",
+      "label": "ridge / alpha 100",
+      "mae_mw": 1401.817754952777,
+      "rmse_mw": 1913.6283261882502,
+      "latency_ms": 2.484723500003838
+    },
+    {
+      "identity": "8532d7e8097c59596e5712cca48047a4d79c913287f7afa00bcc1c9443a9fa2f",
+      "label": "Autoregressive Transformer",
+      "mae_mw": 1854.4808451893566,
+      "rmse_mw": 2547.8512603349677,
+      "latency_ms": 51.92308400000911
+    },
+    {
+      "identity": "a7140d52982dec86d0057530586d88b1c4beff039b2f7116de42f3abe0f015aa",
+      "label": "Autoregressive LSTM",
+      "mae_mw": 1865.305391640017,
+      "rmse_mw": 2436.998731082136,
+      "latency_ms": 7.801582000013241
+    },
+    {
+      "identity": "7f07454b4602a33a0653b0fb1abf673117a60cc0fc5149a388ebfd0bb0326c58",
+      "label": "TimeXer default",
+      "mae_mw": 1411.0271912738954,
+      "rmse_mw": 1900.043896911753,
+      "latency_ms": 1.7691259999992326
+    },
+    {
+      "identity": "1ee0025a5382fc41015d259f67f840473f63aada408a51e5dd9206b2d1671f7b",
+      "label": "TimeXer / no external",
+      "mae_mw": 1435.9099495017922,
+      "rmse_mw": 1932.0721874051092,
+      "latency_ms": 1.1809400000402093
+    },
+    {
+      "identity": "892181fea61d719a73e8df39d7abae54ba253ae6797fac3c416e4d584bca2401",
+      "label": "TimeXer / patch 48",
+      "mae_mw": 1390.053207173889,
+      "rmse_mw": 1876.6242609087992,
+      "latency_ms": 1.799981999965894
+    },
+    {
+      "identity": "5d7f9c4f29d5386b623797d03a9f2a5e3a1f1a561cc1bf650860d25d1ae14118",
+      "label": "TimeXer / one head",
+      "mae_mw": 1429.138620621119,
+      "rmse_mw": 1896.5212632055757,
+      "latency_ms": 1.7518120000090676
+    },
+    {
+      "identity": "840dbb827b9545e90035dc22257f4f4d094d0c1eb05fb46e6d1581e7507c8b36",
+      "label": "TimeXer / no positions",
+      "mae_mw": 1398.6637554238569,
+      "rmse_mw": 1882.3703897086427,
+      "latency_ms": 1.7771099999777107
+    },
+    {
+      "identity": "18994267413907292263e2ff07808acc0650a4b4226ac295292f975f4a7c1c91",
+      "label": "TimeXer / no target calendar",
+      "mae_mw": 1451.980196830554,
+      "rmse_mw": 1932.7356917581858,
+      "latency_ms": 1.740672000039467
+    }
+  ]
+}

@@ -55,3 +55,9 @@ Do not relabel Node DOM mocks as browser tests, or a launched process as a verif
 The suite also verifies real saved baseline forecasts, exact issue/target/cutoff boundaries, model switching, lag values, provenance, and forecast API errors. Attention checks compare displayed weights/output with the PyTorch-verified fixture, test causal masking and head/query controls, and play/pause attention and positional animations. Eight scenarios at two Chromium viewport sizes give sixteen tests.
 
 Install the ML extra for the complete repository checks: `uv sync --frozen --extra api --extra ml --group dev`. The web server still serves saved baseline artifacts without running training during a request.
+
+## Phases 6–8 additions
+
+`transformer.spec.ts` checks shifted versus generated prefix controls and the opt-in TimeXer operator animation. `neural.spec.ts` checks saved trained forecasts, model switching, all-slot inspection, provenance, failure messaging and mobile overflow. The complete suite runs these alongside the existing scenarios at desktop and mobile Chromium sizes. Screenshots are generated for the neural forecast view; these are automated browser evidence, not a claim of manual visual review.
+
+The experiments page displays committed, measured evidence rather than generating new training work in the browser. Neural HTTP responses enforce exactly 48 finite values and a content identity; corrupt or missing resources return 503. The viewer labels each example as retrospective validation and does not present it as a live issue.
