@@ -11,8 +11,12 @@ from torch.nn import functional as F
 from gridlens.models.transformer import TokenTransformer, warmup_rate
 
 
-def batch(rng, count, low=3, high=8):
-    sequences = [[rng.randrange(3, 13) for _ in range(rng.randint(low, high))] for _ in range(count)]
+def batch(rng, count, low=3, high=8, excluded=frozenset()):
+    sequences = []
+    while len(sequences) < count:
+        sequence = [rng.randrange(3, 13) for _ in range(rng.randint(low, high))]
+        if tuple(sequence) not in excluded:
+            sequences.append(sequence)
     length = max(map(len, sequences)) + 1
     source = torch.zeros(count, length, dtype=torch.long)
     target = torch.zeros(count, length + 1, dtype=torch.long)
@@ -38,16 +42,31 @@ def main():
     torch.set_num_threads(2)
     torch.manual_seed(17)
     torch.use_deterministic_algorithms(True)
+    tiny_started = time.perf_counter()
+    tiny = TokenTransformer(width=32,heads=4,hidden=128,layers=1,dropout=0)
+    tiny_optimizer = torch.optim.Adam(tiny.parameters(),lr=.003)
+    tiny_source,tiny_target = batch(random.Random(19),8,3,5)
+    for _ in range(500):
+        tiny_optimizer.zero_grad()
+        tiny_loss = F.cross_entropy(tiny(tiny_source,tiny_target[:,:-1]).reshape(-1,13),tiny_target[:,1:].reshape(-1),ignore_index=0)
+        tiny_loss.backward()
+        tiny_optimizer.step()
+    tiny.eval()
+    tiny_accuracy = accuracy(tiny,tiny_source,tiny_target)
+    tiny_seconds = time.perf_counter()-tiny_started
+    print(json.dumps({'tiny_overfit_exact_accuracy':tiny_accuracy,'seconds':tiny_seconds}),flush=True)
+    torch.manual_seed(17)
     model = TokenTransformer(dropout=0.1)
     optimizer = torch.optim.Adam(model.parameters(), lr=1, betas=(0.9, 0.98), eps=1e-9)
     held_source, held_target = batch(random.Random(101), 256)
+    excluded = frozenset(tuple(int(v) for v in row if int(v) > 2) for row in held_source)
     long_source, long_target = batch(random.Random(102), 128, 9, 12)
     rng = random.Random(17)
     started = time.perf_counter()
     history = []
     for step in range(1, args.steps + 1):
         model.train()
-        source, target = batch(rng, 64)
+        source, target = batch(rng, 64, excluded=excluded)
         optimizer.zero_grad()
         loss = F.cross_entropy(model(source, target[:, :-1]).reshape(-1, 13), target[:, 1:].reshape(-1), ignore_index=0)
         loss.backward()
@@ -68,6 +87,7 @@ def main():
     clone.load_state_dict(torch.load(output / 'weights.pt', weights_only=True))
     torch.testing.assert_close(model(held_source[:2], held_target[:2, :-1]), clone(held_source[:2], held_target[:2, :-1]), rtol=0, atol=0)
     report = {'seed': 17, 'steps': args.steps, 'architecture': {'width':128,'heads':4,'layers':2,'hidden':512}, 'held_out_sequences':256, 'exact_accuracy':accuracy(model,held_source,held_target), 'longer_length_exact_accuracy':accuracy(model,long_source,long_target), 'seconds':time.perf_counter()-started,'history':history,'reload_identical':True,'test_set_used':False}
+    report.update({'training_excludes_all_held_out_sequences':True,'tiny_overfit_exact_accuracy':tiny_accuracy,'tiny_overfit_steps':500,'tiny_overfit_seconds':tiny_seconds,'learning_rate_multiplier':.5,'warmup_steps':400,'initialization':'Xavier uniform matrices; zero PAD embedding'})
     (output / 'report.json').write_text(json.dumps(report, indent=2))
     print('GRIDLENS_REVERSAL_REPORT ' + json.dumps(report), flush=True)
 
