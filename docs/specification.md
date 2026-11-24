@@ -8,6 +8,10 @@
 **Primary geography:** Great Britain.  
 **Audience:** The developer building the system, technical reviewers, and recruiters assessing the finished project.
 
+### Upgrade addendum, 24 November 2026
+
+The accepted code is through the bounded Phase 8 pilot. The I0-I9 upgrade sequence now prioritises verified baseline recovery, actual public inference, same-weight execution optimisation, the deferred point-model study, calibrated replay, service hardening and final evaluation. See [ADR 0007](decisions/0007-upgrade-baseline-and-live-release.md) and the [I0 runbook](operations/i0-baseline.md). Optional accelerated runtimes are allowed alongside the mandatory manual reference only after numerical verification. Public real-inference hosting is a required delivery goal, superseding statements below that treat it as optional. The forecast contract, 2023 calibration roles and locked 2024 evaluation remain unchanged. Existing original phase numbers describe methodological work; upgrade increments describe the revised delivery order.
+
 > GridLens answers three questions: What electricity demand do we expect tomorrow? How uncertain is that forecast? What evidence shows that the system is useful and reproducible?
 
 ---

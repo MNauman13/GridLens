@@ -46,10 +46,11 @@ jobs:
           uv run --frozen --extra api --extra ml python scripts/export_settlement_demo.py --check
           uv run --frozen --extra api --extra ml python scripts/export_attention_demo.py --check
           uv run --frozen --extra api --extra ml python scripts/check_neural_reference.py
+          uv run --frozen --extra api --extra ml python -m scripts.check_i0_reference
           uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api --extra ml ruff check src tests
+          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py
           uv run --frozen --extra api --extra ml mypy src/gridlens
       - name: Node logic, lint, and types
         run: |

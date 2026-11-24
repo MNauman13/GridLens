@@ -1,0 +1,43 @@
+{
+  "archive_restore_actual_predictions": {
+    "models": 3,
+    "status": "passed"
+  },
+  "baseline_report_id": "01ae82c16192a4e6c90f5b742780faca0dd2a872b13c03d14120587e43a99944",
+  "browser_build_checks": "not rerun locally: no frontend code changed; existing full CI workflow retained",
+  "contract_schemas": "verified",
+  "date": "2026-11-24",
+  "durable_archive": {
+    "file_name": "GridLens_I0_Baseline_Models.zip",
+    "separate_persistent_copy_verified": true,
+    "sha256": "860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4",
+    "size_bytes": 946429
+  },
+  "frozen_sources_verified": 8,
+  "i0_report_lineage": "verified",
+  "limitations": [
+    "CPU measurements only",
+    "Regenerated neural weights differ from the original expired pilot; original reports and champion unchanged",
+    "No new inference optimisation, calibrated intervals, live service or model-superiority claim in I0"
+  ],
+  "locked_test_evaluated": false,
+  "mypy": {
+    "source_files": 24,
+    "status": "passed"
+  },
+  "node_unit_tests": {
+    "passed": 3
+  },
+  "original_neural_report_lineage": "verified",
+  "python_lock": "verified",
+  "python_unittest": {
+    "passed": 80,
+    "ran": 81,
+    "skip_reason": "CUDA unavailable; CPU-only environment",
+    "skipped": 1
+  },
+  "report_id": "bac9bc10f7930a4ea5fd50d8da8b2cb42f8da3767fe42d159b9f4b34aac94ea6",
+  "ruff": "passed",
+  "runtime_report_id": "4706d28fea2745c7524a11e5f45dc89fa1e9e9a9d3d4b6120a595290024b3fc7",
+  "schema_version": "gridlens_i0_verification_v1"
+}

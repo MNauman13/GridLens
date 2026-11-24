@@ -8,6 +8,14 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 
 ## Start here
 
+### Upgrade baseline (I0)
+
+The I0 upgrade adds verified baseline recovery, frozen benchmark origins, warm/cold CPU measurements and explicit model archives. It preserves the original Phase 8 evidence and the locked 2024 test. Follow the [I0 operations guide](docs/operations/i0-baseline.md) and [upgrade decision](docs/decisions/0007-upgrade-baseline-and-live-release.md). The public real-inference service is the next increment, I1; the current API still serves labelled saved examples.
+
+The [upgrade experiment manifest](configs/upgrade_experiment_v2.json) pins source/data references, numerical tolerances and benchmark budgets. The [metric registry](configs/metric_registry_v2.json) defines measurements and their scopes. Regenerated model results are separate from the original published pilot; recovery is not an accuracy optimisation.
+
+See the [executed I0 results and limitations](docs/progress/i0-baseline.md) for the recovered models, 1,000-call warm benchmarks, 20-process cold benchmarks, validation scores and archive verification.
+
 - [Full specification](docs/specification.md)
 - [Forecasting decisions](docs/decisions/0001-forecast-contract.md)
 - [Evidence modes and truth](docs/decisions/0002-evidence-and-truth.md)

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GridLens CPU benchmark observation v2",
+  "description": "Each JSONL file belongs to one content-addressed report/manifest specifying data, source, environment, protocol and units. Durations are milliseconds and exclude warmups.",
+  "type": "object",
+  "required": ["model_id", "repeat", "case_index", "elapsed_ms"],
+  "properties": {
+    "model_id": {"type": "string", "minLength": 1},
+    "repeat": {"type": "integer", "minimum": 0},
+    "case_index": {"type": "integer", "minimum": 0, "maximum": 31},
+    "elapsed_ms": {"type": "number", "minimum": 0}
+  },
+  "additionalProperties": false
+}

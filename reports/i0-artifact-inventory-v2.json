@@ -1,0 +1,92 @@
+{
+  "files": [
+    {
+      "path": "bundles/ridge/manifest.json",
+      "sha256": "85a79c3f896e466ad4ada5b18016d38f43fe9e821d44247580cad2288273c175",
+      "size_bytes": 250
+    },
+    {
+      "path": "bundles/ridge/model.json",
+      "sha256": "743a50dc26b6275d01f1ed17d203712857a68391a3668bcdedd1fa8fec9c85d8",
+      "size_bytes": 100565
+    },
+    {
+      "path": "bundles/neural/97151e2ae84a8c102d55f3d95d80b5d6e437ebe302ba935c4b92c8cda07c56d1/manifest.json",
+      "sha256": "1d09f0aeb3fc1bab7e8cbcea3417d0a239ccecbf418815d958718d3b77ff934b",
+      "size_bytes": 400
+    },
+    {
+      "path": "bundles/neural/97151e2ae84a8c102d55f3d95d80b5d6e437ebe302ba935c4b92c8cda07c56d1/metadata.json",
+      "sha256": "dbe831452d2b20bc597cfe5c43b638006de653ff2015b06ca9a2f458d70db3aa",
+      "size_bytes": 1442
+    },
+    {
+      "path": "bundles/neural/97151e2ae84a8c102d55f3d95d80b5d6e437ebe302ba935c4b92c8cda07c56d1/weights.pt",
+      "sha256": "7ef140833e1afaf2bee37a1561752f01dd7cefdc94a491d575f63841d49a6dcf",
+      "size_bytes": 194448
+    },
+    {
+      "path": "bundles/neural/fd0a5de052fce30ee86027b70a2181af12e0a1e7e6d5dfb4650fd573cb1a6cb6/manifest.json",
+      "sha256": "69ebbc2848c5fb7310a9307c92807e8405b02f65f2f0a563e8e23fab5ca8e370",
+      "size_bytes": 400
+    },
+    {
+      "path": "bundles/neural/fd0a5de052fce30ee86027b70a2181af12e0a1e7e6d5dfb4650fd573cb1a6cb6/metadata.json",
+      "sha256": "b40bf97e086a1e0a93ce7f5dfc2f859a279e12ab2d5b0fbd6e0c40c4226ef160",
+      "size_bytes": 1455
+    },
+    {
+      "path": "bundles/neural/fd0a5de052fce30ee86027b70a2181af12e0a1e7e6d5dfb4650fd573cb1a6cb6/weights.pt",
+      "sha256": "d2930a8ea0810746d463a3ead3695a0a473298e285f863cdbb46675b69b7307a",
+      "size_bytes": 309472
+    },
+    {
+      "path": "ARCHIVE_README.txt",
+      "sha256": "811650a91ac5e1fb18c86c2444a11192772abeab60ecbec2b69b6178de7328a7",
+      "size_bytes": 572
+    },
+    {
+      "path": "environment.json",
+      "sha256": "f772153bf2ba39d64b533f3a1c7a1817d5480cc880cc2edf1cf10864cf289f3d",
+      "size_bytes": 766
+    },
+    {
+      "path": "bundle_index.json",
+      "sha256": "830afacbaf9eed8ba2ab61b4321236000a54b86a99a2f5cdb151db81a4e7b31a",
+      "size_bytes": 429
+    },
+    {
+      "path": "benchmark_manifest_v2.json",
+      "sha256": "ac55871292d057ebc5a770726488706a619d7fe4d8bac74011471aebe9c57a3f",
+      "size_bytes": 3536
+    },
+    {
+      "path": "baseline_reproduction.json",
+      "sha256": "4558e1d421aac88b7f49269d69de2e86bef1dbf7f6c7970b5343c543e83958ad",
+      "size_bytes": 28513
+    },
+    {
+      "path": "baseline_runtime_supplement.json",
+      "sha256": "7bd2e4ef84bbf0a75594e8e2d372acbebb682abdc784c87227651d4a22cac4ec",
+      "size_bytes": 70034
+    },
+    {
+      "path": "validation-predictions.json",
+      "sha256": "59d6f2e19774d0b558c12cd10871dd4a6c52160973dfc0bba9cd0bb49c27db8b",
+      "size_bytes": 1597526
+    },
+    {
+      "path": "timings.jsonl",
+      "sha256": "b81cdc78908511c3fa9174b1c4de8ee2ffe908fe540ba95c4b6a93b98545c5ed",
+      "size_bytes": 416721
+    },
+    {
+      "path": "engine_timings.jsonl",
+      "sha256": "cfb35dcd3de0cf1370714f183c90758002946520c8e3d35c0027273dd1def17a",
+      "size_bytes": 272134
+    }
+  ],
+  "report_id": "0c6e5e9f9cf5399c1de611713c8516505a76a46a4ac8d13c158ee354ed2874e1",
+  "sha256": "860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4",
+  "size_bytes": 946429
+}
