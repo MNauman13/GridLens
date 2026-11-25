@@ -2,7 +2,7 @@
 
 An auditable electricity forecasting project with manual PyTorch attention, a complete encoder-decoder Transformer, real-data baselines, and a documented TimeXer application. Neural Conformal Control is a later phase.
 
-**Stage:** Through Phase 8: frozen causal datasets, trained encoder-decoder reproduction, numerical Transformer/LSTM comparisons, a bounded TimeXer validation pilot, verified model bundles, and interactive browser lessons. Prediction intervals and online calibration begin in Phase 9.
+**Stage:** I1 live inference preview plus the original Phase 8 foundation: frozen causal datasets, trained encoder-decoder reproduction, numerical Transformer/LSTM comparisons, a bounded TimeXer validation pilot, verified model bundles, and interactive browser lessons. Prediction intervals and online calibration begin in Phase 9.
 
 GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
 
@@ -10,7 +10,7 @@ GridLens will predict NESO National Demand in MW for the following UTC day and e
 
 ### Upgrade baseline (I0)
 
-The I0 upgrade adds verified baseline recovery, frozen benchmark origins, warm/cold CPU measurements and explicit model archives. It preserves the original Phase 8 evidence and the locked 2024 test. Follow the [I0 operations guide](docs/operations/i0-baseline.md) and [upgrade decision](docs/decisions/0007-upgrade-baseline-and-live-release.md). The public real-inference service is the next increment, I1; the current API still serves labelled saved examples.
+The I0 upgrade adds verified baseline recovery, frozen benchmark origins, warm/cold CPU measurements and explicit model archives. It preserves the original Phase 8 evidence and the locked 2024 test. Follow the [I0 operations guide](docs/operations/i0-baseline.md) and [upgrade decision](docs/decisions/0007-upgrade-baseline-and-live-release.md). I1 now adds actual browser inference on `/live`, plus a separately runnable bounded Python reference service. See the [I1 runbook](docs/operations/i1-live-inference.md), [recorded results](docs/progress/i1-live-inference.md) and [deployment decision](docs/decisions/0008-portable-live-preview.md). Browser/server execution and timings are explicitly distinguished.
 
 The [upgrade experiment manifest](configs/upgrade_experiment_v2.json) pins source/data references, numerical tolerances and benchmark budgets. The [metric registry](configs/metric_registry_v2.json) defines measurements and their scopes. Regenerated model results are separate from the original published pilot; recovery is not an accuracy optimisation.
 

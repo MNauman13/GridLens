@@ -2,8 +2,12 @@
   "name": "gridlens-workspace",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["apps/web"],
-  "engines": {"node": ">=24"},
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "npm run dev --workspace @gridlens/web",
     "build": "npm run build --workspace @gridlens/web",
@@ -13,5 +17,8 @@
     "test:unit": "node --test tests/visual.test.cjs",
     "test:e2e": "playwright test"
   },
-  "devDependencies": {"playwright": "1.64.1"}
+  "devDependencies": {
+    "adm-zip": "^0.6.1",
+    "playwright": "1.64.1"
+  }
 }

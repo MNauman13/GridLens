@@ -12,6 +12,10 @@ dependencies = ["pydantic>=2.12,<3", "tzdata>=2025.2"]
 [project.optional-dependencies]
 api = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
 ml = ["torch>=2.6,<3", "numpy>=2,<3"]
+export = [
+    "onnx>=1.18,<2",
+    "onnxruntime>=1.20,<2",
+]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"

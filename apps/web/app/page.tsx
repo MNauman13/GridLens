@@ -34,12 +34,13 @@ export default function Home() {
     } finally { setLoading(false); }
   }
   return <main>
-    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">Phase 8 · Neural forecasting</span></header>
+    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">I1 · Live inference</span></header>
     <section className="intro"><p className="eyebrow">ELECTRICITY FORECASTING, MADE AUDITABLE</p>
       <h1>A forecast starts with<br/>what we know.</h1>
       <p className="lede">Before training a Transformer, verify its time boundaries. Inspect the history it can use, the day it must skip, and the day it will predict.</p>
       <p className="notice">Development fixture · Synthetic inputs · No trained forecast</p>
     </section>
+    <section className="panel"><h2>Run a trained model now</h2><p>Compute a fresh electricity demand forecast with TimeXer or ridge regression and inspect its latency and error.</p><Link href="/live">Open live inference</Link></section>
     <section className="panel" aria-labelledby="contract-heading">
       <div className="section-heading"><div><p className="eyebrow">01 / CHECK THE CONTRACT</p><h2 id="contract-heading">One issue. Exact boundaries.</h2></div><span className="unit">NESO ND · MW · UTC</span></div>
       <form onSubmit={event => { event.preventDefault(); void check(); }}>
@@ -51,7 +52,7 @@ export default function Home() {
         <p className="verified">Contract verified · {result.contract_version}</p>
         <dl className="counts"><div><dt>History inputs</dt><dd>{result.input_count}</dd></div><div><dt>Skipped intervals</dt><dd>{result.gap_intervals}</dd></div><div><dt>Target outputs</dt><dd>{result.output_count}</dd></div></dl>
         <dl className="boundaries"><div><dt>Issued at</dt><dd>{result.issued_at}</dd></div><div><dt>Context ends, exclusive</dt><dd>{result.context_end_exclusive}</dd></div><div><dt>Target starts</dt><dd>{result.target_start}</dd></div><div><dt>Target ends, exclusive</dt><dd>{result.target_end_exclusive}</dd></div></dl>
-      </> : !loading && <p className="hint">Run the check to validate a synthetic input window through the Python API.</p>}</div>
+      </> : !loading && <p className="hint">Run the check to validate a synthetic input window against the UTC contract.</p>}</div>
     </section>
     <section className="panel" aria-labelledby="timeline-heading">
       <p className="eyebrow">02 / FOLLOW THE INFORMATION</p><h2 id="timeline-heading">What can the model see?</h2>

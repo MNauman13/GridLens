@@ -21,3 +21,5 @@ reports/local/
 /.mypy_cache/
 /test-results/
 /playwright-report/
+/apps/web/public/inference/
+/apps/web/public/ort/

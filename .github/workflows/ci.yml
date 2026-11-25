@@ -36,6 +36,8 @@ jobs:
         run: uv sync --frozen --extra api --extra ml --group dev
       - name: Resolve or install Node lock
         run: npm ci
+      - name: Install verified live assets
+        run: node scripts/prepare_live_assets.mjs
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
       - name: Python tests and deterministic fixture
@@ -50,7 +52,7 @@ jobs:
           uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py
+          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py scripts/prepare_live_demo.py scripts/benchmark_live.py
           uv run --frozen --extra api --extra ml mypy src/gridlens
       - name: Node logic, lint, and types
         run: |

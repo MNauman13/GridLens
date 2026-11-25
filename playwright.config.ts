@@ -7,10 +7,10 @@ export default defineConfig({
   workers: 1,
   reporter: [["list"], ["html", {outputFolder:"reports/local/playwright-report",open:"never"}]],
   outputDir: "reports/local/browser-results",
-  use: {baseURL:"http://127.0.0.1:3000",trace:"retain-on-failure",screenshot:"only-on-failure"},
+  use: {launchOptions:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH}:undefined,baseURL:"http://127.0.0.1:3000",trace:"retain-on-failure",screenshot:"only-on-failure"},
   projects: [{name:"chromium-desktop",use:{...devices["Desktop Chrome"]}}, {name:"chromium-mobile",use:{...devices["iPhone 13"],browserName:"chromium"}}],
   webServer: [
-    {command:"uv run --frozen --extra api --extra ml python -m uvicorn gridlens.api:app --host 127.0.0.1 --port 8000",url:"http://127.0.0.1:8000/v1/health/live",reuseExistingServer:!process.env.CI,timeout:60_000},
-    {command:"npm run start",url:"http://127.0.0.1:3000",reuseExistingServer:!process.env.CI,timeout:60_000},
+    {command:"uv run --frozen --extra api --extra ml python -m uvicorn gridlens.api:app --host 127.0.0.1 --port 8000",url:"http://127.0.0.1:8000/v1/health/ready",env:{GRIDLENS_LIVE_ASSETS:"artifacts/i1",GRIDLENS_JOB_DB:"reports/local/i1/browser-jobs.sqlite3"},reuseExistingServer:!process.env.CI,timeout:60_000},
+    {command:"npm run start",url:"http://127.0.0.1:3000",env:{GRIDLENS_API_URL:"http://127.0.0.1:8000"},reuseExistingServer:!process.env.CI,timeout:60_000},
   ],
 });

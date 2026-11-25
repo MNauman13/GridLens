@@ -1,0 +1,1772 @@
+{
+  "scope": "local single-worker CPU; three runs per validation origin; first predictions included; excludes HTTP/network/browser",
+  "catalog_id": "3c6418fd77386ab996b02e3fe6b38d0cd1c2b01fae2b01ae0967b84190401426",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "torch": "2.14.1+cpu",
+  "threads": 2,
+  "verified_startup_ms": 81.566092,
+  "process_peak_rss_kib_linux": 254676,
+  "successes": 192,
+  "failures": 0,
+  "summary": {
+    "ridge": {
+      "queue_ms": {
+        "p50": 0.43339300000000003,
+        "p95": 0.531523
+      },
+      "predict_ms": {
+        "p50": 2.332225,
+        "p95": 3.29927625
+      },
+      "submit_to_persisted_ms": {
+        "p50": 4.426317,
+        "p95": 5.55782875
+      }
+    },
+    "timexer": {
+      "queue_ms": {
+        "p50": 0.490468,
+        "p95": 0.91035475
+      },
+      "predict_ms": {
+        "p50": 1.8260035000000001,
+        "p95": 2.6638365
+      },
+      "submit_to_persisted_ms": {
+        "p50": 3.073041,
+        "p95": 4.84514975
+      }
+    }
+  },
+  "samples": [
+    {
+      "model": "ridge",
+      "target_date": "2022-01-01",
+      "repetition": 0,
+      "queue_ms": 1.015128,
+      "predict_ms": 3.0036,
+      "submit_to_persisted_ms": 5.799317,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-01",
+      "repetition": 1,
+      "queue_ms": 0.396427,
+      "predict_ms": 2.289927,
+      "submit_to_persisted_ms": 4.302335,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-01",
+      "repetition": 2,
+      "queue_ms": 0.357559,
+      "predict_ms": 2.190908,
+      "submit_to_persisted_ms": 4.1724,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-12",
+      "repetition": 0,
+      "queue_ms": 0.392451,
+      "predict_ms": 2.30608,
+      "submit_to_persisted_ms": 4.355916,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-12",
+      "repetition": 1,
+      "queue_ms": 0.370448,
+      "predict_ms": 2.209946,
+      "submit_to_persisted_ms": 4.256796,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-12",
+      "repetition": 2,
+      "queue_ms": 0.372721,
+      "predict_ms": 2.317338,
+      "submit_to_persisted_ms": 4.24233,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-24",
+      "repetition": 0,
+      "queue_ms": 0.336903,
+      "predict_ms": 2.326922,
+      "submit_to_persisted_ms": 4.338505,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-24",
+      "repetition": 1,
+      "queue_ms": 0.402005,
+      "predict_ms": 2.240442,
+      "submit_to_persisted_ms": 4.297458,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-01-24",
+      "repetition": 2,
+      "queue_ms": 0.41171,
+      "predict_ms": 2.216636,
+      "submit_to_persisted_ms": 4.260422,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-05",
+      "repetition": 0,
+      "queue_ms": 0.380974,
+      "predict_ms": 2.310969,
+      "submit_to_persisted_ms": 4.297218,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-05",
+      "repetition": 1,
+      "queue_ms": 0.364289,
+      "predict_ms": 2.263377,
+      "submit_to_persisted_ms": 4.43861,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-05",
+      "repetition": 2,
+      "queue_ms": 0.507835,
+      "predict_ms": 2.256316,
+      "submit_to_persisted_ms": 4.387453,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-16",
+      "repetition": 0,
+      "queue_ms": 0.341384,
+      "predict_ms": 2.260622,
+      "submit_to_persisted_ms": 4.258139,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-16",
+      "repetition": 1,
+      "queue_ms": 0.426272,
+      "predict_ms": 2.211168,
+      "submit_to_persisted_ms": 4.304198,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-16",
+      "repetition": 2,
+      "queue_ms": 0.392441,
+      "predict_ms": 2.189085,
+      "submit_to_persisted_ms": 4.195284,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-28",
+      "repetition": 0,
+      "queue_ms": 0.334474,
+      "predict_ms": 2.43815,
+      "submit_to_persisted_ms": 4.3852,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-28",
+      "repetition": 1,
+      "queue_ms": 0.429147,
+      "predict_ms": 2.197838,
+      "submit_to_persisted_ms": 4.262125,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-02-28",
+      "repetition": 2,
+      "queue_ms": 0.361855,
+      "predict_ms": 2.195445,
+      "submit_to_persisted_ms": 4.163146,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-12",
+      "repetition": 0,
+      "queue_ms": 0.349757,
+      "predict_ms": 2.251819,
+      "submit_to_persisted_ms": 4.289626,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-12",
+      "repetition": 1,
+      "queue_ms": 0.353282,
+      "predict_ms": 2.224078,
+      "submit_to_persisted_ms": 4.161593,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-12",
+      "repetition": 2,
+      "queue_ms": 0.380883,
+      "predict_ms": 2.250066,
+      "submit_to_persisted_ms": 4.242625,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-23",
+      "repetition": 0,
+      "queue_ms": 0.37174,
+      "predict_ms": 2.29178,
+      "submit_to_persisted_ms": 4.325415,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-23",
+      "repetition": 1,
+      "queue_ms": 0.363262,
+      "predict_ms": 2.206121,
+      "submit_to_persisted_ms": 4.184213,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-03-23",
+      "repetition": 2,
+      "queue_ms": 0.35194,
+      "predict_ms": 2.51155,
+      "submit_to_persisted_ms": 4.528686,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-04",
+      "repetition": 0,
+      "queue_ms": 0.368855,
+      "predict_ms": 2.337528,
+      "submit_to_persisted_ms": 4.38511,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-04",
+      "repetition": 1,
+      "queue_ms": 0.356938,
+      "predict_ms": 2.310347,
+      "submit_to_persisted_ms": 4.3787,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-04",
+      "repetition": 2,
+      "queue_ms": 0.49135,
+      "predict_ms": 3.311343,
+      "submit_to_persisted_ms": 5.496331,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-16",
+      "repetition": 0,
+      "queue_ms": 0.47163,
+      "predict_ms": 2.413493,
+      "submit_to_persisted_ms": 4.538,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-16",
+      "repetition": 1,
+      "queue_ms": 0.414714,
+      "predict_ms": 2.302726,
+      "submit_to_persisted_ms": 4.434339,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-16",
+      "repetition": 2,
+      "queue_ms": 1.585882,
+      "predict_ms": 2.607855,
+      "submit_to_persisted_ms": 5.462036,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-28",
+      "repetition": 0,
+      "queue_ms": 0.433994,
+      "predict_ms": 2.548996,
+      "submit_to_persisted_ms": 4.659843,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-28",
+      "repetition": 1,
+      "queue_ms": 0.460633,
+      "predict_ms": 2.238749,
+      "submit_to_persisted_ms": 4.390128,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-04-28",
+      "repetition": 2,
+      "queue_ms": 0.39193,
+      "predict_ms": 2.367934,
+      "submit_to_persisted_ms": 4.429066,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-09",
+      "repetition": 0,
+      "queue_ms": 0.43823,
+      "predict_ms": 2.514734,
+      "submit_to_persisted_ms": 4.646688,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-09",
+      "repetition": 1,
+      "queue_ms": 0.415811,
+      "predict_ms": 2.528816,
+      "submit_to_persisted_ms": 4.477208,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-09",
+      "repetition": 2,
+      "queue_ms": 0.485235,
+      "predict_ms": 2.304318,
+      "submit_to_persisted_ms": 4.549763,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-21",
+      "repetition": 0,
+      "queue_ms": 0.518491,
+      "predict_ms": 3.939599,
+      "submit_to_persisted_ms": 6.09938,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-21",
+      "repetition": 1,
+      "queue_ms": 0.441895,
+      "predict_ms": 5.809424,
+      "submit_to_persisted_ms": 7.985179,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-05-21",
+      "repetition": 2,
+      "queue_ms": 0.434735,
+      "predict_ms": 2.262075,
+      "submit_to_persisted_ms": 4.402676,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-02",
+      "repetition": 0,
+      "queue_ms": 0.413653,
+      "predict_ms": 2.542817,
+      "submit_to_persisted_ms": 4.608796,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-02",
+      "repetition": 1,
+      "queue_ms": 0.446333,
+      "predict_ms": 2.263056,
+      "submit_to_persisted_ms": 4.558962,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-02",
+      "repetition": 2,
+      "queue_ms": 0.432792,
+      "predict_ms": 2.352872,
+      "submit_to_persisted_ms": 4.570569,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-13",
+      "repetition": 0,
+      "queue_ms": 0.452461,
+      "predict_ms": 2.521335,
+      "submit_to_persisted_ms": 5.165385,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-13",
+      "repetition": 1,
+      "queue_ms": 0.417048,
+      "predict_ms": 2.435525,
+      "submit_to_persisted_ms": 4.506943,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-13",
+      "repetition": 2,
+      "queue_ms": 0.39884,
+      "predict_ms": 2.450037,
+      "submit_to_persisted_ms": 4.583278,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-25",
+      "repetition": 0,
+      "queue_ms": 0.39819,
+      "predict_ms": 2.408084,
+      "submit_to_persisted_ms": 5.742322,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-25",
+      "repetition": 1,
+      "queue_ms": 0.485311,
+      "predict_ms": 2.748466,
+      "submit_to_persisted_ms": 4.903661,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-06-25",
+      "repetition": 2,
+      "queue_ms": 0.443527,
+      "predict_ms": 2.215014,
+      "submit_to_persisted_ms": 4.217949,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-07",
+      "repetition": 0,
+      "queue_ms": 0.372781,
+      "predict_ms": 2.43812,
+      "submit_to_persisted_ms": 4.410338,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-07",
+      "repetition": 1,
+      "queue_ms": 0.479461,
+      "predict_ms": 2.613804,
+      "submit_to_persisted_ms": 4.763399,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-07",
+      "repetition": 2,
+      "queue_ms": 1.480398,
+      "predict_ms": 2.358449,
+      "submit_to_persisted_ms": 5.423293,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-19",
+      "repetition": 0,
+      "queue_ms": 0.447965,
+      "predict_ms": 2.386803,
+      "submit_to_persisted_ms": 4.616318,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-19",
+      "repetition": 1,
+      "queue_ms": 0.464484,
+      "predict_ms": 3.329901,
+      "submit_to_persisted_ms": 6.892203,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-19",
+      "repetition": 2,
+      "queue_ms": 0.431704,
+      "predict_ms": 2.250817,
+      "submit_to_persisted_ms": 4.257037,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-30",
+      "repetition": 0,
+      "queue_ms": 0.378204,
+      "predict_ms": 2.268424,
+      "submit_to_persisted_ms": 4.350258,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-30",
+      "repetition": 1,
+      "queue_ms": 0.491605,
+      "predict_ms": 3.30222,
+      "submit_to_persisted_ms": 5.458795,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-07-30",
+      "repetition": 2,
+      "queue_ms": 0.423313,
+      "predict_ms": 2.415716,
+      "submit_to_persisted_ms": 4.525991,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-11",
+      "repetition": 0,
+      "queue_ms": 0.475501,
+      "predict_ms": 2.857781,
+      "submit_to_persisted_ms": 4.971052,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-11",
+      "repetition": 1,
+      "queue_ms": 0.473829,
+      "predict_ms": 2.385571,
+      "submit_to_persisted_ms": 4.65803,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-11",
+      "repetition": 2,
+      "queue_ms": 0.400939,
+      "predict_ms": 2.460863,
+      "submit_to_persisted_ms": 4.628045,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-23",
+      "repetition": 0,
+      "queue_ms": 0.437985,
+      "predict_ms": 2.501906,
+      "submit_to_persisted_ms": 4.568776,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-23",
+      "repetition": 1,
+      "queue_ms": 0.479277,
+      "predict_ms": 2.45853,
+      "submit_to_persisted_ms": 4.691691,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-08-23",
+      "repetition": 2,
+      "queue_ms": 0.709153,
+      "predict_ms": 2.861226,
+      "submit_to_persisted_ms": 5.249411,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-03",
+      "repetition": 0,
+      "queue_ms": 0.452316,
+      "predict_ms": 2.466001,
+      "submit_to_persisted_ms": 4.678186,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-03",
+      "repetition": 1,
+      "queue_ms": 0.44512,
+      "predict_ms": 2.732683,
+      "submit_to_persisted_ms": 4.892168,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-03",
+      "repetition": 2,
+      "queue_ms": 0.451906,
+      "predict_ms": 2.419522,
+      "submit_to_persisted_ms": 4.498741,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-15",
+      "repetition": 0,
+      "queue_ms": 0.456107,
+      "predict_ms": 2.285129,
+      "submit_to_persisted_ms": 4.33851,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-15",
+      "repetition": 1,
+      "queue_ms": 0.401444,
+      "predict_ms": 2.42519,
+      "submit_to_persisted_ms": 4.574695,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-15",
+      "repetition": 2,
+      "queue_ms": 0.468896,
+      "predict_ms": 2.247993,
+      "submit_to_persisted_ms": 3.955523,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-27",
+      "repetition": 0,
+      "queue_ms": 0.50514,
+      "predict_ms": 2.230387,
+      "submit_to_persisted_ms": 4.261704,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-27",
+      "repetition": 1,
+      "queue_ms": 0.4651,
+      "predict_ms": 2.480604,
+      "submit_to_persisted_ms": 4.559222,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-09-27",
+      "repetition": 2,
+      "queue_ms": 0.398149,
+      "predict_ms": 2.435195,
+      "submit_to_persisted_ms": 4.441415,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-09",
+      "repetition": 0,
+      "queue_ms": 0.450217,
+      "predict_ms": 3.298295,
+      "submit_to_persisted_ms": 5.275335,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-09",
+      "repetition": 1,
+      "queue_ms": 0.464754,
+      "predict_ms": 2.343387,
+      "submit_to_persisted_ms": 4.407614,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-09",
+      "repetition": 2,
+      "queue_ms": 0.337182,
+      "predict_ms": 2.947166,
+      "submit_to_persisted_ms": 5.004818,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-20",
+      "repetition": 0,
+      "queue_ms": 0.383427,
+      "predict_ms": 2.53174,
+      "submit_to_persisted_ms": 4.599673,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-20",
+      "repetition": 1,
+      "queue_ms": 0.363968,
+      "predict_ms": 2.399992,
+      "submit_to_persisted_ms": 4.314514,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-10-20",
+      "repetition": 2,
+      "queue_ms": 0.43846,
+      "predict_ms": 2.386742,
+      "submit_to_persisted_ms": 4.43158,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-01",
+      "repetition": 0,
+      "queue_ms": 0.570619,
+      "predict_ms": 2.432802,
+      "submit_to_persisted_ms": 4.675223,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-01",
+      "repetition": 1,
+      "queue_ms": 0.411954,
+      "predict_ms": 2.279711,
+      "submit_to_persisted_ms": 4.306992,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-01",
+      "repetition": 2,
+      "queue_ms": 0.49585,
+      "predict_ms": 2.248474,
+      "submit_to_persisted_ms": 4.363347,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-13",
+      "repetition": 0,
+      "queue_ms": 0.504854,
+      "predict_ms": 2.349225,
+      "submit_to_persisted_ms": 4.455867,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-13",
+      "repetition": 1,
+      "queue_ms": 0.441279,
+      "predict_ms": 2.268855,
+      "submit_to_persisted_ms": 4.423568,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-13",
+      "repetition": 2,
+      "queue_ms": 0.434878,
+      "predict_ms": 2.255975,
+      "submit_to_persisted_ms": 4.314964,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-24",
+      "repetition": 0,
+      "queue_ms": 0.476642,
+      "predict_ms": 2.251979,
+      "submit_to_persisted_ms": 4.407283,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-24",
+      "repetition": 1,
+      "queue_ms": 0.493367,
+      "predict_ms": 2.24614,
+      "submit_to_persisted_ms": 4.409036,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-11-24",
+      "repetition": 2,
+      "queue_ms": 0.421538,
+      "predict_ms": 2.241043,
+      "submit_to_persisted_ms": 4.264919,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-06",
+      "repetition": 0,
+      "queue_ms": 0.407057,
+      "predict_ms": 2.263026,
+      "submit_to_persisted_ms": 4.314684,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-06",
+      "repetition": 1,
+      "queue_ms": 0.482671,
+      "predict_ms": 2.235044,
+      "submit_to_persisted_ms": 4.315976,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-06",
+      "repetition": 2,
+      "queue_ms": 0.404994,
+      "predict_ms": 2.274583,
+      "submit_to_persisted_ms": 4.345821,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-18",
+      "repetition": 0,
+      "queue_ms": 0.412135,
+      "predict_ms": 2.410809,
+      "submit_to_persisted_ms": 4.496829,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-18",
+      "repetition": 1,
+      "queue_ms": 0.454468,
+      "predict_ms": 2.264107,
+      "submit_to_persisted_ms": 4.326462,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-18",
+      "repetition": 2,
+      "queue_ms": 0.396992,
+      "predict_ms": 2.300893,
+      "submit_to_persisted_ms": 4.298399,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-30",
+      "repetition": 0,
+      "queue_ms": 0.456101,
+      "predict_ms": 2.300883,
+      "submit_to_persisted_ms": 4.438641,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-30",
+      "repetition": 1,
+      "queue_ms": 0.479446,
+      "predict_ms": 2.210927,
+      "submit_to_persisted_ms": 4.29898,
+      "result_cache_hit": false
+    },
+    {
+      "model": "ridge",
+      "target_date": "2022-12-30",
+      "repetition": 2,
+      "queue_ms": 0.503051,
+      "predict_ms": 2.188664,
+      "submit_to_persisted_ms": 4.316296,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-01",
+      "repetition": 0,
+      "queue_ms": 0.48893,
+      "predict_ms": 6.515796,
+      "submit_to_persisted_ms": 8.181083,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-01",
+      "repetition": 1,
+      "queue_ms": 0.567128,
+      "predict_ms": 1.972148,
+      "submit_to_persisted_ms": 4.263307,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-01",
+      "repetition": 2,
+      "queue_ms": 0.400778,
+      "predict_ms": 2.210977,
+      "submit_to_persisted_ms": 4.465741,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-12",
+      "repetition": 0,
+      "queue_ms": 0.411017,
+      "predict_ms": 2.236836,
+      "submit_to_persisted_ms": 4.196836,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-12",
+      "repetition": 1,
+      "queue_ms": 0.41235,
+      "predict_ms": 1.924907,
+      "submit_to_persisted_ms": 4.002635,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-12",
+      "repetition": 2,
+      "queue_ms": 0.548845,
+      "predict_ms": 2.80736,
+      "submit_to_persisted_ms": 4.321173,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-24",
+      "repetition": 0,
+      "queue_ms": 0.420517,
+      "predict_ms": 1.911447,
+      "submit_to_persisted_ms": 2.99616,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-24",
+      "repetition": 1,
+      "queue_ms": 0.452726,
+      "predict_ms": 1.906209,
+      "submit_to_persisted_ms": 3.152244,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-01-24",
+      "repetition": 2,
+      "queue_ms": 0.513777,
+      "predict_ms": 2.01355,
+      "submit_to_persisted_ms": 4.184798,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-05",
+      "repetition": 0,
+      "queue_ms": 0.438234,
+      "predict_ms": 1.944776,
+      "submit_to_persisted_ms": 3.127927,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-05",
+      "repetition": 1,
+      "queue_ms": 1.067866,
+      "predict_ms": 2.777871,
+      "submit_to_persisted_ms": 4.952739,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-05",
+      "repetition": 2,
+      "queue_ms": 0.419181,
+      "predict_ms": 1.582291,
+      "submit_to_persisted_ms": 3.823369,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-16",
+      "repetition": 0,
+      "queue_ms": 0.403802,
+      "predict_ms": 1.846219,
+      "submit_to_persisted_ms": 2.96942,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-16",
+      "repetition": 1,
+      "queue_ms": 0.499266,
+      "predict_ms": 1.656102,
+      "submit_to_persisted_ms": 2.996565,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-16",
+      "repetition": 2,
+      "queue_ms": 1.21238,
+      "predict_ms": 2.517068,
+      "submit_to_persisted_ms": 4.702858,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-28",
+      "repetition": 0,
+      "queue_ms": 0.44509,
+      "predict_ms": 1.841422,
+      "submit_to_persisted_ms": 2.968333,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-28",
+      "repetition": 1,
+      "queue_ms": 0.466907,
+      "predict_ms": 1.825548,
+      "submit_to_persisted_ms": 3.002789,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-02-28",
+      "repetition": 2,
+      "queue_ms": 0.416282,
+      "predict_ms": 1.808071,
+      "submit_to_persisted_ms": 2.882318,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-12",
+      "repetition": 0,
+      "queue_ms": 0.500518,
+      "predict_ms": 1.824656,
+      "submit_to_persisted_ms": 2.965788,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-12",
+      "repetition": 1,
+      "queue_ms": 0.484369,
+      "predict_ms": 1.783485,
+      "submit_to_persisted_ms": 2.939084,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-12",
+      "repetition": 2,
+      "queue_ms": 0.479401,
+      "predict_ms": 1.824266,
+      "submit_to_persisted_ms": 3.01287,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-23",
+      "repetition": 0,
+      "queue_ms": 0.487678,
+      "predict_ms": 1.530784,
+      "submit_to_persisted_ms": 3.693419,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-23",
+      "repetition": 1,
+      "queue_ms": 0.492571,
+      "predict_ms": 2.440674,
+      "submit_to_persisted_ms": 4.194027,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-03-23",
+      "repetition": 2,
+      "queue_ms": 0.509873,
+      "predict_ms": 1.809944,
+      "submit_to_persisted_ms": 2.959384,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-04",
+      "repetition": 0,
+      "queue_ms": 0.489692,
+      "predict_ms": 1.802372,
+      "submit_to_persisted_ms": 2.924207,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-04",
+      "repetition": 1,
+      "queue_ms": 0.496798,
+      "predict_ms": 1.728392,
+      "submit_to_persisted_ms": 2.982399,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-04",
+      "repetition": 2,
+      "queue_ms": 0.582396,
+      "predict_ms": 1.93361,
+      "submit_to_persisted_ms": 4.178428,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-16",
+      "repetition": 0,
+      "queue_ms": 0.45908,
+      "predict_ms": 1.994822,
+      "submit_to_persisted_ms": 4.128654,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-16",
+      "repetition": 1,
+      "queue_ms": 0.520463,
+      "predict_ms": 2.739573,
+      "submit_to_persisted_ms": 4.213577,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-16",
+      "repetition": 2,
+      "queue_ms": 0.801191,
+      "predict_ms": 1.678746,
+      "submit_to_persisted_ms": 3.123741,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-28",
+      "repetition": 0,
+      "queue_ms": 0.384078,
+      "predict_ms": 1.88007,
+      "submit_to_persisted_ms": 2.975204,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-28",
+      "repetition": 1,
+      "queue_ms": 1.574845,
+      "predict_ms": 2.25245,
+      "submit_to_persisted_ms": 4.811662,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-04-28",
+      "repetition": 2,
+      "queue_ms": 0.438414,
+      "predict_ms": 2.109134,
+      "submit_to_persisted_ms": 4.249175,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-09",
+      "repetition": 0,
+      "queue_ms": 0.504354,
+      "predict_ms": 2.638591,
+      "submit_to_persisted_ms": 4.178703,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-09",
+      "repetition": 1,
+      "queue_ms": 0.590138,
+      "predict_ms": 2.137447,
+      "submit_to_persisted_ms": 6.532837,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-09",
+      "repetition": 2,
+      "queue_ms": 0.519677,
+      "predict_ms": 2.020271,
+      "submit_to_persisted_ms": 4.153141,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-21",
+      "repetition": 0,
+      "queue_ms": 0.511384,
+      "predict_ms": 1.745737,
+      "submit_to_persisted_ms": 3.120246,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-21",
+      "repetition": 1,
+      "queue_ms": 0.535871,
+      "predict_ms": 1.791266,
+      "submit_to_persisted_ms": 2.988403,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-05-21",
+      "repetition": 2,
+      "queue_ms": 0.563137,
+      "predict_ms": 1.902804,
+      "submit_to_persisted_ms": 3.233386,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-02",
+      "repetition": 0,
+      "queue_ms": 0.41868,
+      "predict_ms": 1.764615,
+      "submit_to_persisted_ms": 2.872594,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-02",
+      "repetition": 1,
+      "queue_ms": 0.415456,
+      "predict_ms": 1.930436,
+      "submit_to_persisted_ms": 4.137988,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-02",
+      "repetition": 2,
+      "queue_ms": 0.380192,
+      "predict_ms": 1.772768,
+      "submit_to_persisted_ms": 2.926149,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-13",
+      "repetition": 0,
+      "queue_ms": 0.511355,
+      "predict_ms": 1.643163,
+      "submit_to_persisted_ms": 3.004782,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-13",
+      "repetition": 1,
+      "queue_ms": 0.421018,
+      "predict_ms": 1.771786,
+      "submit_to_persisted_ms": 3.09628,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-13",
+      "repetition": 2,
+      "queue_ms": 0.629993,
+      "predict_ms": 1.915473,
+      "submit_to_persisted_ms": 4.215305,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-25",
+      "repetition": 0,
+      "queue_ms": 0.521349,
+      "predict_ms": 1.830154,
+      "submit_to_persisted_ms": 2.978533,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-25",
+      "repetition": 1,
+      "queue_ms": 0.540899,
+      "predict_ms": 1.753619,
+      "submit_to_persisted_ms": 3.022239,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-06-25",
+      "repetition": 2,
+      "queue_ms": 0.510594,
+      "predict_ms": 1.763044,
+      "submit_to_persisted_ms": 3.076341,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-07",
+      "repetition": 0,
+      "queue_ms": 0.504905,
+      "predict_ms": 1.893169,
+      "submit_to_persisted_ms": 3.039224,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-07",
+      "repetition": 1,
+      "queue_ms": 0.502151,
+      "predict_ms": 1.631175,
+      "submit_to_persisted_ms": 2.931051,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-07",
+      "repetition": 2,
+      "queue_ms": 0.490443,
+      "predict_ms": 1.636323,
+      "submit_to_persisted_ms": 2.978127,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-19",
+      "repetition": 0,
+      "queue_ms": 0.640294,
+      "predict_ms": 1.572798,
+      "submit_to_persisted_ms": 3.059765,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-19",
+      "repetition": 1,
+      "queue_ms": 0.718941,
+      "predict_ms": 1.826459,
+      "submit_to_persisted_ms": 3.286026,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-19",
+      "repetition": 2,
+      "queue_ms": 0.579372,
+      "predict_ms": 1.831707,
+      "submit_to_persisted_ms": 3.180913,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-30",
+      "repetition": 0,
+      "queue_ms": 0.480788,
+      "predict_ms": 1.71448,
+      "submit_to_persisted_ms": 3.013105,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-30",
+      "repetition": 1,
+      "queue_ms": 0.48217,
+      "predict_ms": 1.916094,
+      "submit_to_persisted_ms": 3.103982,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-07-30",
+      "repetition": 2,
+      "queue_ms": 0.46881,
+      "predict_ms": 1.622953,
+      "submit_to_persisted_ms": 2.975348,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-11",
+      "repetition": 0,
+      "queue_ms": 0.41518,
+      "predict_ms": 1.717515,
+      "submit_to_persisted_ms": 2.968157,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-11",
+      "repetition": 1,
+      "queue_ms": 1.621816,
+      "predict_ms": 1.647279,
+      "submit_to_persisted_ms": 4.945613,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-11",
+      "repetition": 2,
+      "queue_ms": 0.424613,
+      "predict_ms": 1.664475,
+      "submit_to_persisted_ms": 2.947166,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-23",
+      "repetition": 0,
+      "queue_ms": 0.469021,
+      "predict_ms": 2.766093,
+      "submit_to_persisted_ms": 4.257879,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-23",
+      "repetition": 1,
+      "queue_ms": 0.6879,
+      "predict_ms": 2.015583,
+      "submit_to_persisted_ms": 4.417689,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-08-23",
+      "repetition": 2,
+      "queue_ms": 0.463842,
+      "predict_ms": 1.790926,
+      "submit_to_persisted_ms": 2.889749,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-03",
+      "repetition": 0,
+      "queue_ms": 0.474529,
+      "predict_ms": 1.76684,
+      "submit_to_persisted_ms": 2.930351,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-03",
+      "repetition": 1,
+      "queue_ms": 0.490493,
+      "predict_ms": 1.759047,
+      "submit_to_persisted_ms": 2.99676,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-03",
+      "repetition": 2,
+      "queue_ms": 0.473828,
+      "predict_ms": 1.89376,
+      "submit_to_persisted_ms": 2.941517,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-15",
+      "repetition": 0,
+      "queue_ms": 0.537173,
+      "predict_ms": 1.849975,
+      "submit_to_persisted_ms": 3.053556,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-15",
+      "repetition": 1,
+      "queue_ms": 0.466837,
+      "predict_ms": 1.771976,
+      "submit_to_persisted_ms": 2.912874,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-15",
+      "repetition": 2,
+      "queue_ms": 0.479677,
+      "predict_ms": 2.041142,
+      "submit_to_persisted_ms": 4.170988,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-27",
+      "repetition": 0,
+      "queue_ms": 0.625807,
+      "predict_ms": 1.831257,
+      "submit_to_persisted_ms": 3.121027,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-27",
+      "repetition": 1,
+      "queue_ms": 0.526136,
+      "predict_ms": 1.888142,
+      "submit_to_persisted_ms": 4.103206,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-09-27",
+      "repetition": 2,
+      "queue_ms": 0.483593,
+      "predict_ms": 1.896774,
+      "submit_to_persisted_ms": 3.002158,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-09",
+      "repetition": 0,
+      "queue_ms": 0.483823,
+      "predict_ms": 1.821412,
+      "submit_to_persisted_ms": 2.983691,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-09",
+      "repetition": 1,
+      "queue_ms": 0.459306,
+      "predict_ms": 1.783514,
+      "submit_to_persisted_ms": 2.971662,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-09",
+      "repetition": 2,
+      "queue_ms": 0.476401,
+      "predict_ms": 1.972168,
+      "submit_to_persisted_ms": 3.138504,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-20",
+      "repetition": 0,
+      "queue_ms": 0.445325,
+      "predict_ms": 1.888012,
+      "submit_to_persisted_ms": 3.00312,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-20",
+      "repetition": 1,
+      "queue_ms": 0.475621,
+      "predict_ms": 1.623733,
+      "submit_to_persisted_ms": 2.922027,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-10-20",
+      "repetition": 2,
+      "queue_ms": 0.435981,
+      "predict_ms": 1.948021,
+      "submit_to_persisted_ms": 2.987656,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-01",
+      "repetition": 0,
+      "queue_ms": 0.496011,
+      "predict_ms": 1.699437,
+      "submit_to_persisted_ms": 2.969249,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-01",
+      "repetition": 1,
+      "queue_ms": 0.419205,
+      "predict_ms": 1.741541,
+      "submit_to_persisted_ms": 2.953636,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-01",
+      "repetition": 2,
+      "queue_ms": 0.463162,
+      "predict_ms": 1.717876,
+      "submit_to_persisted_ms": 3.014286,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-13",
+      "repetition": 0,
+      "queue_ms": 0.418444,
+      "predict_ms": 1.66088,
+      "submit_to_persisted_ms": 3.150447,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-13",
+      "repetition": 1,
+      "queue_ms": 0.857851,
+      "predict_ms": 1.745287,
+      "submit_to_persisted_ms": 3.373568,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-13",
+      "repetition": 2,
+      "queue_ms": 0.608326,
+      "predict_ms": 1.91326,
+      "submit_to_persisted_ms": 3.185094,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-24",
+      "repetition": 0,
+      "queue_ms": 0.515595,
+      "predict_ms": 1.901983,
+      "submit_to_persisted_ms": 2.987847,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-24",
+      "repetition": 1,
+      "queue_ms": 1.801281,
+      "predict_ms": 2.470128,
+      "submit_to_persisted_ms": 5.244358,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-11-24",
+      "repetition": 2,
+      "queue_ms": 0.508109,
+      "predict_ms": 2.045859,
+      "submit_to_persisted_ms": 4.251239,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-06",
+      "repetition": 0,
+      "queue_ms": 0.484274,
+      "predict_ms": 1.711786,
+      "submit_to_persisted_ms": 3.00289,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-06",
+      "repetition": 1,
+      "queue_ms": 0.500889,
+      "predict_ms": 1.709473,
+      "submit_to_persisted_ms": 3.069741,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-06",
+      "repetition": 2,
+      "queue_ms": 0.60102,
+      "predict_ms": 1.540618,
+      "submit_to_persisted_ms": 2.999254,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-18",
+      "repetition": 0,
+      "queue_ms": 0.493257,
+      "predict_ms": 1.66801,
+      "submit_to_persisted_ms": 3.010361,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-18",
+      "repetition": 1,
+      "queue_ms": 0.456541,
+      "predict_ms": 1.804847,
+      "submit_to_persisted_ms": 2.953195,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-18",
+      "repetition": 2,
+      "queue_ms": 0.473057,
+      "predict_ms": 1.751306,
+      "submit_to_persisted_ms": 3.101227,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-30",
+      "repetition": 0,
+      "queue_ms": 0.647649,
+      "predict_ms": 1.732848,
+      "submit_to_persisted_ms": 3.083911,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-30",
+      "repetition": 1,
+      "queue_ms": 0.524044,
+      "predict_ms": 1.803565,
+      "submit_to_persisted_ms": 4.009184,
+      "result_cache_hit": false
+    },
+    {
+      "model": "timexer",
+      "target_date": "2022-12-30",
+      "repetition": 2,
+      "queue_ms": 0.53534,
+      "predict_ms": 2.081443,
+      "submit_to_persisted_ms": 3.187983,
+      "result_cache_hit": false
+    }
+  ]
+}
