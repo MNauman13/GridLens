@@ -12,7 +12,7 @@ const loaded = new Map<string, {ridge?:RidgeParameters;session?:import("onnxrunt
 
 async function verifiedFile(asset:string, expected:string):Promise<ArrayBuffer>{
   if(!/^(models|cases)\/[a-zA-Z0-9_.-]+$/.test(asset))throw Error("Invalid artifact path");
-  const response=await fetch(`/inference/${asset}`,{cache:"force-cache"});
+  const response=await fetch(`/inference/${asset}?sha256=${expected}`,{cache:"force-cache",signal:AbortSignal.timeout(30000)});
   if(!response.ok)throw Error("The verified model or input file could not be downloaded. Please retry.");
   const buffer=await response.arrayBuffer();
   const digest=await crypto.subtle.digest("SHA-256",buffer);
@@ -83,11 +83,12 @@ export async function runBrowser(catalog:DemoCatalog,kind:"ridge"|"timexer",day:
 
 export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void):Promise<DemoResult>{
   const started=performance.now();
-  const response=await fetch("/api/live/jobs",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day})});
+  const signal=AbortSignal.timeout(30000);
+  const response=await fetch("/api/live/jobs",{method:"POST",signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day})});
   const accepted=await response.json();
   if(!response.ok)throw Error(accepted.detail??accepted.error??"Reference service unavailable");
   for(let attempt=0;attempt<150;attempt++){
-    const reply=await fetch(`/api/live/jobs/${accepted.job_id}`,{cache:"no-store"});
+    const reply=await fetch(`/api/live/jobs/${accepted.job_id}`,{cache:"no-store",signal});
     const job=await reply.json();
     if(!reply.ok)throw Error(job.detail??job.error??"Could not retrieve inference status");
     if(job.state==="failed")throw Error(job.error??"Reference inference failed");

@@ -16,7 +16,7 @@ export default function LiveForecast(){
   const [slot,setSlot]=useState(0);
   const generation=useRef(0);
   useEffect(()=>{const controller=new AbortController();fetch("/api/live/catalog",{signal:controller.signal}).then(async response=>{if(!response.ok)throw Error("The verified inference artifacts are unavailable.");return response.json() as Promise<DemoCatalog>;}).then(value=>{if(!controller.signal.aborted){setCatalog(value);setDay(value.cases[0].target_date);setStage("Ready to run a real forecast");}}).catch(e=>{if(!controller.signal.aborted)setError(e.message);});const ref=generation;return()=>{controller.abort();ref.current++;};},[]);
-  function reset(){generation.current++;setResult(null);setError("");}
+  function reset(){generation.current++;setResult(null);setError("");setStage("Ready to run a real forecast");}
   async function run(){
     if(!catalog||running)return;
     const request=++generation.current;
@@ -25,7 +25,7 @@ export default function LiveForecast(){
       const update=(value:string)=>{if(request===generation.current)setStage(value);};
       const value=mode==="browser"?await runBrowser(catalog,model,day,update):await runServer(model,day,update);
       if(request===generation.current){setResult(value);setStage("Fresh inference complete · 48 half-hour predictions");}
-    }catch(e){if(request===generation.current){setError(e instanceof Error?e.message:"Inference failed");setStage("Inference could not complete");}}
+    }catch(e){if(request===generation.current){setError(e instanceof Error?(e.name==="TimeoutError"?"Inference request timed out after 30 seconds. Please retry.":e.message):"Inference failed");setStage("Inference could not complete");}}
     finally{if(request===generation.current)setRunning(false);}
   }
   const bounds=result?[Math.min(...result.prediction_mw,...result.observed_mw)-700,Math.max(...result.prediction_mw,...result.observed_mw)+700]:[0,1];
