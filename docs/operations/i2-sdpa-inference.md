@@ -2,13 +2,22 @@
 
 ## Reproduce measurements
 
-Keep the recovered I0 neural bundles in reports/local/i0. The I1 public archive supplies the same frozen 32 feature windows and observed validation curves; it does not supply numerical Transformer weights. Recover I0 first if those retained weights are absent.
+The exact recovered I0 model weights and evidence are available in the [pinned public baseline archive](../../configs/i0_public_artifact_v1.json). The I1 public archive supplies the same frozen 32 feature windows and observed validation curves. Download and verify the baseline archive, then extract it into a fresh directory:
+
+```bash
+mkdir -p reports/local
+curl --fail --location 'https://yn04mbtmhemrrpni.public.blob.vercel-storage.com/gridlens/i0/860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4.zip' --output reports/local/i0-public.zip
+printf '%s  %s\n' '860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4' 'reports/local/i0-public.zip' | sha256sum --check
+unzip reports/local/i0-public.zip -d reports/local/i0-public
+```
+
+Use the extracted root with `--baseline reports/local/i0-public`. Existing recovered bundles in `reports/local/i0` remain a valid default. The benchmark verifies each bundle and its exact committed model identity before execution.
 
 ```bash
 uv sync --frozen --extra api --extra ml --group dev
 npm ci
 node scripts/prepare_live_assets.mjs
-uv run --frozen --extra api --extra ml python -m scripts.benchmark_sdpa --output reports/local/i2-new-run
+uv run --frozen --extra api --extra ml python -m scripts.benchmark_sdpa --baseline reports/local/i0-public --output reports/local/i2-new-run
 ```
 
 Use a fresh output directory because evidence writes are immutable. The benchmark verifies source/data pins, model identities and artifact digests before comparing. It aborts if normalised prediction agreement, the 0.5 MW maximum drift gate or the forecast-RMSE regression gate fails. It records 8,000 paired timing observations per experiment, both scopes, complete prediction arrays, forecast metrics, actual SDPA profiler operators, hardware/software and three fresh-process memory trials per runtime/model. No training or test evaluation occurs. Avoid other sustained CPU workloads while measuring.

@@ -16,6 +16,8 @@ I2 adds an optional checked SDPA adapter and [paired inference measurements](doc
 
 The [upgrade experiment manifest](configs/upgrade_experiment_v2.json) pins source/data references, numerical tolerances and benchmark budgets. The [metric registry](configs/metric_registry_v2.json) defines measurements and their scopes. Regenerated model results are separate from the original published pilot; recovery is not an accuracy optimisation.
 
+The [pinned public baseline archive](configs/i0_public_artifact_v1.json) provides the exact weights and I0 evidence used by I2. The [I2 runbook](docs/operations/i2-sdpa-inference.md) includes download, checksum and extraction instructions.
+
 See the [executed I0 results and limitations](docs/progress/i0-baseline.md) for the recovered models, 1,000-call warm benchmarks, 20-process cold benchmarks, validation scores and archive verification.
 
 - [Full specification](docs/specification.md)
