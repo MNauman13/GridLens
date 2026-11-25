@@ -3,8 +3,8 @@ export type DemoCase = {
   history:number[][]; target_calendar:number[][]; observed_mw:number[];
 };
 export type DemoModel = {kind:"ridge"|"timexer";model_id:string;asset:string;sha256:string;browser_runtime:string;reference_runtime:string;scaling?:{means:number[];scales:number[]}};
-export type DemoCatalog = {catalog_id:string;dataset_manifest_id:string;evidence_mode:string;evaluation_role:string;browser_parity_max_mw:number;models:Record<"ridge"|"timexer",DemoModel>;cases:{target_date:string;issue_date:string;asset:string;sha256:string;feature_snapshot_id:string}[];server_available:boolean;server_message?:string};
-export type DemoResult = {execution_id:string;prediction_mw:number[];observed_mw:number[];inputs:DemoCase["inputs"];model_id:string;runtime:string;execution_location:"browser"|"python_server";pipeline_ms:number;predict_ms:number;model_init_ms:number;model_cache_hit:boolean;result_cache_hit:false;queue_ms?:number};
+export type DemoCatalog = {catalog_id:string;dataset_manifest_id:string;evidence_mode:string;evaluation_role:string;browser_parity_max_mw:number;models:Record<"ridge"|"timexer",DemoModel>;cases:{target_date:string;issue_date:string;asset:string;sha256:string;feature_snapshot_id:string}[];server_available:boolean;server_runtimes?:Record<string,string[]>;server_message?:string};
+export type DemoResult = {execution_id:string;prediction_mw:number[];observed_mw:number[];inputs:DemoCase["inputs"];model_id:string;runtime:string;execution_location:"browser"|"python_server";pipeline_ms:number;predict_ms:number;model_init_ms:number;model_cache_hit:boolean;result_cache_hit:false;queue_ms?:number;runtime_id?:string};
 
 type RidgeParameters = {x_mean:number[];x_scale:number[];y_mean:number[];weights:number[][]};
 type OrtModule = typeof import("onnxruntime-web/wasm");
@@ -81,10 +81,10 @@ export async function runBrowser(catalog:DemoCatalog,kind:"ridge"|"timexer",day:
   return {execution_id:crypto.randomUUID(),prediction_mw:prediction,observed_mw:value.observed_mw,inputs:value.inputs,model_id:model.model_id,runtime:model.browser_runtime,execution_location:"browser",pipeline_ms:performance.now()-start,predict_ms:predictionMs,model_init_ms:initMs,model_cache_hit:cached,result_cache_hit:false};
 }
 
-export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void):Promise<DemoResult>{
+export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void,runtime:"manual"|"sdpa"="manual"):Promise<DemoResult>{
   const started=performance.now();
   const signal=AbortSignal.timeout(30000);
-  const response=await fetch("/api/live/jobs",{method:"POST",signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day})});
+  const response=await fetch("/api/live/jobs",{method:"POST",signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day,runtime})});
   const accepted=await response.json();
   if(!response.ok)throw Error(accepted.detail??accepted.error??"Reference service unavailable");
   for(let attempt=0;attempt<150;attempt++){
@@ -94,7 +94,7 @@ export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage
     if(job.state==="failed")throw Error(job.error??"Reference inference failed");
     if(job.state==="succeeded"){
       const r=job.result;
-      return {execution_id:r.execution_id,prediction_mw:r.point.prediction_mw,observed_mw:r.observed_mw,inputs:r.inputs,model_id:r.model_id,runtime:r.runtime,execution_location:"python_server",pipeline_ms:performance.now()-started,predict_ms:r.predict_ms,model_init_ms:0,model_cache_hit:true,result_cache_hit:false,queue_ms:r.queue_ms};
+      return {execution_id:r.execution_id,prediction_mw:r.point.prediction_mw,observed_mw:r.observed_mw,inputs:r.inputs,model_id:r.model_id,runtime:r.runtime,execution_location:"python_server",pipeline_ms:performance.now()-started,predict_ms:r.predict_ms,model_init_ms:0,model_cache_hit:true,result_cache_hit:false,queue_ms:r.queue_ms,runtime_id:r.runtime_id??undefined};
     }
     onStage(job.state==="queued"?"Waiting for the reference worker":"Running reference model inference");
     await new Promise(resolve=>setTimeout(resolve,200));

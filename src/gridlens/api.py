@@ -28,7 +28,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         try:
             from gridlens.live import LiveService
 
-            application.state.live_service = LiveService(Path(root), Path(os.environ.get("GRIDLENS_JOB_DB", "reports/local/i1/jobs.sqlite3")))
+            application.state.live_service = LiveService(Path(root), Path(os.environ.get("GRIDLENS_JOB_DB", "reports/local/i1/jobs.sqlite3")), enable_sdpa=os.environ.get("GRIDLENS_SDPA_ENABLED") == "1")
         except Exception:
             logging.getLogger(__name__).exception("Live inference artifacts are not ready")
     yield
@@ -47,6 +47,7 @@ def live() -> dict[str, str]:
 class LiveRequest(StrictRecord):
     model: Literal["ridge", "timexer"]
     target_date: date
+    runtime: Literal["manual", "sdpa"] = "manual"
 
 
 def reference_service(request: Request) -> Any:
@@ -65,7 +66,7 @@ def ready(request: Request) -> dict[str, Any]:
 @app.get("/v1/live/catalog")
 def live_catalog(request: Request) -> dict[str, Any]:
     service = reference_service(request)
-    return {**service.catalog, "execution_location": "python_server", "capacity": service.capacity}
+    return {**service.catalog, "execution_location": "python_server", "capacity": service.capacity, "server_runtimes": service.runtime_catalog}
 
 
 @app.post("/v1/forecast-jobs", status_code=202)
@@ -78,7 +79,7 @@ def submit_live_job(payload: LiveRequest, request: Request, response: Response) 
         token = secrets.token_hex(32)
     owner = owner_hash(token)
     try:
-        identifier = service.submit(owner, payload.model, payload.target_date.isoformat())
+        identifier = service.submit(owner, payload.model, payload.target_date.isoformat(), payload.runtime)
     except AdmissionError as exc:
         raise HTTPException(status_code=429, detail=str(exc), headers={"Retry-After": "5"}) from exc
     except ValueError as exc:

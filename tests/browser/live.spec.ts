@@ -76,3 +76,14 @@ test('Python service UI computes both models and never replaces a failed job',as
   await expect(page.getByRole('alert').filter({hasText:'Reference service unavailable'})).toBeVisible();
   await expect(page.getByTestId('live-execution-id')).toHaveCount(0);
 });
+
+test('optional server SDPA has its own runtime identity and benchmark link',async({page})=>{
+  await page.goto('/live');
+  await expect(page.getByRole('link',{name:'Inference benchmarks'})).toHaveAttribute('href','/experiments#inference');
+  await page.getByRole('combobox',{name:'Execution',exact:true}).selectOption('server');
+  await page.getByRole('combobox',{name:'Python attention runtime',exact:true}).selectOption('sdpa');
+  await page.getByRole('button',{name:'Run fresh inference'}).click();
+  await expect(page.getByText('pytorch_sdpa_checked_v2',{exact:true})).toBeVisible();
+  await expect(page.getByText('Runtime identity',{exact:true})).toBeVisible();
+  await expect(page.getByTestId('live-execution-id')).toBeVisible();
+});

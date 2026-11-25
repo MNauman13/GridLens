@@ -1,0 +1,27 @@
+{
+  "schema_version": "gridlens_i2_runtime_experiment_v1",
+  "parent_plan_id": "36e245ef6050444d06c6dcbc38fafb78050be8d313edb9a7546c48d9f344a4dc",
+  "phase": "I2",
+  "runtimes": [
+    "manual",
+    "sdpa_checked"
+  ],
+  "models": [
+    "transformer",
+    "timexer"
+  ],
+  "corpus": "exact inherited 32 point_validation dates; no 2024 evaluation",
+  "timing_protocol": "10 warmups per condition; 5 repeats x 200 paired calls per runtime/scope; per-pair order shuffled before measurement with seed 17",
+  "order_seed": 17,
+  "memory_processes_per_runtime": 3,
+  "validation": "retain shape, mask, finite projected QKV and score-overflow rejection; reject training; manual weights on explicit request",
+  "inference_mode": "torch.no_grad for both paths, matching NeuralBundle.predict",
+  "selection": "no automatic runtime or model promotion; report gains and regressions per architecture",
+  "statistics": "descriptive 95% bootstrap interval of mean speedup resampling 5 paired repeat blocks, 2000 draws; not accuracy significance",
+  "device": "cpu",
+  "precision": "float32",
+  "torch_threads": 2,
+  "batch_size": 1,
+  "result_cache": "disabled",
+  "paid_compute_enabled": false
+}
