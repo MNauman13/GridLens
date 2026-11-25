@@ -20,8 +20,12 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "adm-zip": "0.6.1",
     "eslint": "10.13.0",
     "eslint-config-next": "16.4.6",
     "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

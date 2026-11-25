@@ -12,6 +12,8 @@ Open `/live`. The prebuild script downloads the pinned 1,020,577-byte demo archi
 
 A click computes 48 new values, assigns a new execution ID, and displays model execution time, pipeline time, model-load status and selected-day MAE. These are validation examples, not evidence of generalisation on the locked test set. Browser model execution excludes preprocessing/model initialisation; pipeline time includes input verification, model initialisation if needed and prediction, but excludes React rendering. Browser and server numbers must not be compared as speedups.
 
+For Vercel, use root directory `apps/web`, Node 24, and enable source files outside the root directory. The checked-in Vercel configuration installs from the workspace root so build-time tools and the shared export preparation script are available. No reference-service URL is configured for the browser-only public preview.
+
 ## Python reference mode
 
 ```bash
