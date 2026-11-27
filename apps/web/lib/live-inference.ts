@@ -4,7 +4,7 @@ export type DemoCase = {
 };
 export type DemoModel = {kind:"ridge"|"timexer";model_id:string;asset:string;sha256:string;browser_runtime:string;reference_runtime:string;scaling?:{means:number[];scales:number[]}};
 export type DemoCatalog = {catalog_id:string;dataset_manifest_id:string;evidence_mode:string;evaluation_role:string;browser_parity_max_mw:number;models:Record<"ridge"|"timexer",DemoModel>;cases:{target_date:string;issue_date:string;asset:string;sha256:string;feature_snapshot_id:string}[];server_available:boolean;server_runtimes?:Record<string,string[]>;server_message?:string};
-export type DemoResult = {execution_id:string;prediction_mw:number[];observed_mw:number[];inputs:DemoCase["inputs"];model_id:string;runtime:string;execution_location:"browser"|"python_server";pipeline_ms:number;predict_ms:number;model_init_ms:number;model_cache_hit:boolean;result_cache_hit:false;queue_ms?:number;runtime_id?:string};
+export type DemoResult = {execution_id:string;prediction_mw:number[];observed_mw:number[];inputs:DemoCase["inputs"];model_id:string;runtime:string;execution_location:"browser"|"python_server"|"web_server";pipeline_ms:number;predict_ms:number;model_init_ms:number;model_cache_hit:boolean;result_cache_hit:false;queue_ms?:number;runtime_id?:string};
 
 type RidgeParameters = {x_mean:number[];x_scale:number[];y_mean:number[];weights:number[][]};
 type OrtModule = typeof import("onnxruntime-web/wasm");
@@ -100,4 +100,11 @@ export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage
     await new Promise(resolve=>setTimeout(resolve,200));
   }
   throw Error("The reference worker did not finish within 30 seconds");
+}
+
+export async function runWebServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void):Promise<DemoResult>{
+  const start=performance.now();onStage("Running fresh inference on the web server");
+  const response=await fetch("/api/compute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day}),signal:AbortSignal.timeout(30000)});
+  const value=await response.json();if(!response.ok)throw Error(value.error??"Server inference failed");
+  return {...value,pipeline_ms:performance.now()-start};
 }

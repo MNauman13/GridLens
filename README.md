@@ -14,6 +14,10 @@ The I0 upgrade adds verified baseline recovery, frozen benchmark origins, warm/c
 
 I2 adds an optional checked SDPA adapter and [paired inference measurements](docs/progress/i2-sdpa-inference.md): the numerical Transformer's median bundle latency fell 14.8% on the measured CPU, while TimeXer showed no convincing gain. Original model/training sources and weights are preserved. Read the [I2 runbook](docs/operations/i2-sdpa-inference.md) or open `/experiments#inference` to compare timing scopes, prediction drift and memory measurements.
 
+Full KV decoding now has [retained measurements](reports/i2-cache/README.md) and a visitor-facing comparison at `/experiments#cache`. The 27 November campaign measured a 1.54× batch-one median speed-up with a 0.023 MW maximum prediction drift. These are Python CPU results on the recorded host, separate from browser latency.
+
+The end-to-end release is in progress. The [release tracker](docs/progress/release-work.md) distinguishes executed gates from pending studies. The Python service now uses a [durable queue](docs/operations/durable-serving.md) with PostgreSQL support, owner tickets, retries and fenced leases. `/live` also offers fresh synchronous computation on the Next.js web server. The [causal interval engine](docs/operations/calibration.md) and bounded multi-seed study are implemented; their release conclusions must wait for the executed campaigns and final freeze.
+
 The [upgrade experiment manifest](configs/upgrade_experiment_v2.json) pins source/data references, numerical tolerances and benchmark budgets. The [metric registry](configs/metric_registry_v2.json) defines measurements and their scopes. Regenerated model results are separate from the original published pilot; recovery is not an accuracy optimisation.
 
 The [pinned public baseline archive](configs/i0_public_artifact_v1.json) provides the exact weights and I0 evidence used by I2. The [I2 runbook](docs/operations/i2-sdpa-inference.md) includes download, checksum and extraction instructions.
