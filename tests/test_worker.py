@@ -47,6 +47,7 @@ class WorkerTests(unittest.TestCase):
                 TestClient(app) as client,
             ):
                 self.assertEqual(client.get("/v1/health/ready").status_code, 200)
+                self.assertEqual(app.state.live_service.job(ticket, "owner")["state"], "succeeded")
                 payload = {"model": "ridge", "target_date": "2022-01-01"}
                 first = client.post(
                     "/v1/forecast-jobs", json=payload, headers={"idempotency-key": "api-once"}

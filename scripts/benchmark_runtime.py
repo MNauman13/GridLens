@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import random
+import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -101,6 +103,7 @@ def main():
                 }
             )
 
+        @torch.no_grad()
         def execute(name, a, b, _sessions=sessions):
             if name == "eager":
                 return bundle.model(a, b).numpy()
@@ -175,6 +178,22 @@ def main():
                         "runtimes": summary,
                     }
                 )
+    cold = []
+    for threads in plan["threads"]:
+        for name in plan["runtimes"]:
+            for repeat in range(3):
+                tick = time.perf_counter()
+                child = subprocess.run(
+                    [sys.executable, "-m", "scripts.runtime_cold", name, str(threads)],
+                    cwd=ROOT,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+                result = json.loads(child.stdout)
+                result["process_wall_ms"] = (time.perf_counter() - tick) * 1000
+                result["repeat"] = repeat
+                cold.append(result)
     decisions = []
     for name in plan["runtimes"][1:]:
         matching = [p for p in parity if p["runtime"] == name]
@@ -199,7 +218,7 @@ def main():
             "schema_version": "gridlens_i3_runtime_v1",
             "plan_id": content_id(plan),
             "model_id": bundle.metadata["identity"],
-            "environment": environment_record(),
+            "environment": environment_record(ROOT),
             "build_seconds": build_seconds,
             "initialisations": initialisations,
             "artifacts": {
@@ -213,6 +232,8 @@ def main():
             "raw_timings": raw,
             "locked_test_evaluated": False,
             "source_sha256": sha256(Path(__file__)),
+            "cold_source_sha256": sha256(ROOT / "scripts/runtime_cold.py"),
+            "cold_process_trials": cold,
         },
     )
     print(json.dumps(decisions), flush=True)

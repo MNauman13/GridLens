@@ -36,7 +36,13 @@ class LiveService:
     """One resident model worker. Multi-process leases belong to I6, not this preview."""
 
     def __init__(
-        self, root: Path, database: Path, *, capacity: int = 8, enable_sdpa: bool = False
+        self,
+        root: Path,
+        database: Path,
+        *,
+        capacity: int = 8,
+        enable_sdpa: bool = False,
+        enable_onnx: bool = False,
     ) -> None:
         if capacity < 1:
             raise ValueError("Positive worker capacity required")
@@ -136,6 +142,35 @@ class LiveService:
             self._sdpa_models["timexer"] = candidate
             self._sdpa_runtime = runtime_record()
             self.runtime_catalog["timexer"].append("sdpa")
+        self._portable_models: dict[str, Any] = {}
+        self._portable_runtime: dict[str, Any] = {}
+        if enable_onnx:
+            from gridlens.inference.portable import PortableBundle
+
+            row = catalog["models"]["timexer"]
+            portable = PortableBundle(
+                self._models["timexer"], safe_member(root / "client", row["asset"]), row["sha256"]
+            )
+            # The public API accepts only this finite allowlisted corpus. Verify every input.
+            for case in self._cases.values():
+                snapshot = FeatureSnapshot(
+                    InputWindow.model_validate(case["inputs"]),
+                    tuple(map(tuple, case["history"])),
+                    tuple(map(tuple, case["target_calendar"])),
+                )
+                want = self._models["timexer"].predict(snapshot)
+                got = portable.predict(snapshot)
+                if (
+                    max(
+                        abs(a - b)
+                        for a, b in zip(want.prediction_mw, got.prediction_mw, strict=True)
+                    )
+                    > 0.5
+                ):
+                    raise ValueError("ONNX startup parity failed")
+            self._portable_models["timexer"] = portable
+            self._portable_runtime = portable.runtime_record()
+            self.runtime_catalog["timexer"].append("onnx")
         database.parent.mkdir(parents=True, exist_ok=True)
         with self.connect() as connection:
             connection.execute("""CREATE TABLE IF NOT EXISTS live_jobs (
@@ -267,7 +302,13 @@ class LiveService:
             tuple(tuple(item) for item in case["target_calendar"]),
         )
         started = time.perf_counter_ns()
-        engine = self._models[kind] if runtime == "manual" else self._sdpa_models[kind]
+        engine = (
+            self._models[kind]
+            if runtime == "manual"
+            else self._portable_models[kind]
+            if runtime == "onnx"
+            else self._sdpa_models[kind]
+        )
         point = engine.predict(inputs if kind == "ridge" else snapshot)
         duration = (time.perf_counter_ns() - started) / 1e6
         payload = {
@@ -279,8 +320,14 @@ class LiveService:
             "model_id": point.model_version,
             "runtime": self.catalog["models"][kind]["reference_runtime"]
             if runtime == "manual"
+            else self._portable_runtime["name"]
+            if runtime == "onnx"
             else self._sdpa_runtime["name"],
-            "runtime_id": self._sdpa_runtime.get("runtime_id") if runtime == "sdpa" else None,
+            "runtime_id": self._sdpa_runtime.get("runtime_id")
+            if runtime == "sdpa"
+            else self._portable_runtime.get("runtime_id")
+            if runtime == "onnx"
+            else None,
             "point": point.model_dump(mode="json"),
             "inputs": inputs.model_dump(mode="json"),
             "observed_mw": case["observed_mw"],

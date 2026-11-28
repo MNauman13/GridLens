@@ -180,6 +180,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     weights = OUT / "ncc.pt"
     torch.save(network.state_dict(), weights)
+    validation_checkpoints = {}
     comparisons = {}
     checkpoints = {}
     all_records = {}
@@ -214,6 +215,7 @@ def main():
             if release_time(day) <= firstclock:
                 replay.observe(day, combined[day], firstclock)
         # campaign needs access to preceding pending labels on later maturity.
+        validation_checkpoints[method] = replay.checkpoint()
         records, _ = campaign_with_history(replay, roles["calibrator_validation"], combined)
         actual = [r["actual"] for r in roles["calibrator_validation"]]
         point = [r["point"] for r in roles["calibrator_validation"]]
@@ -264,6 +266,9 @@ def main():
         },
     }
     write_report(OUT / "study.json", report)
+    (OUT / "validation-checkpoints.json").write_text(
+        json.dumps(validation_checkpoints, allow_nan=False) + "\n"
+    )
     (OUT / "checkpoints.json").write_text(json.dumps(checkpoints, allow_nan=False) + "\n")
     (OUT / "replay-validation.json").write_text(
         json.dumps(

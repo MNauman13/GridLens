@@ -21,6 +21,7 @@ services:
       GRIDLENS_LIVE_ASSETS: /app/artifacts/i1
       GRIDLENS_COOKIE_SECURE: ${GRIDLENS_COOKIE_SECURE:-1}
       GRIDLENS_SDPA_ENABLED: "1"
+      GRIDLENS_ONNX_ENABLED: "1"
     volumes:
       - ./artifacts/i1:/app/artifacts/i1:ro
       - worker-state:/app/reports/local

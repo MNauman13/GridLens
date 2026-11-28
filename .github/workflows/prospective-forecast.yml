@@ -1,0 +1,39 @@
+name: Forecast from captured vintages
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 9 * * *'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - run: python -m pip install uv==0.11.21
+      - run: uv sync --frozen --extra ml
+      - run: npm ci
+      - run: node scripts/prepare_baseline_assets.mjs
+      - name: Download the latest retained source vintage
+        run: |
+          artifact_id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts" --jq '[.artifacts[] | select(.name | startswith("source-vintage-")) | select(.expired == false)][0].id')
+          [[ "$artifact_id" =~ ^[0-9]+$ ]] || { echo "No source capture artifact is available"; exit 1; }
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > source-vintage.zip
+      - name: Forecast only with eligible observations
+        run: uv run --frozen --extra ml python -m scripts.forecast_prospective --capture-archive source-vintage.zip
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: captured-forecast-${{ github.run_id }}
+          path: reports/local/prospective-forecast.json
+          retention-days: 90

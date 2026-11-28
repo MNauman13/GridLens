@@ -22,10 +22,14 @@ class DurableLiveService:
         database: str | Path,
         *,
         enable_sdpa: bool = False,
+        enable_onnx: bool = False,
         start_worker: bool = True,
     ) -> None:
         self.engine = LiveService(
-            root, Path("reports/local/i6/engine.sqlite3"), enable_sdpa=enable_sdpa
+            root,
+            Path("reports/local/i6/engine.sqlite3"),
+            enable_sdpa=enable_sdpa,
+            enable_onnx=enable_onnx,
         )
         self.store = JobStore(database)
         self.catalog = self.engine.catalog

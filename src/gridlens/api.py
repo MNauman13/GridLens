@@ -35,6 +35,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
                     os.environ.get("GRIDLENS_JOB_DB", "reports/local/i6/jobs.sqlite3"),
                 ),
                 enable_sdpa=os.environ.get("GRIDLENS_SDPA_ENABLED") == "1",
+                enable_onnx=os.environ.get("GRIDLENS_ONNX_ENABLED") == "1",
             )
         except Exception:
             logging.getLogger(__name__).exception("Live inference artifacts are not ready")
@@ -43,7 +44,7 @@ async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         application.state.live_service.close()
 
 
-app = FastAPI(title="GridLens", version="0.2.0", lifespan=lifespan)
+app = FastAPI(title="GridLens", version="0.3.0", lifespan=lifespan)
 
 
 @app.get("/v1/health/live")
@@ -54,7 +55,7 @@ def live() -> dict[str, str]:
 class LiveRequest(StrictRecord):
     model: Literal["ridge", "timexer"]
     target_date: date
-    runtime: Literal["manual", "sdpa"] = "manual"
+    runtime: Literal["manual", "sdpa", "onnx"] = "manual"
 
 
 def reference_service(request: Request) -> Any:

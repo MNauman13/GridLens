@@ -14,10 +14,11 @@
     "start": "npm run start --workspace @gridlens/web",
     "typecheck": "npm run typecheck --workspace @gridlens/web",
     "lint": "npm run lint --workspace @gridlens/web",
-    "test:unit": "node --test tests/visual.test.cjs",
+    "test:unit": "node --test tests/visual.test.cjs tests/replay.test.cjs",
     "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
     "playwright": "1.64.1"
   }
 }

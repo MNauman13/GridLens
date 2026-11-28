@@ -9,7 +9,7 @@ export default function LiveForecast(){
   const [model,setModel]=useState<"ridge"|"timexer">("timexer");
   const [day,setDay]=useState("");
   const [mode,setMode]=useState("browser");
-  const [serverRuntime,setServerRuntime]=useState<"manual"|"sdpa">("manual");
+  const [serverRuntime,setServerRuntime]=useState<"manual"|"sdpa"|"onnx">("manual");
   const [stage,setStage]=useState("Loading available models and dates");
   const [running,setRunning]=useState(false);
   const [error,setError]=useState("");
@@ -33,7 +33,7 @@ export default function LiveForecast(){
   const points=(values:number[])=>values.map((v,i)=>`${36+i*648/47},${238-(v-bounds[0])/(bounds[1]-bounds[0])*206}`).join(" ");
   const mae=result?result.prediction_mw.reduce((sum,v,i)=>sum+Math.abs(v-result.observed_mw[i]),0)/48:0;
   return <main className="live-workspace">
-    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><nav><Link href="/experiments#inference">Inference benchmarks</Link><Link href="/forecasts/neural">Saved examples</Link><Link href="/learn/transformer">Inside the transformer</Link></nav></header>
+    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><nav><Link href="/replay">Uncertainty replay</Link><Link href="/results">Results</Link><Link href="/experiments#inference">Inference benchmarks</Link><Link href="/forecasts/neural">Saved examples</Link><Link href="/learn/transformer">Inside the transformer</Link></nav></header>
     <section className="intro"><p className="eyebrow">RUN THE MODEL</p><h1>Forecast the grid.<br/>See the computation.</h1><p className="lede">Choose a historical day and run a trained electricity-demand model. Every click computes a new 48-slot forecast. No account or API key.</p><p className="notice">Real model inference · 2022 validation replay · MW</p></section>
     <section className="panel live-controls" aria-label="Inference controls">
       <div className="live-form">
@@ -42,7 +42,7 @@ export default function LiveForecast(){
         <label htmlFor="live-mode">Execution<select id="live-mode" value={mode} disabled={running} onChange={e=>{reset();setMode(e.target.value);}}><option value="browser">This browser</option><option value="web">Web server</option><option value="server" disabled={!catalog?.server_available}>Python reference service{!catalog?.server_available?" (not connected)":""}</option></select></label>
         <button onClick={run} disabled={!catalog||running}>{running?"Computing…":"Run fresh inference"}</button>
       </div>
-      {mode==="server"&&model==="timexer"&&<label htmlFor="server-runtime">Python attention runtime<select id="server-runtime" disabled={running} value={serverRuntime} onChange={e=>{reset();setServerRuntime(e.target.value as "manual"|"sdpa");}}><option value="manual">Manual reference</option><option value="sdpa" disabled={!catalog?.server_runtimes?.timexer?.includes("sdpa")}>Checked PyTorch SDPA{!catalog?.server_runtimes?.timexer?.includes("sdpa")?" (not enabled)":""}</option></select></label>}
+      {mode==="server"&&model==="timexer"&&<label htmlFor="server-runtime">Python attention runtime<select id="server-runtime" disabled={running} value={serverRuntime} onChange={e=>{reset();setServerRuntime(e.target.value as "manual"|"sdpa"|"onnx");}}><option value="manual">Manual reference</option><option value="sdpa" disabled={!catalog?.server_runtimes?.timexer?.includes("sdpa")}>Checked PyTorch SDPA{!catalog?.server_runtimes?.timexer?.includes("sdpa")?" (not enabled)":""}</option><option value="onnx" disabled={!catalog?.server_runtimes?.timexer?.includes("onnx")}>Verified ONNX CPU{!catalog?.server_runtimes?.timexer?.includes("onnx")?" (not enabled)":""}</option></select></label>}
       <p role="status" aria-live="polite" className="live-status">{stage}</p>
       {error&&<p role="alert" className="error">{error}</p>}
       <p className="hint">Browser mode runs the same trained TimeXer weights through WebAssembly, or the fitted ridge coefficients in JavaScript. It does not replay saved predictions. Web server mode performs synchronous inference on the deployed server. Python mode uses a durable worker when connected.</p>

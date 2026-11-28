@@ -6,8 +6,8 @@ import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
 
-from gridlens.data.neso import Source, parse_csv
-from gridlens.data.store import content_id
+from gridlens.data.neso import QuarantineError, Source, parse_csv
+from gridlens.data.store import content_id, write_once
 
 URL = "https://api.neso.energy/dataset/7a12172a-939c-404c-b581-a6128b74f588/resource/177f6fa4-ae49-4182-81ea-0c6b35f26ca6/download/demanddataupdate.csv"
 
@@ -24,11 +24,33 @@ def main():
         }
     received = datetime.now(UTC)
     digest = hashlib.sha256(raw).hexdigest()
-    parsed = parse_csv(raw, Source("177f6fa4-ae49-4182-81ea-0c6b35f26ca6", "mixed_actual_forecast"))
+    write_once(Path("reports/local/prospective/raw") / (digest + ".csv"), raw)
+    try:
+        parsed = parse_csv(
+            raw, Source("177f6fa4-ae49-4182-81ea-0c6b35f26ca6", "mixed_actual_forecast")
+        )
+    except QuarantineError as exc:
+        record = {
+            "status": "quarantined",
+            "first_seen_at": received.isoformat(),
+            "source_url": URL,
+            "raw_sha256": digest,
+            "reason": str(exc),
+            "details": exc.details,
+            "forecast_issued": False,
+        }
+        record["capture_id"] = content_id(record)
+        root = Path("reports/local/prospective") / record["capture_id"]
+        root.mkdir(parents=True, exist_ok=False)
+        (root / "raw.csv").write_bytes(raw)
+        (root / "capture.json").write_text(json.dumps(record, indent=2) + "\n")
+        print(json.dumps(record))
+        raise SystemExit(2) from None
     valid = [row for row in parsed.rows if row.values[0] is not None]
     newest = max((row.interval_end for row in valid), default=None)
     report = {
         "schema_version": "gridlens_prospective_capture_v1",
+        "status": "valid",
         "requested_at": start.isoformat(),
         "first_seen_at": received.isoformat(),
         "source_url": URL,

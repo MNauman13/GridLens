@@ -7,12 +7,15 @@ import {createRequire} from 'node:module';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const require=createRequire(path.join(root,'apps/web/package.json'));
 const AdmZip=require('adm-zip');
-const spec=JSON.parse(await readFile(path.join(root,'configs/i1_demo_artifact.json'),'utf8'));
+let specification=process.env.GRIDLENS_DEMO_SPEC;
+if(!specification){try{await readFile(path.join(root,'configs/live_release_artifact_v1.json'));specification='configs/live_release_artifact_v1.json';}catch(error){if(error.code!=='ENOENT')throw error;specification='configs/i1_demo_artifact.json';}}
+const spec=JSON.parse(await readFile(path.join(root,specification),'utf8'));
 const directory=path.join(root,'artifacts/i1');
 const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
 const safe=name=>{if(!/^[a-zA-Z0-9_./-]+$/.test(name)||name.startsWith('/')||name.split('/').includes('..'))throw Error('Unsafe artifact member');return path.join(directory,name);};
 let archive;
-try{archive=await readFile(path.join(directory,'GridLens_I1_Demo.zip'));}catch{
+try{archive=await readFile(path.join(directory,'GridLens_I1_Demo.zip'));}catch{/* A missing local cache is downloaded below. */}
+if(!archive||archive.length!==spec.size_bytes||digest(archive)!==spec.sha256){
   const response=await fetch(spec.url,{signal:AbortSignal.timeout(60000)});
   if(!response.ok)throw Error('Unable to download pinned I1 artifact');
   if(Number(response.headers.get('content-length'))>spec.size_bytes)throw Error('Oversized artifact');

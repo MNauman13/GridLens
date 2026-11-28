@@ -91,6 +91,25 @@ class QueueTests(unittest.TestCase):
         self.assertEqual(len([t for t in tasks if t]), 2)
         self.assertEqual(len({t["id"] for t in tasks if t}), 2)
 
+    def test_actual_process_death_after_claim_is_recovered(self):
+        import json
+        import subprocess
+        import sys
+
+        ticket, _ = self.store.submit("crash-owner", {"x": 9}, "once")
+        script = "from gridlens.jobs import JobStore; import sys,os,json; store=JobStore(sys.argv[1],clock=lambda:1000.,lease_seconds=5,max_attempts=2); task=store.claim(); os.write(1,json.dumps(task).encode()); os._exit(17)"
+        child = subprocess.run(
+            [sys.executable, "-c", script, str(self.path)], capture_output=True, text=True
+        )
+        self.assertEqual(child.returncode, 17, child.stderr)
+        old = json.loads(child.stdout)
+        self.now = 1006.0
+        new = self.store.claim()
+        self.assertEqual(new["id"], old["id"])
+        self.assertFalse(self.store.complete(old["id"], old["fence"], {"stale": True}))
+        self.assertTrue(self.store.complete(new["id"], new["fence"], {"recovered": True}))
+        self.assertEqual(self.store.job(ticket, "crash-owner")["result"], {"recovered": True})
+
 
 class PostgresQueueTests(QueueTests):
     def setUp(self):

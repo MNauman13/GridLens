@@ -81,7 +81,7 @@ export async function runBrowser(catalog:DemoCatalog,kind:"ridge"|"timexer",day:
   return {execution_id:crypto.randomUUID(),prediction_mw:prediction,observed_mw:value.observed_mw,inputs:value.inputs,model_id:model.model_id,runtime:model.browser_runtime,execution_location:"browser",pipeline_ms:performance.now()-start,predict_ms:predictionMs,model_init_ms:initMs,model_cache_hit:cached,result_cache_hit:false};
 }
 
-export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void,runtime:"manual"|"sdpa"="manual"):Promise<DemoResult>{
+export async function runServer(kind:"ridge"|"timexer",day:string,onStage:(stage:string)=>void,runtime:"manual"|"sdpa"|"onnx"="manual"):Promise<DemoResult>{
   const started=performance.now();
   const signal=AbortSignal.timeout(30000);
   const response=await fetch("/api/live/jobs",{method:"POST",signal,headers:{"Content-Type":"application/json"},body:JSON.stringify({model:kind,target_date:day,runtime})});

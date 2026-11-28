@@ -69,7 +69,7 @@ jobs:
           uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py scripts/prepare_live_demo.py scripts/benchmark_live.py scripts/benchmark_sdpa.py scripts/export_i2_evidence.py scripts/benchmark_cached.py scripts/run_cached_forecast.py scripts/export_cache_evidence.py scripts/release_study.py scripts/calibration_study.py scripts/load_service.py scripts/check_postgres.py
+          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py scripts/prepare_live_demo.py scripts/benchmark_live.py scripts/benchmark_sdpa.py scripts/export_i2_evidence.py scripts/benchmark_cached.py scripts/run_cached_forecast.py scripts/export_cache_evidence.py scripts/release_study.py scripts/calibration_study.py scripts/load_service.py scripts/check_postgres.py scripts/benchmark_runtime.py scripts/runtime_cold.py scripts/backup_jobs.py scripts/freeze_release.py scripts/evaluate_release.py scripts/summarise_validation.py scripts/export_release_web.py scripts/prepare_release_demo.py scripts/public_smoke.py scripts/capture_prospective.py scripts/forecast_prospective.py scripts/check_monitoring_window.py scripts/container_smoke.py
           uv run --frozen --extra api --extra ml mypy src/gridlens
       - name: Node logic, lint, and types
         run: |
@@ -94,3 +94,39 @@ jobs:
             uv.lock
             package-lock.json
           retention-days: 7
+
+  containers:
+    needs: foundation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GRIDLENS_POSTGRES_PASSWORD: gridlens-ci-container
+      GRIDLENS_COOKIE_SECURE: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: node scripts/prepare_live_assets.mjs
+      - name: Build and launch PostgreSQL and API images
+        run: docker compose up --build --detach --wait --wait-timeout 180
+      - name: Verify compute, ownership and database persistence
+        run: python -m scripts.container_smoke
+      - name: Capture container logs
+        if: always()
+        run: docker compose logs --no-color > container-logs.txt
+      - name: Stop disposable containers
+        if: always()
+        run: docker compose down --volumes
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: container-verification-${{ github.sha }}
+          path: |
+            container-logs.txt
+            reports/local/container-smoke.json
+          retention-days: 30

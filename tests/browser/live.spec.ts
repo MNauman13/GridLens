@@ -87,3 +87,13 @@ test('optional server SDPA has its own runtime identity and benchmark link',asyn
   await expect(page.getByText('Runtime identity',{exact:true})).toBeVisible();
   await expect(page.getByTestId('live-execution-id')).toBeVisible();
 });
+
+test('verified ONNX CPU jobs have separate runtime provenance',async({page})=>{
+  await page.goto('/live');
+  await page.getByRole('combobox',{name:'Execution',exact:true}).selectOption('server');
+  await page.getByRole('combobox',{name:'Python attention runtime',exact:true}).selectOption('onnx');
+  await page.getByRole('button',{name:'Run fresh inference'}).click();
+  await expect(page.getByRole('status')).toContainText('Fresh inference complete');
+  await expect(page.getByText('onnx_cpu_fp32',{exact:true})).toBeVisible();
+  await expect(page.getByText('Runtime identity',{exact:true})).toBeVisible();
+});

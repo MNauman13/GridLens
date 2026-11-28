@@ -1,10 +1,10 @@
 # GridLens
 
-An auditable electricity forecasting project with manual PyTorch attention, a complete encoder-decoder Transformer, real-data baselines, and a documented TimeXer application. Neural Conformal Control is a later phase.
+GridLens forecasts British electricity demand using trained TimeXer and numerical Transformer models, with real browser and server inference, causal uncertainty replay and measured runtime experiments.
 
-**Stage:** I1 live inference preview plus the original Phase 8 foundation: frozen causal datasets, trained encoder-decoder reproduction, numerical Transformer/LSTM comparisons, a bounded TimeXer validation pilot, verified model bundles, and interactive browser lessons. Prediction intervals and online calibration begin in Phase 9.
+**Stage:** end-to-end release candidate. The three-seed model study, interval selection, runtime/INT8 campaign and 15-minute service test have been executed. Final frozen-test, container and monitoring status is recorded in the [release tracker](docs/progress/release-work.md). Failed candidates remain visible. Seven-day availability requires a real observation window.
 
-GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
+Open `/live` to compute a new 48-half-hour forecast, `/replay` to advance through delayed feedback, `/results` for measured study results, or `/learn/transformer` for the architecture walkthrough. No account or API key is needed for the public demo.
 
 ## Start here
 
