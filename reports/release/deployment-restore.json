@@ -1,0 +1,8 @@
+{
+  "prior_checkpoint_git_sha": "affe86212d538e9dca615e1f5eb2da2eef6eb56d",
+  "prior_checkpoint_rebuild_ready": true,
+  "recovery_deployment_id": "dpl_CtLeL5pBopnSNwT94NfLgeV6P5Ld",
+  "current_production_deployment_id": "dpl_ARwSHBaZvneYqMHiaCCcbbGPpSvP",
+  "default_alias_restored_to_release": true,
+  "note": "The staging rebuild reassigned the default project alias. The production beta domain stayed on the release, and the default alias was explicitly restored afterwards."
+}

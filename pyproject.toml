@@ -4,14 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gridlens"
-version = "0.1.0"
+version = "0.3.0"
 description = "Auditable electricity forecasting with a Transformer built from scratch"
 requires-python = ">=3.12,<3.14"
 dependencies = ["pydantic>=2.12,<3", "tzdata>=2025.2"]
 
 [project.optional-dependencies]
-api = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+api = [
+    "fastapi>=0.115,<1",
+    "onnxruntime>=1.20,<2",
+    "psycopg[binary]>=3.2,<4",
+    "uvicorn>=0.30,<1",
+]
 ml = ["torch>=2.6,<3", "numpy>=2,<3"]
+export = [
+    "onnx>=1.18,<2",
+    "onnxruntime>=1.20,<2",
+]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"

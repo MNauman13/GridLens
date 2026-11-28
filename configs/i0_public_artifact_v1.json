@@ -1,0 +1,18 @@
+{
+  "schema_version": "gridlens_public_baseline_archive_v1",
+  "url": "https://yn04mbtmhemrrpni.public.blob.vercel-storage.com/gridlens/i0/860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4.zip",
+  "sha256": "860c78208df49838edaa998b98c3b3ca49798a9538c0f1796adf7e1243d6b9c4",
+  "size_bytes": 946429,
+  "archive_format": "zip",
+  "reference_report": "reports/i0-baseline-reproduction-v2.json",
+  "reference_report_id": "01ae82c16192a4e6c90f5b742780faca0dd2a872b13c03d14120587e43a99944",
+  "model_ids": {
+    "ridge": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+    "transformer": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+    "timexer": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12"
+  },
+  "contents": "Verified ridge, numerical Transformer and TimeXer bundles plus I0 reports and 2022 point-validation predictions; no raw CSVs, training checkpoints or secrets",
+  "attribution": "Supported by National Energy SO Open Data",
+  "data_license": "https://www.neso.energy/data-portal/neso-open-licence",
+  "locked_test_evaluated": false
+}

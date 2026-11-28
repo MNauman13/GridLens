@@ -3,7 +3,7 @@ import { test, expect } from "playwright/test";
 test("real API validates the forecast contract and leap-day origin", async ({page}) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/learn/contract");
   await expect(page.getByRole("heading",{level:1})).toContainText("what we know");
   await page.getByRole("button",{name:"Run contract check"}).click();
   await expect(page.getByRole("status")).toContainText("Contract verified");
@@ -18,7 +18,7 @@ test("real API validates the forecast contract and leap-day origin", async ({pag
 });
 
 test("timeline controls reach delayed feedback and return", async ({page}) => {
-  await page.goto("/");
+  await page.goto("/learn/contract");
   await expect(page.getByRole("button",{name:"Previous"})).toBeDisabled();
   await page.getByRole("button",{name:"Next",exact:true}).click();
   await expect(page.getByRole("heading",{name:"Respect the issue-day gap"})).toBeVisible();
@@ -33,7 +33,7 @@ test("timeline controls reach delayed feedback and return", async ({page}) => {
 
 test("API outage is visible and does not masquerade as verification", async ({page}) => {
   await page.route("**/api/fixture?**",route => route.fulfill({status:503,contentType:"application/json",body:'{"error":"unavailable"}'}));
-  await page.goto("/");
+  await page.goto("/learn/contract");
   await page.getByRole("button",{name:"Run contract check"}).click();
   await expect(page.getByRole("main").getByRole("alert")).toContainText("API is unavailable");
   await expect(page.getByRole("status")).not.toContainText("Contract verified");

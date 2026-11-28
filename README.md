@@ -1,12 +1,28 @@
 # GridLens
 
-An auditable electricity forecasting project with manual PyTorch attention, a complete encoder-decoder Transformer, real-data baselines, and a documented TimeXer application. Neural Conformal Control is a later phase.
+GridLens forecasts British electricity demand using trained TimeXer and numerical Transformer models, with real browser and server inference, causal uncertainty replay and measured runtime experiments.
 
-**Stage:** Through Phase 8: frozen causal datasets, trained encoder-decoder reproduction, numerical Transformer/LSTM comparisons, a bounded TimeXer validation pilot, verified model bundles, and interactive browser lessons. Prediction intervals and online calibration begin in Phase 9.
+**Stage:** end-to-end release candidate. The three-seed model study, interval selection, runtime/INT8 campaign and 15-minute service test have been executed. Final frozen-test, container and monitoring status is recorded in the [release tracker](docs/progress/release-work.md). Failed candidates remain visible. Seven-day availability requires a real observation window.
 
-GridLens will predict NESO National Demand in MW for the following UTC day and evaluate prediction accuracy, interval coverage, width, and runtime. It will retain source and model versions so forecasts can be reproduced.
+Open `/live` to compute a new 48-half-hour forecast, `/replay` to advance through delayed feedback, `/results` for measured study results, or `/learn/transformer` for the architecture walkthrough. No account or API key is needed for the public demo.
 
 ## Start here
+
+### Upgrade baseline (I0)
+
+The I0 upgrade adds verified baseline recovery, frozen benchmark origins, warm/cold CPU measurements and explicit model archives. It preserves the original Phase 8 evidence and the locked 2024 test. Follow the [I0 operations guide](docs/operations/i0-baseline.md) and [upgrade decision](docs/decisions/0007-upgrade-baseline-and-live-release.md). I1 now adds actual browser inference on `/live`, plus a separately runnable bounded Python reference service. See the [I1 runbook](docs/operations/i1-live-inference.md), [recorded results](docs/progress/i1-live-inference.md) and [deployment decision](docs/decisions/0008-portable-live-preview.md). Browser/server execution and timings are explicitly distinguished.
+
+I2 adds an optional checked SDPA adapter and [paired inference measurements](docs/progress/i2-sdpa-inference.md): the numerical Transformer's median bundle latency fell 14.8% on the measured CPU, while TimeXer showed no convincing gain. Original model/training sources and weights are preserved. Read the [I2 runbook](docs/operations/i2-sdpa-inference.md) or open `/experiments#inference` to compare timing scopes, prediction drift and memory measurements.
+
+Full KV decoding now has [retained measurements](reports/i2-cache/README.md) and a visitor-facing comparison at `/experiments#cache`. The 27 November campaign measured a 1.54× batch-one median speed-up with a 0.023 MW maximum prediction drift. These are Python CPU results on the recorded host, separate from browser latency.
+
+The [release tracker](docs/progress/release-work.md) distinguishes executed model, calibration, inference and service campaigns from the remaining operational observation window. The Python service now uses a [durable queue](docs/operations/durable-serving.md) with PostgreSQL support, owner tickets, retries and fenced leases. `/live` also offers fresh synchronous computation on the Next.js web server. The [causal interval engine](docs/operations/calibration.md), multi-seed study and frozen 2024 evaluation have been executed. Read the [release model card](docs/models/release-model-card.md) for measured results and limitations.
+
+The [upgrade experiment manifest](configs/upgrade_experiment_v2.json) pins source/data references, numerical tolerances and benchmark budgets. The [metric registry](configs/metric_registry_v2.json) defines measurements and their scopes. Regenerated model results are separate from the original published pilot; recovery is not an accuracy optimisation.
+
+The [pinned public baseline archive](configs/i0_public_artifact_v1.json) provides the exact weights and I0 evidence used by I2. The [I2 runbook](docs/operations/i2-sdpa-inference.md) includes download, checksum and extraction instructions.
+
+See the [executed I0 results and limitations](docs/progress/i0-baseline.md) for the recovered models, 1,000-call warm benchmarks, 20-process cold benchmarks, validation scores and archive verification.
 
 - [Full specification](docs/specification.md)
 - [Forecasting decisions](docs/decisions/0001-forecast-contract.md)

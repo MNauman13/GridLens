@@ -1,0 +1,1456 @@
+{
+  "baseline_report_id": "01ae82c16192a4e6c90f5b742780faca0dd2a872b13c03d14120587e43a99944",
+  "experiment_plan_id": "36e245ef6050444d06c6dcbc38fafb78050be8d313edb9a7546c48d9f344a4dc",
+  "locked_test_evaluated": false,
+  "not_applicable": {
+    "decoder_kv_cache_bytes": "Reference path has no incremental cache",
+    "gpu": "CPU-only baseline",
+    "http_and_concurrent_load": "I1/I6 implement the live service",
+    "isolated_encoder_decoder_spans": "Forward-only aggregate here; fine-grained profiler belongs to I2",
+    "statistical_model_superiority": "Single-seed reproduction, no new selection claim"
+  },
+  "protocol": {
+    "cold_processes_per_model": 20,
+    "device": "cpu",
+    "torch_threads": 2
+  },
+  "report_id": "4706d28fea2745c7524a11e5f45dc89fa1e9e9a9d3d4b6120a595290024b3fc7",
+  "results": [
+    {
+      "cold_first_predict": {
+        "calls": 20,
+        "max_ms": 2.879224,
+        "mean_ms": 2.3713091,
+        "min_ms": 2.170607,
+        "p50_ms": 2.3267575000000003,
+        "p95_ms": 2.65698765,
+        "p99_ms": 2.8347767299999993
+      },
+      "cold_import": {
+        "calls": 20,
+        "max_ms": 1979.418014,
+        "mean_ms": 1792.9090781,
+        "min_ms": 1628.271556,
+        "p50_ms": 1795.7559385,
+        "p95_ms": 1958.36352595,
+        "p99_ms": 1975.20711639
+      },
+      "cold_load": {
+        "calls": 20,
+        "max_ms": 3.872009,
+        "mean_ms": 2.4419566,
+        "min_ms": 1.812779,
+        "p50_ms": 2.3776935,
+        "p95_ms": 3.3716212000000003,
+        "p99_ms": 3.771931439999999
+      },
+      "cold_process_count": 20,
+      "cold_process_wall": {
+        "calls": 20,
+        "max_ms": 2741.795781,
+        "mean_ms": 2529.52764295,
+        "min_ms": 2359.27778,
+        "p50_ms": 2540.5261410000003,
+        "p95_ms": 2703.0724092,
+        "p99_ms": 2734.05110664
+      },
+      "cold_raw_trials": [
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.34499,
+          "fresh_process_wall_ms": 2637.243314,
+          "imports_ms": 1847.976321,
+          "load_ms": 1.982985,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309825536,
+            "rss_bytes": 309825536
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308908032,
+            "rss_bytes": 308908032
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.436888,
+          "fresh_process_wall_ms": 2662.008835,
+          "imports_ms": 1912.553831,
+          "load_ms": 2.341144,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309030912,
+            "rss_bytes": 309030912
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308215808,
+            "rss_bytes": 308215808
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.170607,
+          "fresh_process_wall_ms": 2359.27778,
+          "imports_ms": 1666.891549,
+          "load_ms": 1.812779,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309907456,
+            "rss_bytes": 309907456
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308994048,
+            "rss_bytes": 308994048
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.404029,
+          "fresh_process_wall_ms": 2359.67514,
+          "imports_ms": 1628.271556,
+          "load_ms": 1.91354,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 310001664,
+            "rss_bytes": 310001664
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309084160,
+            "rss_bytes": 309084160
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.879224,
+          "fresh_process_wall_ms": 2631.236177,
+          "imports_ms": 1876.688646,
+          "load_ms": 2.921378,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309047296,
+            "rss_bytes": 309047296
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308224000,
+            "rss_bytes": 308224000
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.292771,
+          "fresh_process_wall_ms": 2565.576847,
+          "imports_ms": 1872.982664,
+          "load_ms": 2.79071,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309940224,
+            "rss_bytes": 309940224
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309018624,
+            "rss_bytes": 309018624
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.340433,
+          "fresh_process_wall_ms": 2554.120281,
+          "imports_ms": 1856.457693,
+          "load_ms": 2.73684,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309866496,
+            "rss_bytes": 309866496
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308944896,
+            "rss_bytes": 308944896
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.177397,
+          "fresh_process_wall_ms": 2467.542522,
+          "imports_ms": 1771.203968,
+          "load_ms": 1.876175,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309747712,
+            "rss_bytes": 309747712
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308822016,
+            "rss_bytes": 308822016
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.313082,
+          "fresh_process_wall_ms": 2741.795781,
+          "imports_ms": 1979.418014,
+          "load_ms": 3.872009,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309055488,
+            "rss_bytes": 309055488
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308232192,
+            "rss_bytes": 308232192
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.310718,
+          "fresh_process_wall_ms": 2420.312375,
+          "imports_ms": 1690.880286,
+          "load_ms": 2.612342,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309833728,
+            "rss_bytes": 309833728
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308912128,
+            "rss_bytes": 308912128
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.603408,
+          "fresh_process_wall_ms": 2503.091791,
+          "imports_ms": 1676.179904,
+          "load_ms": 1.878988,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309096448,
+            "rss_bytes": 309096448
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308281344,
+            "rss_bytes": 308281344
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.645291,
+          "fresh_process_wall_ms": 2588.609252,
+          "imports_ms": 1820.307909,
+          "load_ms": 3.345285,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309035008,
+            "rss_bytes": 309035008
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308211712,
+            "rss_bytes": 308211712
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.521505,
+          "fresh_process_wall_ms": 2686.427232,
+          "imports_ms": 1897.58253,
+          "load_ms": 3.048478,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309829632,
+            "rss_bytes": 309829632
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308912128,
+            "rss_bytes": 308912128
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.262074,
+          "fresh_process_wall_ms": 2644.281225,
+          "imports_ms": 1861.672799,
+          "load_ms": 2.237387,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309039104,
+            "rss_bytes": 309039104
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308211712,
+            "rss_bytes": 308211712
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.200121,
+          "fresh_process_wall_ms": 2701.034337,
+          "imports_ms": 1957.255395,
+          "load_ms": 1.963204,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309055488,
+            "rss_bytes": 309055488
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308232192,
+            "rss_bytes": 308232192
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.383096,
+          "fresh_process_wall_ms": 2526.932001,
+          "imports_ms": 1762.232081,
+          "load_ms": 2.414243,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309055488,
+            "rss_bytes": 309055488
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308236288,
+            "rss_bytes": 308236288
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.27171,
+          "fresh_process_wall_ms": 2366.082034,
+          "imports_ms": 1678.134629,
+          "load_ms": 2.166521,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309051392,
+            "rss_bytes": 309051392
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308232192,
+            "rss_bytes": 308232192
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.241444,
+          "fresh_process_wall_ms": 2420.243278,
+          "imports_ms": 1725.396411,
+          "load_ms": 2.483238,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309047296,
+            "rss_bytes": 309047296
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308228096,
+            "rss_bytes": 308228096
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.416437,
+          "fresh_process_wall_ms": 2387.392928,
+          "imports_ms": 1697.422071,
+          "load_ms": 2.489087,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309764096,
+            "rss_bytes": 309764096
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308838400,
+            "rss_bytes": 308838400
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.210957,
+          "fresh_process_wall_ms": 2367.669729,
+          "imports_ms": 1678.673305,
+          "load_ms": 1.952799,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 309051392,
+            "rss_bytes": 309051392
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308232192,
+            "rss_bytes": 308232192
+          },
+          "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4",
+          "prediction_fingerprint": "6bec2aa3df2c77c85740f4e2802467d4906560d6964816df2ea08bb2855e2eec"
+        }
+      ],
+      "cold_scope": "new interpreter and model instance; OS file cache may remain warm; local artifact bytes",
+      "kind": "ridge",
+      "model_id": "ridge_v1_2fb4118ae9478b5d1ff3248ff66f2baf764bb7baf44443b751940eb087a357c4"
+    },
+    {
+      "cold_first_predict": {
+        "calls": 20,
+        "max_ms": 64.36272,
+        "mean_ms": 47.22344045,
+        "min_ms": 37.154678,
+        "p50_ms": 46.0759255,
+        "p95_ms": 57.652107150000006,
+        "p99_ms": 63.02059742999999
+      },
+      "cold_import": {
+        "calls": 20,
+        "max_ms": 1952.25145,
+        "mean_ms": 1717.45685415,
+        "min_ms": 1583.79968,
+        "p50_ms": 1695.5039095,
+        "p95_ms": 1844.4853386,
+        "p99_ms": 1930.6982277199997
+      },
+      "cold_load": {
+        "calls": 20,
+        "max_ms": 10.395295,
+        "mean_ms": 8.8940561,
+        "min_ms": 7.242269,
+        "p50_ms": 9.2453645,
+        "p95_ms": 10.233978350000001,
+        "p99_ms": 10.36303167
+      },
+      "cold_process_count": 20,
+      "cold_process_wall": {
+        "calls": 20,
+        "max_ms": 2783.790923,
+        "mean_ms": 2485.753457,
+        "min_ms": 2293.065255,
+        "p50_ms": 2452.9002335,
+        "p95_ms": 2695.04320835,
+        "p99_ms": 2766.04138007
+      },
+      "cold_raw_trials": [
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 53.016494,
+          "fresh_process_wall_ms": 2783.790923,
+          "imports_ms": 1952.25145,
+          "load_ms": 9.230612,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327999488,
+            "rss_bytes": 324517888
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308916224,
+            "rss_bytes": 308916224
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 37.678628,
+          "fresh_process_wall_ms": 2421.025781,
+          "imports_ms": 1629.948923,
+          "load_ms": 8.139951,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327942144,
+            "rss_bytes": 324521984
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308924416,
+            "rss_bytes": 308924416
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 42.690166,
+          "fresh_process_wall_ms": 2391.205442,
+          "imports_ms": 1611.885987,
+          "load_ms": 9.445805,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327446528,
+            "rss_bytes": 324370432
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308961280,
+            "rss_bytes": 308961280
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 44.353069,
+          "fresh_process_wall_ms": 2449.948677,
+          "imports_ms": 1726.717491,
+          "load_ms": 9.346206,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 328511488,
+            "rss_bytes": 328511488
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308236288,
+            "rss_bytes": 308236288
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 64.36272,
+          "fresh_process_wall_ms": 2559.924604,
+          "imports_ms": 1785.432032,
+          "load_ms": 9.559387,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327913472,
+            "rss_bytes": 324505600
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308912128,
+            "rss_bytes": 308912128
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 48.017252,
+          "fresh_process_wall_ms": 2690.372276,
+          "imports_ms": 1821.135669,
+          "load_ms": 8.158809,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327917568,
+            "rss_bytes": 324509696
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308912128,
+            "rss_bytes": 308912128
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 51.289166,
+          "fresh_process_wall_ms": 2667.204597,
+          "imports_ms": 1838.813438,
+          "load_ms": 10.225488,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327892992,
+            "rss_bytes": 324444160
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308822016,
+            "rss_bytes": 308822016
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 45.911248,
+          "fresh_process_wall_ms": 2455.85179,
+          "imports_ms": 1688.343023,
+          "load_ms": 7.624796,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327872512,
+            "rss_bytes": 324521984
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308924416,
+            "rss_bytes": 308924416
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 56.538131,
+          "fresh_process_wall_ms": 2589.693817,
+          "imports_ms": 1808.397758,
+          "load_ms": 10.030045,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327860224,
+            "rss_bytes": 324513792
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308977664,
+            "rss_bytes": 308977664
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 46.240603,
+          "fresh_process_wall_ms": 2613.792002,
+          "imports_ms": 1838.009202,
+          "load_ms": 10.395295,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327839744,
+            "rss_bytes": 324505600
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308903936,
+            "rss_bytes": 308903936
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 54.568706,
+          "fresh_process_wall_ms": 2391.364853,
+          "imports_ms": 1614.874198,
+          "load_ms": 7.982684,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327938048,
+            "rss_bytes": 324526080
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308928512,
+            "rss_bytes": 308928512
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 57.298917,
+          "fresh_process_wall_ms": 2539.699136,
+          "imports_ms": 1680.644932,
+          "load_ms": 9.260117,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327790592,
+            "rss_bytes": 324460544
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308862976,
+            "rss_bytes": 308862976
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 42.911343,
+          "fresh_process_wall_ms": 2554.720883,
+          "imports_ms": 1785.035807,
+          "load_ms": 9.386496,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 328511488,
+            "rss_bytes": 328511488
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308203520,
+            "rss_bytes": 308203520
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 45.417474,
+          "fresh_process_wall_ms": 2468.126409,
+          "imports_ms": 1740.533319,
+          "load_ms": 9.341669,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 328622080,
+            "rss_bytes": 328622080
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308289536,
+            "rss_bytes": 308289536
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 37.154678,
+          "fresh_process_wall_ms": 2419.61895,
+          "imports_ms": 1702.664796,
+          "load_ms": 7.818878,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327487488,
+            "rss_bytes": 324333568
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308862976,
+            "rss_bytes": 308862976
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 39.348049,
+          "fresh_process_wall_ms": 2310.652371,
+          "imports_ms": 1588.403787,
+          "load_ms": 7.566158,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 328523776,
+            "rss_bytes": 328523776
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308244480,
+            "rss_bytes": 308244480
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 49.078454,
+          "fresh_process_wall_ms": 2308.857875,
+          "imports_ms": 1618.559729,
+          "load_ms": 9.068428,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327852032,
+            "rss_bytes": 324501504
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308899840,
+            "rss_bytes": 308899840
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 40.005821,
+          "fresh_process_wall_ms": 2293.065255,
+          "imports_ms": 1583.79968,
+          "load_ms": 7.242269,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327938048,
+            "rss_bytes": 324521984
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308924416,
+            "rss_bytes": 308924416
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 47.126432,
+          "fresh_process_wall_ms": 2416.932702,
+          "imports_ms": 1666.355829,
+          "load_ms": 9.849262,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 327933952,
+            "rss_bytes": 324603904
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308916224,
+            "rss_bytes": 308916224
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 41.461458,
+          "fresh_process_wall_ms": 2389.220797,
+          "imports_ms": 1667.330033,
+          "load_ms": 8.208767,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 328503296,
+            "rss_bytes": 328503296
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308289536,
+            "rss_bytes": 308289536
+          },
+          "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+          "prediction_fingerprint": "4d2345ee28c763a1bb072167fca169cb679f3814d7689d81487c9517624a03c0"
+        }
+      ],
+      "cold_scope": "new interpreter and model instance; OS file cache may remain warm; local artifact bytes",
+      "engine_scope": "model forward only; excludes feature transformation, scaling, inverse scaling and output validation",
+      "kind": "transformer",
+      "memory_after_engine": {
+        "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+        "process_lifetime_peak_rss_bytes": 743141376,
+        "rss_bytes": 743141376
+      },
+      "memory_before_engine": {
+        "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+        "process_lifetime_peak_rss_bytes": 741654528,
+        "rss_bytes": 728920064
+      },
+      "model_id": "0e00a4691cdb3808ada347c75279dfcc3fe0d11e73b9628bc06460cbc837583e",
+      "preparation_latency": {
+        "calls": 32,
+        "max_ms": 1.497544,
+        "mean_ms": 0.637169375,
+        "min_ms": 0.469005,
+        "p50_ms": 0.5358665,
+        "p95_ms": 1.2648902499999999,
+        "p99_ms": 1.4521565900000002
+      },
+      "prepared_engine_latency": {
+        "batch_size": 1,
+        "calls": 1000,
+        "capacity_scope": "sequential model calls, not concurrent HTTP service throughput",
+        "max_ms": 147.586051,
+        "mean_ms": 41.192213691,
+        "min_ms": 32.546219,
+        "p50_ms": 39.4062275,
+        "p95_ms": 51.264799749999995,
+        "p99_ms": 77.26207099999995,
+        "prediction_result_cache": "disabled",
+        "repetitions": [
+          {
+            "calls": 200,
+            "max_ms": 147.586051,
+            "mean_ms": 42.16330073,
+            "min_ms": 33.695654,
+            "p50_ms": 39.7392255,
+            "p95_ms": 52.564994299999995,
+            "p99_ms": 90.10980368999984
+          },
+          {
+            "calls": 200,
+            "max_ms": 129.72232,
+            "mean_ms": 43.78836727,
+            "min_ms": 32.782915,
+            "p50_ms": 43.2711945,
+            "p95_ms": 52.84338479999995,
+            "p99_ms": 108.20222558
+          },
+          {
+            "calls": 200,
+            "max_ms": 92.589728,
+            "mean_ms": 39.072188045,
+            "min_ms": 32.980472,
+            "p50_ms": 36.77857,
+            "p95_ms": 47.302623349999976,
+            "p99_ms": 65.77599576999981
+          },
+          {
+            "calls": 200,
+            "max_ms": 83.186924,
+            "mean_ms": 39.978444245,
+            "min_ms": 32.546219,
+            "p50_ms": 38.013054,
+            "p95_ms": 47.739303699999994,
+            "p99_ms": 61.05854279999995
+          },
+          {
+            "calls": 200,
+            "max_ms": 77.202224,
+            "mean_ms": 40.958768165,
+            "min_ms": 32.950467,
+            "p50_ms": 40.4522915,
+            "p95_ms": 49.066836699999996,
+            "p99_ms": 64.94010758999994
+          }
+        ],
+        "sequential_capacity_forecasts_per_second": 24.276432616644925,
+        "warmup_calls_excluded": 10
+      }
+    },
+    {
+      "cold_first_predict": {
+        "calls": 20,
+        "max_ms": 4.915868,
+        "mean_ms": 3.6438151,
+        "min_ms": 2.784652,
+        "p50_ms": 3.5218945,
+        "p95_ms": 4.54795865,
+        "p99_ms": 4.84228613
+      },
+      "cold_import": {
+        "calls": 20,
+        "max_ms": 2287.661932,
+        "mean_ms": 1769.8772279,
+        "min_ms": 1599.618256,
+        "p50_ms": 1734.2251325,
+        "p95_ms": 1991.6333174000001,
+        "p99_ms": 2228.4562090799996
+      },
+      "cold_load": {
+        "calls": 20,
+        "max_ms": 12.9492,
+        "mean_ms": 11.02922385,
+        "min_ms": 8.784762,
+        "p50_ms": 11.264974500000001,
+        "p95_ms": 12.514343199999999,
+        "p99_ms": 12.86222864
+      },
+      "cold_process_count": 20,
+      "cold_process_wall": {
+        "calls": 20,
+        "max_ms": 3079.664727,
+        "mean_ms": 2499.2295919,
+        "min_ms": 2294.335664,
+        "p50_ms": 2439.4008075,
+        "p95_ms": 2723.6489647000003,
+        "p99_ms": 3008.4615745399997
+      },
+      "cold_raw_trials": [
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 4.915868,
+          "fresh_process_wall_ms": 3079.664727,
+          "imports_ms": 2287.661932,
+          "load_ms": 9.628261,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324571136,
+            "rss_bytes": 324571136
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308891648,
+            "rss_bytes": 308891648
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.784652,
+          "fresh_process_wall_ms": 2625.105662,
+          "imports_ms": 1733.64363,
+          "load_ms": 8.784762,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323768320,
+            "rss_bytes": 323768320
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308260864,
+            "rss_bytes": 308260864
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.254529,
+          "fresh_process_wall_ms": 2704.911293,
+          "imports_ms": 1976.052864,
+          "load_ms": 10.365651,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323792896,
+            "rss_bytes": 323792896
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308224000,
+            "rss_bytes": 308224000
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.384183,
+          "fresh_process_wall_ms": 2678.879248,
+          "imports_ms": 1867.940312,
+          "load_ms": 12.128715,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324550656,
+            "rss_bytes": 324550656
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308944896,
+            "rss_bytes": 308944896
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.839949,
+          "fresh_process_wall_ms": 2469.770165,
+          "imports_ms": 1783.018,
+          "load_ms": 11.498466,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324562944,
+            "rss_bytes": 324562944
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308891648,
+            "rss_bytes": 308891648
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.613369,
+          "fresh_process_wall_ms": 2294.335664,
+          "imports_ms": 1599.618256,
+          "load_ms": 9.78022,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323739648,
+            "rss_bytes": 323739648
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308166656,
+            "rss_bytes": 308166656
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.442051,
+          "fresh_process_wall_ms": 2424.300449,
+          "imports_ms": 1672.761346,
+          "load_ms": 12.086792,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324558848,
+            "rss_bytes": 324558848
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308883456,
+            "rss_bytes": 308883456
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.908112,
+          "fresh_process_wall_ms": 2351.808241,
+          "imports_ms": 1649.021954,
+          "load_ms": 10.798793,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323792896,
+            "rss_bytes": 323792896
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308219904,
+            "rss_bytes": 308219904
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.349842,
+          "fresh_process_wall_ms": 2425.730737,
+          "imports_ms": 1734.806635,
+          "load_ms": 11.875769,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324579328,
+            "rss_bytes": 324579328
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308908032,
+            "rss_bytes": 308908032
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.878568,
+          "fresh_process_wall_ms": 2414.360965,
+          "imports_ms": 1724.713941,
+          "load_ms": 11.61444,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323772416,
+            "rss_bytes": 323772416
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308199424,
+            "rss_bytes": 308199424
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.322961,
+          "fresh_process_wall_ms": 2453.070878,
+          "imports_ms": 1724.166458,
+          "load_ms": 11.254689,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323788800,
+            "rss_bytes": 323788800
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308215808,
+            "rss_bytes": 308215808
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.156801,
+          "fresh_process_wall_ms": 2414.053921,
+          "imports_ms": 1709.354902,
+          "load_ms": 9.346016,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324583424,
+            "rss_bytes": 324583424
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308908032,
+            "rss_bytes": 308908032
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.363172,
+          "fresh_process_wall_ms": 2364.013647,
+          "imports_ms": 1675.127613,
+          "load_ms": 10.942619,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323776512,
+            "rss_bytes": 323776512
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308264960,
+            "rss_bytes": 308264960
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.900971,
+          "fresh_process_wall_ms": 2411.942201,
+          "imports_ms": 1750.85882,
+          "load_ms": 11.27526,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324562944,
+            "rss_bytes": 324562944
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308948992,
+            "rss_bytes": 308948992
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 4.528595,
+          "fresh_process_wall_ms": 2457.026532,
+          "imports_ms": 1761.207684,
+          "load_ms": 11.874422,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323788800,
+            "rss_bytes": 323788800
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308289536,
+            "rss_bytes": 308289536
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.458464,
+          "fresh_process_wall_ms": 2688.363431,
+          "imports_ms": 1859.613724,
+          "load_ms": 12.9492,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324509696,
+            "rss_bytes": 324509696
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308899840,
+            "rss_bytes": 308899840
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 4.45183,
+          "fresh_process_wall_ms": 2496.967852,
+          "imports_ms": 1752.195442,
+          "load_ms": 12.491456,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323776512,
+            "rss_bytes": 323776512
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308207616,
+            "rss_bytes": 308207616
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 2.964061,
+          "fresh_process_wall_ms": 2335.840281,
+          "imports_ms": 1642.260118,
+          "load_ms": 9.036911,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323788800,
+            "rss_bytes": 323788800
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308224000,
+            "rss_bytes": 308224000
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.772999,
+          "fresh_process_wall_ms": 2499.530468,
+          "imports_ms": 1760.638027,
+          "load_ms": 11.958569,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 324460544,
+            "rss_bytes": 324460544
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308785152,
+            "rss_bytes": 308785152
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        },
+        {
+          "feature_snapshot_id": "fa60194fcf252cf3a3636e9bb2cfdb1f1d945854b7d3b02708718eecd658e72f",
+          "first_bundle_predict_ms": 3.585325,
+          "fresh_process_wall_ms": 2394.915476,
+          "imports_ms": 1732.8829,
+          "load_ms": 10.893466,
+          "memory_after_first_predict": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 323727360,
+            "rss_bytes": 323727360
+          },
+          "memory_before_load": {
+            "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+            "process_lifetime_peak_rss_bytes": 308219904,
+            "rss_bytes": 308219904
+          },
+          "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+          "prediction_fingerprint": "0a20b60f9ed6f592cf14669c2a6b5e417e2c7c8117de30cbbde071ef285b62cd"
+        }
+      ],
+      "cold_scope": "new interpreter and model instance; OS file cache may remain warm; local artifact bytes",
+      "engine_scope": "model forward only; excludes feature transformation, scaling, inverse scaling and output validation",
+      "kind": "timexer",
+      "memory_after_engine": {
+        "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+        "process_lifetime_peak_rss_bytes": 744521728,
+        "rss_bytes": 744521728
+      },
+      "memory_before_engine": {
+        "peak_scope": "process lifetime, includes dataset construction/training; not isolated model memory",
+        "process_lifetime_peak_rss_bytes": 743469056,
+        "rss_bytes": 743469056
+      },
+      "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+      "preparation_latency": {
+        "calls": 32,
+        "max_ms": 0.807715,
+        "mean_ms": 0.54611625,
+        "min_ms": 0.468264,
+        "p50_ms": 0.525801,
+        "p95_ms": 0.7063948999999999,
+        "p99_ms": 0.7798695600000001
+      },
+      "prepared_engine_latency": {
+        "batch_size": 1,
+        "calls": 1000,
+        "capacity_scope": "sequential model calls, not concurrent HTTP service throughput",
+        "max_ms": 15.910075,
+        "mean_ms": 1.179774326,
+        "min_ms": 0.901687,
+        "p50_ms": 1.107011,
+        "p95_ms": 1.37155165,
+        "p99_ms": 2.0684492399999996,
+        "prediction_result_cache": "disabled",
+        "repetitions": [
+          {
+            "calls": 200,
+            "max_ms": 2.131437,
+            "mean_ms": 1.20178777,
+            "min_ms": 0.949429,
+            "p50_ms": 1.19583,
+            "p95_ms": 1.44725215,
+            "p99_ms": 1.91446813
+          },
+          {
+            "calls": 200,
+            "max_ms": 2.067813,
+            "mean_ms": 1.089476765,
+            "min_ms": 0.901687,
+            "p50_ms": 1.059955,
+            "p95_ms": 1.3479166500000002,
+            "p99_ms": 1.476632529999996
+          },
+          {
+            "calls": 200,
+            "max_ms": 1.569833,
+            "mean_ms": 1.12267047,
+            "min_ms": 1.037742,
+            "p50_ms": 1.10294,
+            "p95_ms": 1.2781506499999995,
+            "p99_ms": 1.3919318399999998
+          },
+          {
+            "calls": 200,
+            "max_ms": 15.910075,
+            "mean_ms": 1.34974295,
+            "min_ms": 1.044182,
+            "p50_ms": 1.104778,
+            "p95_ms": 1.469777699999998,
+            "p99_ms": 7.245563819999971
+          },
+          {
+            "calls": 200,
+            "max_ms": 2.723058,
+            "mean_ms": 1.135193675,
+            "min_ms": 1.039915,
+            "p50_ms": 1.098228,
+            "p95_ms": 1.3438843499999997,
+            "p99_ms": 1.5371996299999962
+          }
+        ],
+        "sequential_capacity_forecasts_per_second": 847.6197336743875,
+        "warmup_calls_excluded": 10
+      }
+    }
+  ],
+  "schema_version": "gridlens_baseline_runtime_supplement_v1",
+  "script_sha256": "5b42e252ca2f1d8946b14b3dbd15db62e950df153e4c15df74b4a2d3baf0fd08"
+}

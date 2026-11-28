@@ -1,0 +1,139 @@
+{
+  "cases": [
+    {
+      "max_abs_drift_mw": 0.0037600621944875456,
+      "target_date": "2022-01-01"
+    },
+    {
+      "max_abs_drift_mw": 0.006912596363690682,
+      "target_date": "2022-01-12"
+    },
+    {
+      "max_abs_drift_mw": 0.005294037000567187,
+      "target_date": "2022-01-24"
+    },
+    {
+      "max_abs_drift_mw": 0.003320343646919355,
+      "target_date": "2022-02-05"
+    },
+    {
+      "max_abs_drift_mw": 0.0030344284677994438,
+      "target_date": "2022-02-16"
+    },
+    {
+      "max_abs_drift_mw": 0.0032963959529297426,
+      "target_date": "2022-02-28"
+    },
+    {
+      "max_abs_drift_mw": 0.003721766381204361,
+      "target_date": "2022-03-12"
+    },
+    {
+      "max_abs_drift_mw": 0.004903671724605374,
+      "target_date": "2022-03-23"
+    },
+    {
+      "max_abs_drift_mw": 0.002833908671163954,
+      "target_date": "2022-04-04"
+    },
+    {
+      "max_abs_drift_mw": 0.0023738097079331055,
+      "target_date": "2022-04-16"
+    },
+    {
+      "max_abs_drift_mw": 0.004109697005333146,
+      "target_date": "2022-04-28"
+    },
+    {
+      "max_abs_drift_mw": 0.0026282506296411157,
+      "target_date": "2022-05-09"
+    },
+    {
+      "max_abs_drift_mw": 0.002642703602759866,
+      "target_date": "2022-05-21"
+    },
+    {
+      "max_abs_drift_mw": 0.004046929192554671,
+      "target_date": "2022-06-02"
+    },
+    {
+      "max_abs_drift_mw": 0.0029897252388764173,
+      "target_date": "2022-06-13"
+    },
+    {
+      "max_abs_drift_mw": 0.0050916073232656345,
+      "target_date": "2022-06-25"
+    },
+    {
+      "max_abs_drift_mw": 0.0034147646074416116,
+      "target_date": "2022-07-07"
+    },
+    {
+      "max_abs_drift_mw": 0.004300558659451781,
+      "target_date": "2022-07-19"
+    },
+    {
+      "max_abs_drift_mw": 0.006691070480883354,
+      "target_date": "2022-07-30"
+    },
+    {
+      "max_abs_drift_mw": 0.004527502616838319,
+      "target_date": "2022-08-11"
+    },
+    {
+      "max_abs_drift_mw": 0.002988687734614359,
+      "target_date": "2022-08-23"
+    },
+    {
+      "max_abs_drift_mw": 0.004900195974187227,
+      "target_date": "2022-09-03"
+    },
+    {
+      "max_abs_drift_mw": 0.0036969560678699054,
+      "target_date": "2022-09-15"
+    },
+    {
+      "max_abs_drift_mw": 0.002859919328329852,
+      "target_date": "2022-09-27"
+    },
+    {
+      "max_abs_drift_mw": 0.004617128248355584,
+      "target_date": "2022-10-09"
+    },
+    {
+      "max_abs_drift_mw": 0.004947305798850721,
+      "target_date": "2022-10-20"
+    },
+    {
+      "max_abs_drift_mw": 0.002317211026820587,
+      "target_date": "2022-11-01"
+    },
+    {
+      "max_abs_drift_mw": 0.003870462460326962,
+      "target_date": "2022-11-13"
+    },
+    {
+      "max_abs_drift_mw": 0.00535194217809476,
+      "target_date": "2022-11-24"
+    },
+    {
+      "max_abs_drift_mw": 0.002991315042891074,
+      "target_date": "2022-12-06"
+    },
+    {
+      "max_abs_drift_mw": 0.0052418430750549305,
+      "target_date": "2022-12-18"
+    },
+    {
+      "max_abs_drift_mw": 0.0032037822020356543,
+      "target_date": "2022-12-30"
+    }
+  ],
+  "dataset_manifest_id": "784a934d96749bbc8105c63ae32e4cc63fd7d817557adbaf045f0625f15a0f26",
+  "locked_test_evaluated": false,
+  "max_abs_drift_mw": 0.006912596363690682,
+  "model_id": "e0dccac903c812b779545c7738b2141728a5520c9840b7774db795256bff7c12",
+  "purpose": "portable deployment parity, not an inference optimisation claim",
+  "report_id": "cb352e35b3c39d22196af7aed7afa16e006485d8328c048baccae1ddf20cb3aa",
+  "runtime": "onnx_cpu_fp32"
+}

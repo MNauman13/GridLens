@@ -1,0 +1,40 @@
+{
+  "schema_version": "gridlens_metric_registry_v2",
+  "phase": "I0",
+  "forecast_unit": "MW",
+  "required_dimensions": ["source_commit", "working_tree_dirty", "dataset_manifest_id", "model_id", "experiment_plan_id", "evidence_mode", "evaluation_role", "seed", "device", "torch_threads", "batch_size", "prediction_result_cache", "timing_scope"],
+  "metrics": {
+    "mae_mw": {"unit": "MW", "definition": "mean absolute prediction error across aligned validation points"},
+    "rmse_mw": {"unit": "MW", "definition": "square root of mean squared error across aligned validation points"},
+    "bias_mw": {"unit": "MW", "definition": "mean(prediction - actual); positive means overprediction"},
+    "ramp_mae_mw": {"unit": "MW per 30-minute change", "definition": "MAE of within-day adjacent differences, 47 per target day"},
+    "slot_mae_mw": {"unit": "MW", "shape": [48], "definition": "MAE by output slot"},
+    "slot_rmse_mw": {"unit": "MW", "shape": [48], "definition": "RMSE by output slot"},
+    "mean_daily_peak_absolute_error_mw": {"unit": "MW", "definition": "mean absolute difference of predicted and actual daily maxima"},
+    "mean_peak_timing_absolute_error_slots": {"unit": "30-minute slots", "definition": "mean absolute peak-index difference; earliest maximum wins ties"},
+    "daily_mae_p95_mw": {"unit": "MW", "definition": "95th percentile of daily MAE, linear interpolation"},
+    "daily_rmse_p95_mw": {"unit": "MW", "definition": "95th percentile of daily RMSE, linear interpolation"},
+    "bundle_predict_latency": {"unit": "ms", "definition": "warm batch-one bundle.predict including preprocessing, inverse scaling and contract validation; excludes queue/network/load"},
+    "prepared_engine_latency": {"unit": "ms", "definition": "warm model forward on prepared tensors, excludes preprocessing and output contract validation"},
+    "cold_load": {"unit": "ms", "definition": "verified bundle loading in a fresh interpreter after imports; local OS file cache may remain warm"},
+    "cold_import": {"unit": "ms", "definition": "torch and model package import/setup time in child interpreter"},
+    "cold_first_predict": {"unit": "ms", "definition": "first bundle.predict in a fresh model instance"},
+    "cold_process_wall": {"unit": "ms", "definition": "parent wall clock around subprocess startup, imports, load, prediction and exit"},
+    "latency_distribution": {"unit": "ms", "definition": "raw calls with p50/p95/p99 using linear interpolation; warmups excluded; repeat summaries retained"},
+    "sequential_capacity_forecasts_per_second": {"unit": "forecasts/s", "definition": "1000/mean latency_ms; sequential local capacity, not concurrent HTTP throughput"},
+    "rss_bytes": {"unit": "bytes", "definition": "current process RSS where observable; null otherwise"},
+    "process_lifetime_peak_rss_bytes": {"unit": "bytes", "definition": "process high-water RSS; parent includes training and dataset, child is separate fresh process"},
+    "bundle_bytes": {"unit": "bytes", "definition": "sum of deployed manifest, metadata/model and weight files, excluding training checkpoint"},
+    "fit_seconds": {"unit": "s", "definition": "existing trainer reported fit path or separately measured ridge fit; not comparable across different measurement scopes"},
+    "reference_demo_max_abs_drift_mw": {"unit": "MW", "definition": "max deviation from original committed demonstration, diagnostic for regenerated weights"},
+    "reference_rmse_difference_mw": {"unit": "MW", "definition": "new validation RMSE minus original pilot RMSE; not an optimisation effect"}
+  },
+  "not_applicable_in_I0": {
+    "interval_and_calibration_metrics": "I5 implements calibration",
+    "http_throughput_and_queue_metrics": "I1/I6 implement live serving",
+    "gpu_metrics": "CPU-only baseline",
+    "kv_cache_bytes": "Reference numerical decoder has no incremental KV cache",
+    "energy_or_carbon_savings": "No hardware power measurements",
+    "model_superiority_p_value": "Regeneration is not a new model-selection study"
+  }
+}

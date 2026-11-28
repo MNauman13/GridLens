@@ -1,0 +1,20 @@
+{
+  "schema_version": "gridlens_release_study_plan_v1",
+  "seeds": [17, 42, 101],
+  "neural_configs": [
+    {"kind": "transformer", "width": 32, "heads": 4, "layers": 1, "dropout": 0.1},
+    {"kind": "lstm", "width": 32},
+    {"kind": "timexer", "width": 32, "heads": 4, "patch": 24},
+    {"kind": "timexer", "width": 32, "heads": 4, "patch": 48}
+  ],
+  "ridge_alphas": [1.0, 10.0, 100.0],
+  "maximum_epochs": 50,
+  "patience": 8,
+  "per_fit_seconds": 7200,
+  "aggregate_seconds": 43200,
+  "training_role": "point_train",
+  "selection_role": "point_validation",
+  "selection_rule": "Minimum mean full-2022 validation RMSE across the three seeds for each neural configuration, compared with deterministic baselines. Deploy the lowest-validation-RMSE fitted seed within the winning configuration. No ensemble claim.",
+  "locked_test_evaluated": false,
+  "paid_compute_enabled": false
+}

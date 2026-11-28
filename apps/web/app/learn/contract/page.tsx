@@ -1,0 +1,66 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+type Fixture = {
+  fixture_kind: string; real_demand_data: boolean; trained_model: boolean;
+  contract_version: string; issued_at: string; context_start: string;
+  context_end_exclusive: string; target_start: string; target_end_exclusive: string;
+  input_count: number; gap_intervals: number; output_count: number;
+};
+
+const steps = [
+  { title: "Read the context", text: "Use seven complete UTC days of historical demand. Every selected version must also meet the evidence-mode availability rule.", region: 0 },
+  { title: "Respect the issue-day gap", text: "Issue at 09:30 UTC. Observed demand from the issue day is excluded; the complete day is not yet known.", region: 1 },
+  { title: "Predict the target day", text: "Produce 48 half-hour predictions for the following UTC day. Target observations remain hidden from model inputs.", region: 2 },
+  { title: "Wait for the actuals", text: "Update calibration only when actuals become available. Revised-data replay simulates release at 09:00 UTC after the target day.", region: 2 },
+];
+
+export default function Home() {
+  const [issueDate, setIssueDate] = useState("2024-02-10");
+  const [result, setResult] = useState<Fixture | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(0);
+  async function check() {
+    setLoading(true); setError(""); setResult(null);
+    try {
+      const response = await fetch(`/api/fixture?issue_date=${encodeURIComponent(issueDate)}`);
+      if (!response.ok) throw new Error(response.status === 503 ? "The verification API is unavailable. Start the Python API and try again." : "The issue date could not be verified.");
+      setResult(await response.json() as Fixture);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Verification failed.");
+    } finally { setLoading(false); }
+  }
+  return <main>
+    <header><Link className="brand" href="/">Grid<span>Lens</span></Link><span className="phase">I1 · Live inference</span></header>
+    <section className="intro"><p className="eyebrow">ELECTRICITY FORECASTING, MADE AUDITABLE</p>
+      <h1>A forecast starts with<br/>what we know.</h1>
+      <p className="lede">Before training a Transformer, verify its time boundaries. Inspect the history it can use, the day it must skip, and the day it will predict.</p>
+      <p className="notice">Development fixture · Synthetic inputs · No trained forecast</p>
+    </section>
+    <section className="panel"><h2>Run a trained model now</h2><p>Compute a fresh electricity demand forecast with TimeXer or ridge regression and inspect its latency and error.</p><Link href="/live">Open live inference</Link></section>
+    <section className="panel" aria-labelledby="contract-heading">
+      <div className="section-heading"><div><p className="eyebrow">01 / CHECK THE CONTRACT</p><h2 id="contract-heading">One issue. Exact boundaries.</h2></div><span className="unit">NESO ND · MW · UTC</span></div>
+      <form onSubmit={event => { event.preventDefault(); void check(); }}>
+        <label htmlFor="issue-date">Issue date<input id="issue-date" type="date" value={issueDate} onChange={event => {setIssueDate(event.target.value); setResult(null); setError("");}} required/></label>
+        <button type="submit" disabled={loading}>{loading ? "Checking…" : "Run contract check"}</button>
+      </form>
+      {error && <p role="alert" className="error">{error}</p>}
+      <div role="status" aria-live="polite">{result ? <>
+        <p className="verified">Contract verified · {result.contract_version}</p>
+        <dl className="counts"><div><dt>History inputs</dt><dd>{result.input_count}</dd></div><div><dt>Skipped intervals</dt><dd>{result.gap_intervals}</dd></div><div><dt>Target outputs</dt><dd>{result.output_count}</dd></div></dl>
+        <dl className="boundaries"><div><dt>Issued at</dt><dd>{result.issued_at}</dd></div><div><dt>Context ends, exclusive</dt><dd>{result.context_end_exclusive}</dd></div><div><dt>Target starts</dt><dd>{result.target_start}</dd></div><div><dt>Target ends, exclusive</dt><dd>{result.target_end_exclusive}</dd></div></dl>
+      </> : !loading && <p className="hint">Run the check to validate a synthetic input window against the UTC contract.</p>}</div>
+    </section>
+    <section className="panel" aria-labelledby="timeline-heading">
+      <p className="eyebrow">02 / FOLLOW THE INFORMATION</p><h2 id="timeline-heading">What can the model see?</h2>
+      <div className="timeline" aria-label="Forecast regions, shown schematically rather than to time scale">{["7-day context", "Issue-day gap", "Target day"].map((name, index) => <div key={name} className={index === steps[step].region ? "region active" : "region"}><span>{name}</span><strong>{["336 inputs", "48 excluded", "48 outputs"][index]}</strong></div>)}</div>
+      <div className="step-detail" aria-live="polite"><h3>{steps[step].title}</h3><p>{steps[step].text}</p></div>
+      <div className="step-controls"><button onClick={() => setStep(value => value - 1)} disabled={step === 0}>Previous</button><span aria-label="Timeline step">{step + 1} / {steps.length}</span><button onClick={() => setStep(value => value + 1)} disabled={step === steps.length - 1}>Next</button></div>
+    </section>
+    <section className="panel"><h2>Why do some days have 46 or 50 periods?</h2><p>Follow British settlement periods as the local clock changes and UTC keeps moving.</p><Link href="/learn/settlement">Explore settlement time and play the animation</Link></section><section className="panel"><h2>Explore a real saved forecast</h2><p>Compare eligible-lag persistence and ridge regression on a fixed validation day.</p><Link href="/forecasts">Open the baseline forecast explorer</Link></section><section className="panel"><h2>Watch attention calculate</h2><p>Inspect query/key scores, masks, two attention heads, and sinusoidal positions.</p><Link href="/learn/attention">Open the interactive attention lesson</Link></section><footer><p>Supported by National Energy SO Open Data</p><p>Independent project · Validated baselines and a bounded neural forecasting pilot.</p></footer>
+    <section className="panel"><h2>From attention to trained forecasts</h2><p>Explore the complete encoder-decoder Transformer, numerical forecasting and the TimeXer application.</p><p><Link href="/learn/transformer">Follow the model walkthrough</Link> · <Link href="/forecasts/neural">Inspect saved neural forecasts</Link></p></section>
+  </main>;
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version":"gridlens_i3_runtime_plan_v1",
+  "model":"Exact I0 TimeXer, unchanged weights",
+  "runtimes":["eager","torchscript","onnx_fp32","onnx_int8"],
+  "threads":[1,2],
+  "batches":[1,4],
+  "validation_role":"point_validation",
+  "parity_origins":364,
+  "timing_origins":"Same 32 declared I0 benchmark dates",
+  "warmups":10,
+  "repeats":5,
+  "calls_per_repeat":40,
+  "seed":17,
+  "exact_normalised_atol":0.00001,
+  "exact_normalised_rtol":0.00001,
+  "exact_max_mw_drift":0.5,
+  "int8_max_relative_rmse_increase":0.01,
+  "minimum_p50_latency_reduction":0.1,
+  "promotion":"Must pass full-validation accuracy and at least 10% warm B1 latency reduction at the same thread count. No automatic public runtime promotion. Rejected candidates retained.",
+  "locked_test_evaluated":false
+}

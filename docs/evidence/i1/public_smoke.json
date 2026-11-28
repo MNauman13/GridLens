@@ -1,0 +1,25 @@
+{
+  "url": "https://gridlens-mnaumansiddiqui06-6472s-projects.vercel.app/live",
+  "anonymous": true,
+  "testing_proxy_note": "Browser trusts test proxy via ignoreHTTPSErrors; separate Node HTTPS requests verified the endpoints",
+  "runtime": "Chromium 158.0.8127.0",
+  "first_execution_id": "773b50aa-e40b-42a3-8e00-599a732ea4ff",
+  "second_execution_id": "1adace3f-104f-4489-b265-610c70dbc9e1",
+  "fresh_execution": true,
+  "changed_date_changes_forecast": true,
+  "ridge_value": "Forecast 26341.53 MW \u00b7 Observed 26446.00 MW",
+  "server_option_disabled": true,
+  "server_option_details": {
+    "disabled": true,
+    "html": "<option value=\"server\" disabled=\"\">Python reference service<!-- --> (not connected)</option>",
+    "location": "https://gridlens-mnaumansiddiqui06-6472s-projects.vercel.app/live"
+  },
+  "catalog_runtime": {
+    "server_available": false,
+    "catalog_id": "3c6418fd77386ab996b02e3fe6b38d0cd1c2b01fae2b01ae0967b84190401426"
+  },
+  "browser_errors": [],
+  "executed_at": "2026-11-25T15:52:16.331Z",
+  "deployed_commit": "5e8921c9c68182f6f788d6c2d9ad416a8616cfbb",
+  "deployment_url": "https://gridlens-d00wewl3r-mnaumansiddiqui06-6472s-projects.vercel.app/live"
+}
