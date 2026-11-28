@@ -10,6 +10,26 @@ def assess(records):
     valid = sorted(records, key=lambda row: row["started_at"])
     if not valid:
         return {"status": "pending", "probes": 0, "reason": "No observed public probes"}
+    target = next(
+        (row.get("release_freeze_id") for row in reversed(valid) if row.get("release_freeze_id")),
+        None,
+    )
+    if target:
+        prior_other = max(
+            (
+                i
+                for i, row in enumerate(valid)
+                if row.get("release_freeze_id") and row.get("release_freeze_id") != target
+            ),
+            default=-1,
+        )
+        first = next(
+            i
+            for i, row in enumerate(valid)
+            if i > prior_other and row.get("release_freeze_id") == target
+        )
+        # Keep failed probes without metadata after the release starts.
+        valid = valid[first:]
     stamps = [datetime.fromisoformat(row["started_at"]) for row in valid]
     if any(stamp.utcoffset() is None for stamp in stamps):
         raise ValueError("Timezone-aware probe records required")
@@ -22,6 +42,7 @@ def assess(records):
     )
     return {
         "status": "passed" if passed else "pending",
+        "release_freeze_id": target,
         "probes": len(valid),
         "elapsed_days": days,
         "failed_probes": failures,

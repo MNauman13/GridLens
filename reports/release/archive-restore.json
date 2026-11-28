@@ -1,0 +1,14 @@
+{
+  "archive_sha256": "6dc9e6d2a4df4756fd0901239a54e535b26ed86e59dad3586f5bbbed59d4d1b8",
+  "verified_members": 136,
+  "restored_model_id": "6904f21c43454502e5ccb816298effcdda245910ea719e29622b83b153ff1d44",
+  "validation_target_date": "2022-01-01",
+  "max_drift_from_recorded_batch_validation_mw": 0.001953125,
+  "restored_calibration_methods": [
+    "fixed",
+    "ncc",
+    "rolling"
+  ],
+  "locked_test_re_evaluated": false,
+  "passed": true
+}

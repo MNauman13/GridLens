@@ -1,0 +1,25 @@
+{
+  "url": "https://gridlens-mnaumansiddiqui06-6472s-projects.vercel.app",
+  "executed_at": "2026-11-28T11:56:30.331Z",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "fresh_browser_recompute": true,
+      "fresh_server_compute": true,
+      "replay_restore": true,
+      "frozen_test_visible": true,
+      "wcag_violations": 0
+    },
+    {
+      "viewport": "mobile",
+      "fresh_browser_recompute": true,
+      "fresh_server_compute": true,
+      "replay_restore": true,
+      "frozen_test_visible": true,
+      "wcag_violations": 0
+    }
+  ],
+  "javascript_errors": [],
+  "tls_note": "Browser ignores the local test proxy certificate only. A separate standard-library public probe retains normal TLS validation.",
+  "passed": true
+}

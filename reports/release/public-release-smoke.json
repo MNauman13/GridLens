@@ -1,0 +1,72 @@
+{
+  "started_at": "2026-11-28T11:56:28.564198+00:00",
+  "url": "https://gridlens-mnaumansiddiqui06-6472s-projects.vercel.app",
+  "checks": [
+    {
+      "path": "/live",
+      "status": 200,
+      "elapsed_ms": 4947.7804379998815,
+      "bytes": 7824,
+      "sha256": "abebd96e282f6027b7c34db400f709557dbb13e6061d09bc432287f7b69ff422"
+    },
+    {
+      "path": "/experiments",
+      "status": 200,
+      "elapsed_ms": 4287.748102000023,
+      "bytes": 33716,
+      "sha256": "fa515815b503d4f44f3c2fc9a96db31a7442ed6d56d2057c6e33c89735f96b61"
+    },
+    {
+      "path": "/replay",
+      "status": 200,
+      "elapsed_ms": 4364.034425999989,
+      "bytes": 6373,
+      "sha256": "b78df4a83f2d7fe297bfa9c5e7cf0755f6c02d69ec2c3c6abbf184a20d55ca83"
+    },
+    {
+      "path": "/results",
+      "status": 200,
+      "elapsed_ms": 4303.939371999832,
+      "bytes": 6304,
+      "sha256": "f558a9eccb6556be8269c930ff52ba84102d8557d5f5e0eb1dc69f6b83acc4f2"
+    },
+    {
+      "path": "/replay/evidence.json",
+      "status": 200,
+      "elapsed_ms": 4092.670252999824,
+      "bytes": 930770,
+      "sha256": "c86083abe601889d66178423145229b1c490ab075d92b7ae140085d79aaae4a0"
+    },
+    {
+      "path": "/replay/summary.json",
+      "status": 200,
+      "elapsed_ms": 4367.167818000098,
+      "bytes": 742344,
+      "sha256": "6bb9438c8abfdfe3ab7e033ec31bcd51b1b05626d25b17380c343bcbc316de31"
+    },
+    {
+      "path": "/api/live/catalog",
+      "status": 200,
+      "elapsed_ms": 3250.2280619999055,
+      "bytes": 9660,
+      "sha256": "9c9058d85d68bb53ed9941e5a606ff8c15345619a6fec18b8fab7498a2048a36"
+    },
+    {
+      "path": "/api/compute",
+      "status": 200,
+      "elapsed_ms": 4963.716710999961,
+      "bytes": 3975,
+      "sha256": "b3b06b8b0e95510576c0fc27760c204289438d3f571f5995750cbadf2458fc30"
+    },
+    {
+      "path": "/api/compute",
+      "status": 200,
+      "elapsed_ms": 4053.68667599987,
+      "bytes": 3949,
+      "sha256": "c9b927eff5e37edfb240865b181b836fc1a1a6d2dedc493ba319bff204c77a6e"
+    }
+  ],
+  "passed": true,
+  "release_freeze_id": "9ba01343407c54d217aa641da0cad8d200ab3d269b8054a18e082ac6b5ac403f",
+  "total_ms": 38658.963417999985
+}

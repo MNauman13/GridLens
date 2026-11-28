@@ -15,3 +15,5 @@ select {max-width:100%;}
 @media(max-width:700px){.project-grid{grid-template-columns:1fr;}header nav{display:flex;flex-wrap:wrap;gap:12px;}header{align-items:flex-start;}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;}}
 [tabindex="0"]:focus-visible {outline:3px solid #a65124;outline-offset:4px;}
+.step-controls {flex-wrap:wrap;}
+header nav a {color:var(--accent);text-underline-offset:3px;}

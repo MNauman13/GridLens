@@ -48,6 +48,24 @@ def probe(url):
     try:
         call("/live")
         call("/experiments")
+        call("/replay")
+        call("/results")
+        replay = call("/replay/evidence.json")
+        summary = call("/replay/summary.json")
+        if (
+            len(replay["rows"]) < 60
+            or summary["test"] is None
+            or summary["test"]["role"] != "locked_test"
+        ):
+            raise ValueError("Released replay or frozen test evidence is unavailable")
+        freeze = summary["test"]["freeze_id"]
+        if (
+            not isinstance(freeze, str)
+            or len(freeze) != 64
+            or any(c not in "0123456789abcdef" for c in freeze)
+        ):
+            raise ValueError("Invalid public release identity")
+        record["release_freeze_id"] = freeze
         catalog = call("/api/live/catalog")
         day = catalog["cases"][0]["target_date"]
         for model in ("ridge", "timexer"):
