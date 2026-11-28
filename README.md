@@ -1,5 +1,7 @@
 # GridLens
 
+[Live demo](https://gridlens-beta.vercel.app) · [Measured results](https://gridlens-beta.vercel.app/results) · [Uncertainty replay](https://gridlens-beta.vercel.app/replay)
+
 GridLens forecasts British electricity demand using trained TimeXer and numerical Transformer models, with real browser and server inference, causal uncertainty replay and measured runtime experiments.
 
 **Stage:** end-to-end release candidate. The three-seed model study, interval selection, runtime/INT8 campaign and 15-minute service test have been executed. Final frozen-test, container and monitoring status is recorded in the [release tracker](docs/progress/release-work.md). Failed candidates remain visible. Seven-day availability requires a real observation window.
