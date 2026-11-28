@@ -28,7 +28,8 @@ def main():
 
     if call("/v1/health/ready")["status"] != "ready":
         raise ValueError("Container not ready")
-    accepted = call("/v1/forecast-jobs", {"model": "timexer", "target_date": "2022-01-01"})
+    payload = {"model": "timexer", "target_date": "2022-01-01", "runtime": "onnx"}
+    accepted = call("/v1/forecast-jobs", payload)
     for _ in range(100):
         result = call("/v1/jobs/" + accepted["job_id"])
         if result["state"] in ("succeeded", "failed"):
@@ -39,7 +40,9 @@ def main():
         or len(result["result"]["point"]["prediction_mw"]) != 48
         or result["result"]["result_cache_hit"]
     ):
-        raise ValueError("Container fresh inference failed")
+        raise ValueError(
+            f"Container fresh inference failed: state={result.get('state')}, error={result.get('error')}, attempts={result.get('attempts')}"
+        )
     stranger = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     try:
         stranger.open(base + "/v1/jobs/" + accepted["job_id"])
@@ -58,7 +61,7 @@ def main():
     restored = call("/v1/jobs/" + accepted["job_id"])
     if restored != result:
         raise ValueError("Persisted result changed after container restart")
-    duplicate = call("/v1/forecast-jobs", {"model": "timexer", "target_date": "2022-01-01"})
+    duplicate = call("/v1/forecast-jobs", payload)
     if duplicate["job_id"] != accepted["job_id"]:
         raise ValueError("Idempotency was lost after restart")
     report = {

@@ -35,6 +35,11 @@ def main():
             suite = unittest.defaultTestLoader.loadTestsFromName(
                 "tests.test_jobs.PostgresQueueTests"
             )
+            suite.addTests(
+                unittest.defaultTestLoader.loadTestsFromName(
+                    "tests.test_worker.WorkerTests.test_postgres_worker_at_real_epoch"
+                )
+            )
             result = unittest.TextTestRunner(verbosity=2).run(suite)
             if result.wasSuccessful():
                 from gridlens.jobs import JobStore

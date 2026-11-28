@@ -40,11 +40,27 @@ class JobStore:
             Path(self.database).parent.mkdir(parents=True, exist_ok=True)
         with self.connect() as db:
             db.execute(
-                "CREATE TABLE IF NOT EXISTS queue_tasks (id TEXT PRIMARY KEY,work_key TEXT NOT NULL,payload TEXT NOT NULL,state TEXT NOT NULL,created REAL NOT NULL,available REAL NOT NULL,lease_until REAL NOT NULL DEFAULT 0,fence INTEGER NOT NULL DEFAULT 0,attempts INTEGER NOT NULL DEFAULT 0,result TEXT,error TEXT)"
+                "CREATE TABLE IF NOT EXISTS queue_tasks (id TEXT PRIMARY KEY,work_key TEXT NOT NULL,payload TEXT NOT NULL,state TEXT NOT NULL,created DOUBLE PRECISION NOT NULL,available DOUBLE PRECISION NOT NULL,lease_until DOUBLE PRECISION NOT NULL DEFAULT 0,fence INTEGER NOT NULL DEFAULT 0,attempts INTEGER NOT NULL DEFAULT 0,result TEXT,error TEXT)"
             )
             db.execute(
-                "CREATE TABLE IF NOT EXISTS queue_tickets (id TEXT PRIMARY KEY,task_id TEXT NOT NULL REFERENCES queue_tasks(id),owner TEXT NOT NULL,request_key TEXT NOT NULL,created REAL NOT NULL,cancelled INTEGER NOT NULL DEFAULT 0,UNIQUE(owner,request_key))"
+                "CREATE TABLE IF NOT EXISTS queue_tickets (id TEXT PRIMARY KEY,task_id TEXT NOT NULL REFERENCES queue_tasks(id),owner TEXT NOT NULL,request_key TEXT NOT NULL,created DOUBLE PRECISION NOT NULL,cancelled INTEGER NOT NULL DEFAULT 0,UNIQUE(owner,request_key))"
             )
+            if self.postgres:
+                # REAL is float32 in PostgreSQL and loses seconds at Unix epochs.
+                # Widen older installations under the same transaction lock.
+                for table, columns in (
+                    ("queue_tasks", ("created", "available", "lease_until")),
+                    ("queue_tickets", ("created",)),
+                ):
+                    for column in columns:
+                        definition = db.execute(
+                            "SELECT data_type FROM information_schema.columns WHERE table_schema=current_schema() AND table_name=? AND column_name=?",
+                            (table, column),
+                        ).fetchone()
+                        if definition is not None and definition["data_type"] == "real":
+                            db.execute(
+                                f"ALTER TABLE {table} ALTER COLUMN {column} TYPE DOUBLE PRECISION"
+                            )
             db.execute("CREATE INDEX IF NOT EXISTS queue_ready ON queue_tasks(state,available)")
             db.execute("CREATE INDEX IF NOT EXISTS queue_owner ON queue_tickets(owner,created)")
 

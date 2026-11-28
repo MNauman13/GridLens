@@ -66,10 +66,11 @@ jobs:
           uv run --frozen --extra api --extra ml python -m scripts.check_i0_reference
           uv run --frozen --extra api --extra ml python -m scripts.export_i2_evidence --check
           uv run --frozen --extra api --extra ml python -m scripts.export_cache_evidence --check
+          uv run --frozen --extra api --extra ml python -m scripts.check_release_evidence
           uv run --frozen --extra api --extra ml gridlens fixture
       - name: Python lint and types
         run: |
-          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py scripts/prepare_live_demo.py scripts/benchmark_live.py scripts/benchmark_sdpa.py scripts/export_i2_evidence.py scripts/benchmark_cached.py scripts/run_cached_forecast.py scripts/export_cache_evidence.py scripts/release_study.py scripts/calibration_study.py scripts/load_service.py scripts/check_postgres.py scripts/benchmark_runtime.py scripts/runtime_cold.py scripts/backup_jobs.py scripts/freeze_release.py scripts/evaluate_release.py scripts/summarise_validation.py scripts/export_release_web.py scripts/prepare_release_demo.py scripts/public_smoke.py scripts/capture_prospective.py scripts/forecast_prospective.py scripts/check_monitoring_window.py scripts/container_smoke.py
+          uv run --frozen --extra api --extra ml ruff check src tests scripts/reproduce_baseline.py scripts/benchmark_baseline_cold.py scripts/check_i0_reference.py scripts/prepare_live_demo.py scripts/benchmark_live.py scripts/benchmark_sdpa.py scripts/export_i2_evidence.py scripts/benchmark_cached.py scripts/run_cached_forecast.py scripts/export_cache_evidence.py scripts/release_study.py scripts/calibration_study.py scripts/load_service.py scripts/check_postgres.py scripts/benchmark_runtime.py scripts/runtime_cold.py scripts/backup_jobs.py scripts/freeze_release.py scripts/evaluate_release.py scripts/summarise_validation.py scripts/export_release_web.py scripts/prepare_release_demo.py scripts/public_smoke.py scripts/capture_prospective.py scripts/forecast_prospective.py scripts/check_monitoring_window.py scripts/container_smoke.py scripts/check_release_evidence.py
           uv run --frozen --extra api --extra ml mypy src/gridlens
       - name: Node logic, lint, and types
         run: |

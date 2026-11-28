@@ -1,6 +1,6 @@
 {
-  "queue_tests": 6,
+  "queue_tests": 8,
   "restore_result_identical": true,
-  "dump_sha256": "c8a45d9e08534e1172662e0e18b5b17ee6bb4d9abc58a3dd44d8d0e04d76c6b3",
-  "dump_bytes": 4937
+  "dump_sha256": "5e5f57225f358aef74782d52a10b9f8119a603d43253d86a1a8052c0e4949e62",
+  "dump_bytes": 7407
 }

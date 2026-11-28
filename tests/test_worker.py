@@ -69,3 +69,20 @@ class WorkerTests(unittest.TestCase):
                 self.assertEqual(client.get("/v1/jobs/" + identifier).status_code, 404)
                 client.cookies.update(cookies)
                 self.assertEqual(client.delete("/v1/jobs/" + identifier).status_code, 200)
+
+    def test_postgres_worker_at_real_epoch(self):
+        database = os.environ.get("GRIDLENS_TEST_POSTGRES")
+        if not database:
+            self.skipTest("Dedicated PostgreSQL test database required")
+        service = DurableLiveService(ROOT / "artifacts/i1", database, start_worker=False)
+        try:
+            ticket = service.submit(
+                "real-epoch-owner", "timexer", "2022-01-01", request_key="real-epoch-once"
+            )
+            self.assertTrue(service.run_once())
+            result = service.job(ticket, "real-epoch-owner")
+            self.assertEqual(result["state"], "succeeded")
+            self.assertEqual(result["attempts"], 1)
+            self.assertEqual(len(result["result"]["point"]["prediction_mw"]), 48)
+        finally:
+            service.close()

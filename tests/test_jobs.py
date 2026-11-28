@@ -11,7 +11,7 @@ class QueueTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.now = 1000.0
+        self.now = 1_795_820_000.125
         self.path = Path(self.temp.name) / "queue.db"
         self.store = JobStore(self.path, clock=lambda: self.now, lease_seconds=5, max_attempts=2)
 
@@ -97,13 +97,15 @@ class QueueTests(unittest.TestCase):
         import sys
 
         ticket, _ = self.store.submit("crash-owner", {"x": 9}, "once")
-        script = "from gridlens.jobs import JobStore; import sys,os,json; store=JobStore(sys.argv[1],clock=lambda:1000.,lease_seconds=5,max_attempts=2); task=store.claim(); os.write(1,json.dumps(task).encode()); os._exit(17)"
+        script = "from gridlens.jobs import JobStore; import sys,os,json; store=JobStore(sys.argv[1],clock=lambda:float(sys.argv[2]),lease_seconds=5,max_attempts=2); task=store.claim(); os.write(1,json.dumps(task).encode()); os._exit(17)"
         child = subprocess.run(
-            [sys.executable, "-c", script, str(self.path)], capture_output=True, text=True
+            [sys.executable, "-c", script, str(self.path), str(self.now)],
+            capture_output=True,
+            text=True,
         )
         self.assertEqual(child.returncode, 17, child.stderr)
         old = json.loads(child.stdout)
-        self.now = 1006.0
+        self.now += 6.0
         new = self.store.claim()
         self.assertEqual(new["id"], old["id"])
         self.assertFalse(self.store.complete(old["id"], old["fence"], {"stale": True}))
@@ -118,9 +120,29 @@ class PostgresQueueTests(QueueTests):
         database = os.environ.get("GRIDLENS_TEST_POSTGRES")
         if not database:
             self.skipTest("Set GRIDLENS_TEST_POSTGRES to a dedicated test database")
-        self.now = 1000.0
+        self.now = 1_795_820_000.125
         self.path = database
         self.store = JobStore(database, clock=lambda: self.now, lease_seconds=5, max_attempts=2)
         with self.store.connect() as db:
             db.execute("DELETE FROM queue_tickets")
             db.execute("DELETE FROM queue_tasks")
+
+    def test_legacy_float32_columns_are_widened_and_preserve_second_precision(self):
+        with self.store.connect() as db:
+            for table, columns in (
+                ("queue_tasks", ("created", "available", "lease_until")),
+                ("queue_tickets", ("created",)),
+            ):
+                for column in columns:
+                    db.execute(f"ALTER TABLE {table} ALTER COLUMN {column} TYPE REAL")
+        migrated = JobStore(self.path, clock=lambda: self.now, lease_seconds=5)
+        ticket, _ = migrated.submit("migration", {"epoch": True}, "once")
+        task = migrated.claim()
+        with migrated.connect() as db:
+            row = db.execute(
+                "SELECT created,lease_until FROM queue_tasks WHERE id=?", (task["id"],)
+            ).fetchone()
+            self.assertAlmostEqual(row["created"], self.now, places=6)
+            self.assertAlmostEqual(row["lease_until"], self.now + 5, places=6)
+        self.assertTrue(migrated.complete(task["id"], task["fence"], {"precise": True}))
+        self.assertEqual(migrated.job(ticket, "migration")["state"], "succeeded")

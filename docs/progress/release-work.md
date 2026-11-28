@@ -1,15 +1,19 @@
-# End-to-end completion work
+# End-to-end release status
 
-Requested 27 November 2026. This checklist records executable evidence rather than marking design work complete.
+Updated 28 November 2026. Executed evidence is retained under `reports/release`, with model/training artifacts kept separately from Git.
 
-- I0/I1 and fast-attention I2 are committed and publicly deployed.
-- KV-cache I2 code passes initial correctness tests. Its interrupted timing run is not accepted evidence. The completed replacement retains 11,000 timings and establishes 1.54× B1 median speed-up for manual full caching, with 0.022935 MW maximum drift.
-- I3 will compare exact ONNX CPU, dynamic INT8 and eager execution, with startup, precision and batch/thread scopes separated.
-- I4 plan is frozen in configs/release_study_v1.json. Four neural configurations, three seeds, full 2022 validation, 50-epoch cap and patience eight. No 2024 selection.
-- I5 requires fixed/rolling residual intervals, independently implemented NCC losses/control/TTA, matured feedback and replay restoration.
-- I6 durable queue and failure/ownership tests pass on SQLite and real PostgreSQL. The 15-minute offered-load campaign is running. Scheduled capture and operational release checks remain.
-- I7 requires real compute, forecast/interval/replay/comparison workflows and accessible browser verification.
-- I8 remains locked until a final point/runtime/calibration/evaluation manifest has been committed before test inspection.
-- I9 requires public smoke, archive retrieval, restore/rollback and a monitoring record. A seven-day availability observation cannot be manufactured during an implementation session.
+| Phase | Executed outcome | Remaining gate |
+| --- | --- | --- |
+| I0–I1 | Verified baseline recovery, frozen datasets and real browser/server inference | None for the original preview |
+| I2 | Request-local full KV decoding, B1/B4 parity, cancellation/isolation tests and 11,000 retained timings. B1 prepared median 34.04 to 22.07 ms, 1.54× ratio, maximum drift 0.023 MW | No GPU claim |
+| I3 | Eager, TorchScript, FP32 ONNX and dynamic INT8 at B1/B4 and one/two threads. 3,200 warm timings and 24 cold process trials. FP32 ONNX B1 median about 79% lower at two threads | Runtime scopes remain separate from public-network latency |
+| I4 | Four neural configurations, seeds 17/42/101, twelve fits, three ridge penalties and two persistence baselines. Full 2022 validation selected TimeXer with 24-slot patches | No post-test reselection |
+| I5 | Fixed/rolling/NCC causal intervals, matured feedback, checkpoint restoration, bounded TTA and raw validation replay. Rolling selected; NCC's 0.22% WIS gain missed its 5% promotion threshold | NCC remains experimental |
+| I6 | Durable PostgreSQL/SQLite queue, real process-death recovery, fencing, owner tickets, retries/cancellation, verified SQLite and PostgreSQL backup/restore. All 1,800 requests completed in a 15-minute offered-load test; POST-to-result p95 77 ms, read p95 8.3 ms | Compose verification is tracked in CI. Local load is not public availability |
+| I7 | Live computation, causal replay with browser residual quantiles, CSV download, results and architecture pages. Desktop/mobile browser tests and automated WCAG checks | Final deployed smoke follows the release commit |
+| I8 | Freeze committed in `cc39b120` before scoring 366 days from 2024. All seventeen declared models evaluated once, with no refitting. Selected TimeXer RMSE 1967.52 MW versus selected ridge 2003.71 MW; MAE slightly worse and bootstrap intervals include zero | No broad accuracy-superiority claim |
+| I9 | Public smoke driver, source capture/forecast scheduling, probe-window assessment and rollback procedures implemented | Seven real days of monitoring cannot be completed in this session |
 
-Every completed increment must have a measured report, raw-result lineage, passing relevant tests and a clear account of unsupported or time-dependent claims.
+The selected rolling intervals achieved test marginal coverage of 78.59%, 88.81% and 95.18% against 80%, 90% and 95% nominal levels. The method was selected before test evaluation. Fixed and NCC methods missed test coverage tolerances; they are not silently promoted or retuned.
+
+Publishing the newly fitted public model archive was blocked by automatic approval review because the earlier approval covered the original baseline archive. The public live preview retains its original pinned models until explicit approval for the new archive arrives. The uncertainty replay and recorded study results identify their own separately frozen selected model.
